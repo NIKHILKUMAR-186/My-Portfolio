@@ -1,0 +1,9 @@
+{
+  "updated": "Nov 2026",
+  "items": [
+    { "label": "Building", "text": "HydroSentinal v2 — adding LoRa for off-grid deployment." },
+    { "label": "Learning", "text": "PyTorch fundamentals and applied statistics at IIT Madras." },
+    { "label": "Exploring", "text": "On-device ML for low-power microcontrollers." },
+    { "label": "Reading", "text": "'Designing Data-Intensive Applications' — Martin Kleppmann." }
+  ]
+}

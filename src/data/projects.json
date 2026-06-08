@@ -1,0 +1,62 @@
+[
+  {
+    "id": "hydrosentinal",
+    "name": "HydroSentinal",
+    "year": "2025",
+    "status": "Active",
+    "tagline": "Real-time water quality monitoring for communities that need it most.",
+    "overview": "A solar-powered IoT buoy that streams pH, turbidity, TDS, and temperature data to a public dashboard, alerting local authorities when thresholds breach.",
+    "problem": "Rural and semi-urban water bodies often go unmonitored for weeks. By the time contamination is reported, it's already a health crisis.",
+    "solution": "Low-cost ESP32 nodes + cloud aggregation + an open dashboard. Designed to be repaired locally with off-the-shelf parts.",
+    "stack": ["ESP32", "MQTT", "Node.js", "PostgreSQL", "Next.js", "Tailwind"],
+    "challenges": ["Power budgeting for solar duty cycle", "Calibrating cheap pH probes against lab-grade reference", "Designing a watertight, repairable enclosure"],
+    "gallery": [],
+    "github": "https://github.com/nikhilkumar/hydrosentinal",
+    "demo": "https://hydrosentinal.example.com"
+  },
+  {
+    "id": "studybuddy-ai",
+    "name": "StudyBuddy AI",
+    "year": "2024",
+    "status": "Shipped",
+    "tagline": "An AI tutor that explains your textbook the way your best teacher would.",
+    "overview": "Upload a PDF chapter, get a personalised Socratic tutor that quizzes, explains, and tracks weak spots over time.",
+    "problem": "Generic chatbots forget context. Students need a tutor that remembers what they got wrong yesterday.",
+    "solution": "RAG over user-uploaded material, spaced-repetition scheduling, and a clean conversational UI.",
+    "stack": ["Next.js", "OpenAI", "pgvector", "Supabase"],
+    "challenges": ["Cheap embeddings without losing accuracy", "Latency for long PDFs"],
+    "gallery": [],
+    "github": "https://github.com/nikhilkumar/studybuddy",
+    "demo": ""
+  },
+  {
+    "id": "campus-eats",
+    "name": "Campus Eats",
+    "year": "2023",
+    "status": "Archived",
+    "tagline": "A pre-order app for campus canteens — beat the lunch rush.",
+    "overview": "Students pre-order, pay, and pick up. Canteens get demand forecasts to cut food waste.",
+    "problem": "Long queues, wasted food, no analytics for canteen owners.",
+    "solution": "PWA + Razorpay + a tiny ops dashboard. Piloted with 200 students.",
+    "stack": ["React", "Express", "MongoDB", "Razorpay"],
+    "challenges": ["Real-time queue updates without burning battery", "Handling failed payments gracefully"],
+    "gallery": [],
+    "github": "https://github.com/nikhilkumar/campus-eats",
+    "demo": ""
+  },
+  {
+    "id": "sensehub",
+    "name": "SenseHub",
+    "year": "2024",
+    "status": "Experiment",
+    "tagline": "A plug-and-play sensor hub for makers, kids, and classrooms.",
+    "overview": "One board, a dozen sensors, and a drag-and-drop block editor — so an 8-year-old can build their first weather station in 10 minutes.",
+    "problem": "Most IoT kits are too fiddly for beginners and too limited for intermediates.",
+    "solution": "Auto-detected sensor modules + a visual programming layer that exports real code when you're ready to graduate.",
+    "stack": ["ESP32", "MicroPython", "React Flow"],
+    "challenges": ["Sensor auto-detection on a tiny microcontroller", "Designing a block language without dumbing it down"],
+    "gallery": [],
+    "github": "https://github.com/nikhilkumar/sensehub",
+    "demo": ""
+  }
+]

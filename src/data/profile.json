@@ -1,0 +1,15 @@
+{
+  "name": "Nikhil Kumar",
+  "title": "Engineer · Learner · Builder",
+  "tagline": "Building things that matter — from circuits to code.",
+  "education": "B.Tech, MIT Muzaffarpur  ·  BS Data Science, IIT Madras",
+  "location": "India",
+  "bio": "I'm an engineer-in-the-making who treats every project as a chance to learn out loud. I split my time between hardware, software, and data — turning curiosity into things people can actually use.",
+  "interests": ["IoT & Embedded", "AI / ML", "Full-stack Web", "Hardware Prototyping", "Open Source"],
+  "focus": "Shipping HydroSentinal, sharpening Data Science fundamentals at IIT Madras, and contributing to open source.",
+  "avatar": "/avatar.svg",
+  "email": "nikhil@example.com",
+  "github": "https://github.com/nikhilkumar",
+  "linkedin": "https://linkedin.com/in/nikhilkumar",
+  "resume": "/resume.pdf"
+}

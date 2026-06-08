@@ -1,0 +1,42 @@
+[
+  {
+    "id": "class-10",
+    "year": "2019",
+    "title": "Class 10",
+    "place": "CBSE Board",
+    "description": "First taste of programming. Built tiny HTML pages and fell in love with making things appear on a screen.",
+    "highlight": "92% · School topper in Science"
+  },
+  {
+    "id": "class-12",
+    "year": "2021",
+    "title": "Class 12 — PCM",
+    "place": "CBSE Board",
+    "description": "Physics, Chemistry, Math by day; C and Python by night. Started competitive coding and my first Arduino project.",
+    "highlight": "Cleared JEE · State-level science exhibition winner"
+  },
+  {
+    "id": "mit",
+    "year": "2022",
+    "title": "MIT Muzaffarpur",
+    "place": "B.Tech, Computer Science",
+    "description": "Formal engineering begins. Data Structures, Operating Systems, Networks — and a lab where ideas finally meet hardware.",
+    "highlight": "Lead, Coding Club · IoT lab researcher"
+  },
+  {
+    "id": "iitm",
+    "year": "2023",
+    "title": "IIT Madras — BS Data Science",
+    "place": "Online Degree (parallel)",
+    "description": "Took on a parallel BS in Data Science to ground my intuition in math, statistics, and machine learning the rigorous way.",
+    "highlight": "Foundation level cleared with distinction"
+  },
+  {
+    "id": "future",
+    "year": "Next",
+    "title": "What's Next",
+    "place": "Internships → Industry",
+    "description": "Looking for engineering internships where I can ship real products, then full-time roles building AI-powered, hardware-aware systems.",
+    "highlight": "Open to opportunities · Building in public"
+  }
+]

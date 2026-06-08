@@ -1,0 +1,22 @@
+[
+  {
+    "category": "Programming",
+    "items": ["C", "C++", "Python", "JavaScript", "TypeScript", "Java", "SQL"]
+  },
+  {
+    "category": "Web Development",
+    "items": ["React", "Next.js", "TanStack Start", "Node.js", "Express", "Tailwind CSS", "shadcn/ui"]
+  },
+  {
+    "category": "Data Science & AI",
+    "items": ["NumPy", "Pandas", "scikit-learn", "PyTorch (learning)", "Statistics", "RAG / LLM apps"]
+  },
+  {
+    "category": "IoT & Hardware",
+    "items": ["ESP32", "Arduino", "Raspberry Pi", "MQTT", "Sensor calibration", "PCB basics"]
+  },
+  {
+    "category": "Tools",
+    "items": ["Git & GitHub", "Linux", "Docker (learning)", "Figma", "Postman", "VS Code"]
+  }
+]
