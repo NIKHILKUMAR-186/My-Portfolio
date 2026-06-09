@@ -1,7 +1,37 @@
 [
-  { "id": "a1", "year": "2024", "title": "Smart India Hackathon — Grand Finalist", "type": "Hackathon", "description": "Top 50 nationally with an IoT-based public-safety prototype." },
-  { "id": "a2", "year": "2024", "title": "IIT Madras Foundation — Distinction", "type": "Academic", "description": "Cleared Foundation level of BS Data Science with distinction." },
-  { "id": "a3", "year": "2023", "title": "Inter-College Coding Contest — Winner", "type": "Competition", "description": "First place across 40+ teams in algorithmic problem solving." },
-  { "id": "a4", "year": "2023", "title": "MIT Muzaffarpur Merit Scholarship", "type": "Scholarship", "description": "Awarded for academic performance in the first year." },
-  { "id": "a5", "year": "2022", "title": "JEE Mains — Qualified", "type": "Award", "description": "Secured admission to MIT Muzaffarpur through JEE." }
+  {
+    "id": "a1",
+    "year": "2024",
+    "title": "Smart India Hackathon — Grand Finalist",
+    "type": "Hackathon",
+    "description": "Top 50 nationally with an IoT-based public-safety prototype."
+  },
+  {
+    "id": "a2",
+    "year": "2024",
+    "title": "IIT Madras Foundation — Distinction",
+    "type": "Academic",
+    "description": "Cleared Foundation level of BS Data Science with distinction."
+  },
+  {
+    "id": "a3",
+    "year": "2023",
+    "title": "Inter-College Coding Contest — Winner",
+    "type": "Competition",
+    "description": "First place across 40+ teams in algorithmic problem solving."
+  },
+  {
+    "id": "a4",
+    "year": "2023",
+    "title": "MIT Muzaffarpur Merit Scholarship",
+    "type": "Scholarship",
+    "description": "Awarded for academic performance in the first year."
+  },
+  {
+    "id": "a5",
+    "year": "2022",
+    "title": "JEE Mains — Qualified",
+    "type": "Award",
+    "description": "Secured admission to MIT Muzaffarpur through JEE."
+  }
 ]
