@@ -1,74 +1,38 @@
 [
   {
     "id": "c1",
-    "title": "Python for Everybody",
-    "issuer": "Coursera · University of Michigan",
+    "title": "Python Essential 1",
+    "issuer": "Cisco Networking Academy",
     "category": "Programming",
-    "year": "2022",
-    "url": "",
-    "file": ""
+    "year": "2025",
+    "url": "/cretificate/python-essential-1.pdf",
+    "file": "/cretificate/python-essential-1.pdf"
+  },
+  {
+    "id": "c1",
+    "title": "Python Essential 2",
+    "issuer": "Cisco Networking Academy",
+    "category": "Programming",
+    "year": "2026",
+    "url": "/cretificate/python-essential-2.pdf",
+    "file": "/cretificate/python-essential-2.pdf"
   },
   {
     "id": "c2",
-    "title": "Machine Learning Specialization",
-    "issuer": "DeepLearning.AI",
+    "title": "Gen AI Academy 2.0",
+    "issuer": "Google Cloud",
     "category": "Data Science",
     "year": "2024",
-    "url": "",
-    "file": ""
+    "url": "cretificate/Hack2skill-CertificateAI-ML.png",
+    "file": "cretificate/Hack2skill-CertificateAI-ML.png"
   },
   {
-    "id": "c3",
-    "title": "IoT Fundamentals",
-    "issuer": "Cisco Networking Academy",
-    "category": "IoT",
-    "year": "2023",
-    "url": "",
-    "file": ""
-  },
-  {
-    "id": "c4",
-    "title": "Smart India Hackathon — Finalist",
-    "issuer": "Govt. of India",
-    "category": "Hackathons",
-    "year": "2024",
-    "url": "",
-    "file": ""
-  },
-  {
-    "id": "c5",
-    "title": "Full Stack Web Development",
-    "issuer": "Meta · Coursera",
-    "category": "Courses",
-    "year": "2023",
-    "url": "",
-    "file": ""
-  },
-  {
-    "id": "c6",
-    "title": "Data Structures & Algorithms in C++",
-    "issuer": "NPTEL · IIT Madras",
-    "category": "Programming",
-    "year": "2023",
-    "url": "",
-    "file": ""
-  },
-  {
-    "id": "c7",
-    "title": "Embedded Systems with ESP32",
-    "issuer": "Udemy",
-    "category": "IoT",
-    "year": "2024",
-    "url": "",
-    "file": ""
-  },
-  {
-    "id": "c8",
-    "title": "Statistics for Data Science",
-    "issuer": "IIT Madras BS",
-    "category": "Data Science",
-    "year": "2024",
-    "url": "",
-    "file": ""
+    "id": "c2",
+    "title": "Gen AI Academy 2.0",
+    "issuer": "Google Cloud",
+    "category": "AI",
+    "year": "2025",
+    "url": "Hack2skill-CertificateDATA.png",
+    "file": "Hack2skill-CertificateDATA.png"
   }
 ]

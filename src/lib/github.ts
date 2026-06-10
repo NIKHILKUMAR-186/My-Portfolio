@@ -1,0 +1,105 @@
+export const GITHUB_USERNAME = "NIKHILKUMAR-186";
+
+export interface GithubProfile {
+  login: string;
+  html_url: string;
+  avatar_url: string;
+  public_repos: number;
+  followers: number;
+  following: number;
+  created_at: string;
+}
+
+export interface GithubRepo {
+  id: number;
+  name: string;
+  html_url: string;
+  description: string | null;
+  language: string | null;
+  stargazers_count: number;
+  updated_at: string;
+  pushed_at: string;
+  homepage: string | null;
+}
+
+export interface GithubContributions {
+  totalContributions: number;
+  currentStreak: number;
+  longestStreak: number;
+}
+
+async function fetchGithub<T>(url: string): Promise<T> {
+  const response = await fetch(url, {
+    headers: {
+      Accept: "application/vnd.github+json",
+    },
+  });
+
+  if (!response.ok) {
+    const body = await response.text();
+    const message = response.status === 403 ? "GitHub rate limit exceeded" : response.statusText || body;
+    throw new Error(message);
+  }
+
+  return response.json();
+}
+
+export async function getGithubProfile(): Promise<GithubProfile> {
+  return fetchGithub<GithubProfile>(`https://api.github.com/users/${GITHUB_USERNAME}`);
+}
+
+export async function getGithubRepos(): Promise<GithubRepo[]> {
+  return fetchGithub<GithubRepo[]>(
+    `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`
+  );
+}
+
+function computeStreaks(contributions: Array<{ date: string; count: number }>) {
+  let currentStreak = 0;
+  let longestStreak = 0;
+  let tempStreak = 0;
+
+  for (const contribution of contributions) {
+    if (contribution.count > 0) {
+      tempStreak += 1;
+      longestStreak = Math.max(longestStreak, tempStreak);
+    } else {
+      tempStreak = 0;
+    }
+  }
+
+  for (let i = contributions.length - 1; i >= 0; i -= 1) {
+    if (contributions[i].count > 0) {
+      currentStreak += 1;
+    } else {
+      break;
+    }
+  }
+
+  return { currentStreak, longestStreak };
+}
+
+export async function getGithubContributions(): Promise<GithubContributions> {
+  const response = await fetch(`https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}`);
+
+  if (!response.ok) {
+    const body = await response.text();
+    const message = response.status === 403 ? "GitHub rate limit exceeded" : response.statusText || body;
+    throw new Error(message);
+  }
+
+  const payload = await response.json();
+  const contributions = Array.isArray(payload.contributions) ? payload.contributions : [];
+  const totalContributions =
+    typeof payload.totalContributions === "number"
+      ? payload.totalContributions
+      : contributions.reduce((sum: number, day: { count: number }) => sum + (day.count || 0), 0);
+
+  const { currentStreak, longestStreak } = computeStreaks(contributions);
+
+  return {
+    totalContributions,
+    currentStreak,
+    longestStreak,
+  };
+}

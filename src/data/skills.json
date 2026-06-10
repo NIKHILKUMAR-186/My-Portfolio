@@ -1,15 +1,26 @@
 [
   {
     "category": "Programming",
-    "items": ["C", "C++", "Python", "JavaScript", "TypeScript", "Java", "SQL"]
+    "items": ["C", "C++", "Python", "JavaScript", "TypeScript","HTML", "CSS"]
   },
   {
     "category": "Web Development",
-    "items": ["React", "Next.js", "TanStack Start", "Node.js", "Express", "Tailwind CSS", "shadcn/ui"]
+    "items": [
+      "React",
+      "Next.js",
+      "TanStack Start",
+      "Node.js",
+      "Firebase",
+      "Supabase"
+    ]
   },
   {
     "category": "Data Science & AI",
-    "items": ["NumPy", "Pandas", "scikit-learn", "PyTorch (learning)", "Statistics", "RAG / LLM apps"]
+    "items": [
+      "NumPy",
+      "Pandas",
+      "Statistics & Probability"
+    ]
   },
   {
     "category": "IoT & Hardware",
@@ -17,6 +28,6 @@
   },
   {
     "category": "Tools",
-    "items": ["Git & GitHub", "Linux", "Docker (learning)", "Figma", "Postman", "VS Code"]
+    "items": ["Git & GitHub", "Linux", "VS Code"]
   }
 ]

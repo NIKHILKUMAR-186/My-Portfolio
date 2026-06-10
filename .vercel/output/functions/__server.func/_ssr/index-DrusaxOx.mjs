@@ -1,8 +1,13 @@
-import { j as jsxRuntimeExports, r as reactExports } from "../_libs/react.mjs";
+import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { L as Lenis } from "../_libs/lenis.mjs";
 import { L as Link } from "../_libs/tanstack__react-router.mjs";
+import { G as GitHubCalendar } from "../_libs/react-github-calendar.mjs";
+import { R as Root, I as Indicator } from "../_libs/radix-ui__react-progress.mjs";
+import { c as clsx } from "../_libs/clsx.mjs";
+import { t as twMerge } from "../_libs/tailwind-merge.mjs";
 import { A as AnimatePresence, m as motion, u as useScroll, a as useTransform, b as useInView } from "../_libs/framer-motion.mjs";
-import { G as Globe, S as Sun, M as Moon, a as Github, L as Linkedin, b as Mail, A as ArrowDown, c as Sparkles, C as Compass, B as BookOpen, H as Hammer, d as ChevronRight, e as Search, F as FileText, D as Download, T as Trophy, f as GitCommitHorizontal, g as GitBranch, h as Star, i as Music, j as Lightbulb, W as Wrench, k as Award, l as Link2, X, E as ExternalLink } from "../_libs/lucide-react.mjs";
+import { S as Sun, M as Moon, G as Github, L as Linkedin, a as Mail, A as ArrowDown, b as Sparkles, C as Compass, B as BookOpen, H as Hammer, c as ChevronRight, d as Search, F as FileText, D as Download, T as Trophy, e as GitBranch, U as Users, f as Activity, g as TrendingUp, h as GitCommitHorizontal, i as Star, R as Rocket, j as Music, k as Lightbulb, W as Wrench, l as Award, m as Link2, n as Globe, X, E as ExternalLink, o as CalendarDays, p as CodeXml } from "../_libs/lucide-react.mjs";
+import { c as format } from "../_libs/date-fns.mjs";
 import "../_libs/tanstack__router-core.mjs";
 import "../_libs/tanstack__history.mjs";
 import "../_libs/cookie-es.mjs";
@@ -16,47 +21,124 @@ import "crypto";
 import "async_hooks";
 import "stream";
 import "../_libs/isbot.mjs";
+import "../_libs/react-activity-calendar.mjs";
+import "../_libs/floating-ui__react.mjs";
+import "../_libs/floating-ui__utils.mjs";
+import "../_libs/tabbable.mjs";
+import "../_libs/floating-ui__react-dom.mjs";
+import "../_libs/floating-ui__dom.mjs";
+import "../_libs/floating-ui__core.mjs";
+import "../_libs/radix-ui__react-context.mjs";
+import "../_libs/radix-ui__react-primitive.mjs";
+import "../_libs/radix-ui__react-slot.mjs";
+import "../_libs/radix-ui__react-compose-refs.mjs";
 import "../_libs/motion-dom.mjs";
 import "../_libs/motion-utils.mjs";
-const SCENES = [
-  "Hi, I'm Nikhil Kumar.",
-  "Engineer.",
-  "Learner.",
-  "Builder.",
-  "Coding · Learning · Building · Innovating.",
-  "Before we begin — meet my companion, Bunny."
+function AvatarFrame({
+  layoutId,
+  className = "",
+  imageSrc = "/avatar2.png",
+  alt = "Nikhil Kumar",
+  ...props
+}) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    motion.div,
+    {
+      layoutId,
+      className: `relative flex items-center justify-center ${className}`,
+      ...props,
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            className: "absolute inset-0 rounded-full border-2 border-dashed border-cyan-500/30 animate-spin",
+            style: { animationDuration: "40s" }
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-3 rounded-full bg-gradient-to-br from-cyan-500/10 via-slate-950 to-blue-500/10 p-1.5 backdrop-blur-sm border border-slate-800/80 shadow-inner" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-6 rounded-full overflow-hidden border-2 border-slate-700/80 bg-slate-950/90 group flex items-center justify-center shadow-[0_10px_30px_rgba(2,6,23,0.8)]", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "img",
+          {
+            src: imageSrc,
+            alt,
+            referrerPolicy: "no-referrer",
+            className: "w-full h-full object-cover grayscale brightness-90 hover:grayscale-0 hover:brightness-100 transition-all duration-500 select-none scale-105 hover:scale-100"
+          }
+        ) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute top-[10%] left-[10%] w-3 h-3 bg-cyan-400 rounded-full animate-ping pointer-events-none" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bottom-[20%] right-[8%] w-2 h-2 bg-indigo-500 rounded-full pointer-events-none" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute -bottom-2 px-3 py-1 bg-slate-950/90 border border-slate-800 rounded-lg text-[9px] font-mono tracking-widest text-emerald-400 flex items-center gap-1.5 shadow-lg select-none", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            Globe,
+            {
+              className: "w-3 h-3 text-cyan-400 animate-spin",
+              style: { animationDuration: "20s" }
+            }
+          ),
+          "BTech in IT • MIT Muzaffarpur ​ ​ ​ ​ ​ ​ ​ ​ ​ ​ ​ ​ ​ ​ BS Data Science • IIT Madras"
+        ] })
+      ]
+    }
+  );
+}
+const MESSAGES = [
+  "INITIALIZING...",
+  "Loading Journey...",
+  "Loading Projects...",
+  "READY",
+  "Engineer",
+  "Learner",
+  "Builder"
 ];
-const STORAGE_KEY = "nk-intro-seen-v1";
-function CinematicIntro() {
+const messageVariants = {
+  hidden: { opacity: 0, y: 24, filter: "blur(10px)" },
+  visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.9, ease: "easeOut" } },
+  exit: { opacity: 0, y: -20, filter: "blur(10px)", transition: { duration: 0.7, ease: "easeIn" } }
+};
+const avatarVariants = {
+  hidden: { opacity: 0, scale: 0.92, y: 16 },
+  visible: {
+    opacity: 1,
+    scale: [0.96, 1],
+    y: 0,
+    transition: { duration: 1.1, ease: [0.22, 1, 0.36, 1] }
+  }
+};
+function CinematicIntro({ onExitStart }) {
   const [show, setShow] = reactExports.useState(false);
   const [step, setStep] = reactExports.useState(0);
   reactExports.useEffect(() => {
     if (typeof window === "undefined") return;
-    const seen = sessionStorage.getItem(STORAGE_KEY);
-    if (!seen) setShow(true);
+    setShow(true);
   }, []);
   reactExports.useEffect(() => {
     if (!show) return;
-    if (step >= SCENES.length) {
-      const t2 = setTimeout(() => finish(), 600);
-      return () => clearTimeout(t2);
-    }
-    const t = setTimeout(() => setStep((s) => s + 1), 900);
-    return () => clearTimeout(t);
+    const lastIndex = MESSAGES.length - 1;
+    const delay = step === lastIndex ? 1700 : 1700;
+    const timer = setTimeout(() => {
+      if (step === lastIndex) {
+        finish();
+        return;
+      }
+      setStep((current) => current + 1);
+    }, delay);
+    return () => clearTimeout(timer);
   }, [show, step]);
   function finish() {
-    sessionStorage.setItem(STORAGE_KEY, "1");
+    onExitStart?.();
     setShow(false);
   }
+  const showAvatar = step > 3;
   return /* @__PURE__ */ jsxRuntimeExports.jsx(AnimatePresence, { children: show && /* @__PURE__ */ jsxRuntimeExports.jsxs(
     motion.div,
     {
       className: "fixed inset-0 z-[100] flex items-center justify-center bg-background",
-      initial: { opacity: 1 },
-      exit: { opacity: 0 },
-      transition: { duration: 0.6 },
       role: "dialog",
       "aria-label": "Intro animation",
+      initial: { opacity: 1 },
+      animate: { opacity: 1 },
+      exit: { opacity: 0 },
+      transition: { duration: 1, ease: "easeInOut" },
       children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "pointer-events-none absolute inset-0 overflow-hidden", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute left-1/2 top-1/2 size-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/20 blur-3xl" }),
@@ -70,73 +152,39 @@ function CinematicIntro() {
             children: "Skip intro →"
           }
         ),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative flex flex-col items-center gap-8 px-6 text-center", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(AnimatePresence, { mode: "wait", children: step < SCENES.length && /* @__PURE__ */ jsxRuntimeExports.jsx(
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative flex w-full max-w-5xl flex-col items-center gap-10 px-6 text-center", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(AnimatePresence, { mode: "wait", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             motion.h1,
             {
-              initial: { opacity: 0, y: 20, filter: "blur(8px)" },
-              animate: { opacity: 1, y: 0, filter: "blur(0px)" },
-              exit: { opacity: 0, y: -20, filter: "blur(8px)" },
-              transition: { duration: 0.5 },
-              className: "max-w-3xl text-4xl font-bold tracking-tight text-foreground md:text-6xl",
-              children: step === SCENES.length - 1 ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-                "Before we begin — meet my companion, ",
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "gradient-text", children: "Bunny" }),
-                "."
-              ] }) : step === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-                "Hi, I'm ",
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "gradient-text", children: "Nikhil Kumar" }),
-                "."
-              ] }) : SCENES[step]
+              className: "max-w-3xl text-4xl font-semibold uppercase tracking-[0.18em] text-foreground sm:text-5xl md:text-6xl lg:text-7xl",
+              variants: messageVariants,
+              initial: "hidden",
+              animate: "visible",
+              exit: "exit",
+              children: MESSAGES[step]
             },
             step
           ) }),
-          step === SCENES.length - 1 && /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          /* @__PURE__ */ jsxRuntimeExports.jsx(AnimatePresence, { children: showAvatar && /* @__PURE__ */ jsxRuntimeExports.jsx(
             motion.div,
             {
-              initial: { opacity: 0, scale: 0.9 },
-              animate: { opacity: 1, scale: 1 },
-              transition: { duration: 0.7, delay: 0.2, type: "spring" },
-              className: "relative flex items-center justify-center w-64 h-64 md:w-80 md:h-80",
-              children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                  motion.div,
-                  {
-                    animate: { y: [0, -8, 0] },
-                    transition: { duration: 5.5, repeat: Infinity, repeatType: "loop", ease: "easeInOut" },
-                    whileHover: { scale: 1.02 },
-                    className: "relative w-full h-full flex items-center justify-center",
-                    children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(
-                        "div",
-                        {
-                          className: "absolute inset-0 rounded-full border-2 border-dashed border-cyan-500/30 animate-spin",
-                          style: { animationDuration: "40s" }
-                        }
-                      ),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-3 rounded-full bg-gradient-to-br from-cyan-500/10 via-slate-950 to-blue-500/10 p-1.5 backdrop-blur-sm border border-slate-800/80 shadow-inner" }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-6 rounded-full overflow-hidden border-2 border-slate-700/80 bg-slate-950/90 group flex items-center justify-center shadow-[0_10px_30px_rgba(2,6,23,0.8)]", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-                        "img",
-                        {
-                          src: "https://picsum.photos/seed/nikhilavatar/400/400",
-                          alt: "Nikhil Kumar",
-                          referrerPolicy: "no-referrer",
-                          className: "w-full h-full object-cover grayscale brightness-90 hover:grayscale-0 hover:brightness-100 transition-all duration-500 select-none scale-105 hover:scale-100"
-                        }
-                      ) })
-                    ]
-                  }
-                ),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute top-[10%] left-[10%] w-3 h-3 bg-cyan-400 rounded-full animate-ping pointer-events-none" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute bottom-[20%] right-[8%] w-2 h-2 bg-indigo-500 rounded-full pointer-events-none" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute -bottom-2 px-3 py-1 bg-slate-950/90 border border-slate-800 rounded-lg text-[9px] font-mono tracking-widest text-emerald-400 flex items-center gap-1.5 shadow-lg select-none", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(Globe, { className: "w-3 h-3 text-cyan-400 animate-spin", style: { animationDuration: "20s" } }),
-                  "SYSTEMS_ACTIVE"
-                ] })
-              ]
+              className: "relative flex items-center justify-center w-56 h-56 md:w-72 md:h-72",
+              initial: "hidden",
+              animate: "visible",
+              exit: "hidden",
+              variants: avatarVariants,
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                AvatarFrame,
+                {
+                  layoutId: "avatar",
+                  className: "w-full h-full",
+                  imageSrc: "/avatar.png",
+                  alt: "Nikhil Kumar"
+                }
+              )
             }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-4 flex gap-2", children: SCENES.map((_, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+          ) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-4 flex gap-2", children: MESSAGES.map((_, i) => /* @__PURE__ */ jsxRuntimeExports.jsx(
             "span",
             {
               className: `h-1 rounded-full transition-all ${i <= step ? "w-8 bg-primary" : "w-4 bg-border"}`
@@ -234,12 +282,12 @@ const name = "Nikhil Kumar";
 const title = "Engineer · Learner · Builder";
 const tagline = "Building things that matter — from circuits to code.";
 const education = "B.Tech, MIT Muzaffarpur  ·  BS Data Science, IIT Madras";
-const bio = "I'm an engineer-in-the-making who treats every project as a chance to learn out loud. I split my time between hardware, software, and data — turning curiosity into things people can actually use.";
+const bio = "I'm Nikhil Kumar, an engineering student exploring the intersection of software, data, and embedded systems. Currently pursuing B.Tech at MIT Muzaffarpur and BS in Data Science at IIT Madras, I enjoy turning ideas into real products — from IoT hardware prototypes to full-stack applications. My goal is simple: Learn deeply, build publicly, and solve meaningful problems.";
 const interests = ["IoT & Embedded", "AI / ML", "Full-stack Web", "Hardware Prototyping", "Open Source"];
-const focus = "Shipping HydroSentinal, sharpening Data Science fundamentals at IIT Madras, and contributing to open source.";
-const email = "nikhil@example.com";
-const github = "https://github.com/nikhilkumar";
-const linkedin = "https://linkedin.com/in/nikhilkumar";
+const focus = "Shipping HydroSentinal, sharpening Data Science fundamentals at IIT Madras and Learning new things.";
+const email = "raj.savera111@gmail.com";
+const github = "https://github.com/NIKHILKUMAR-186";
+const linkedin = "https://www.linkedin.com/in/nikhil-kumar-b288a7303";
 const resume = "/resume.pdf";
 const profile = {
   name,
@@ -254,7 +302,38 @@ const profile = {
   linkedin,
   resume
 };
-function Hero() {
+const heroSectionVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      when: "beforeChildren",
+      staggerChildren: 0.14,
+      delayChildren: 0.2
+    }
+  }
+};
+const splashVariants = {
+  hidden: { opacity: 0, y: 26 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.85, ease: "easeOut" } }
+};
+const buttonGroupVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.85, ease: "easeOut", delayChildren: 0.12, staggerChildren: 0.08 } }
+};
+const buttonVariants = {
+  hidden: { opacity: 0, y: 18 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.75, ease: "easeOut" } }
+};
+const avatarWrapperVariants = {
+  hidden: { opacity: 0, scale: 0.9 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.95, ease: "easeOut" } }
+};
+const scrollVariants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.9, ease: "easeOut", delay: 0.4 } }
+};
+function Hero({ introReady }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "relative flex min-h-[100dvh] items-center overflow-hidden pt-24", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "pointer-events-none absolute inset-0 overflow-hidden", "aria-hidden": true, children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -275,133 +354,119 @@ function Hero() {
       )
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative mx-auto w-full max-w-6xl px-4", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-1 lg:grid-cols-2 gap-6 items-center", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs(
-            motion.div,
-            {
-              initial: { opacity: 0, y: 30 },
-              animate: { opacity: 1, y: 0 },
-              transition: { duration: 0.8 },
-              className: "inline-flex items-center gap-2 rounded-full border border-border bg-surface/50 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur",
-              children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "relative flex size-2", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute inline-flex size-full animate-ping rounded-full bg-primary opacity-75" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "relative inline-flex size-2 rounded-full bg-primary" })
-                ] }),
-                "Open to internships · Available 2026"
-              ]
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs(
-            motion.h1,
-            {
-              initial: { opacity: 0, y: 30 },
-              animate: { opacity: 1, y: 0 },
-              transition: { duration: 0.8, delay: 0.1 },
-              className: "mt-6 text-5xl font-bold leading-[1.05] tracking-tight md:text-7xl lg:text-8xl",
-              children: [
-                profile.name.split(" ")[0],
-                " ",
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "gradient-text", children: profile.name.split(" ")[1] })
-              ]
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs(
-            motion.p,
-            {
-              initial: { opacity: 0, y: 20 },
-              animate: { opacity: 1, y: 0 },
-              transition: { duration: 0.8, delay: 0.25 },
-              className: "mt-6 max-w-2xl text-xl text-muted-foreground md:text-2xl",
-              children: [
-                profile.title,
-                ". ",
-                profile.tagline
-              ]
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs(
-            motion.div,
-            {
-              initial: { opacity: 0, y: 20 },
-              animate: { opacity: 1, y: 0 },
-              transition: { duration: 0.8, delay: 0.4 },
-              className: "mt-10 flex flex-wrap items-center gap-3",
-              children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        motion.div,
+        {
+          className: "grid grid-cols-1 lg:grid-cols-2 gap-6 items-center",
+          variants: heroSectionVariants,
+          initial: "hidden",
+          animate: introReady ? "visible" : "hidden",
+          children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                motion.div,
+                {
+                  className: "inline-flex items-center gap-2 rounded-full border border-border bg-surface/50 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur",
+                  variants: splashVariants,
+                  children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "relative flex size-2", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute inline-flex size-full animate-ping rounded-full bg-primary opacity-75" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "relative inline-flex size-2 rounded-full bg-primary" })
+                    ] }),
+                    "Open to internships · Available 2026"
+                  ]
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                motion.h1,
+                {
+                  className: "mt-6 text-5xl font-bold leading-[1.05] tracking-tight md:text-7xl lg:text-8xl",
+                  variants: splashVariants,
+                  children: [
+                    profile.name.split(" ")[0],
+                    " ",
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "gradient-text", children: profile.name.split(" ")[1] })
+                  ]
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                motion.p,
+                {
+                  className: "mt-6 max-w-2xl text-xl text-muted-foreground md:text-2xl",
+                  variants: splashVariants,
+                  children: [
+                    profile.title,
+                    ". ",
+                    profile.tagline
+                  ]
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { className: "mt-10 flex flex-wrap items-center gap-3", variants: buttonGroupVariants, children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  "a",
+                  motion.a,
                   {
                     href: "#projects",
                     className: "group relative overflow-hidden rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:scale-[1.03] glow-cyan",
+                    variants: buttonVariants,
                     children: /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "relative z-10", children: "See my work" })
                   }
                 ),
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  "a",
+                  motion.a,
                   {
                     href: "#contact",
                     className: "glass rounded-full px-6 py-3 text-sm font-semibold text-foreground transition hover:border-primary/60",
+                    variants: buttonVariants,
                     children: "Get in touch"
                   }
                 ),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "ml-2 flex items-center gap-1", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: profile.github, className: "glass flex size-10 items-center justify-center rounded-full transition hover:text-primary", "aria-label": "GitHub", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Github, { className: "size-4" }) }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: profile.linkedin, className: "glass flex size-10 items-center justify-center rounded-full transition hover:text-primary", "aria-label": "LinkedIn", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Linkedin, { className: "size-4" }) }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: `mailto:${profile.email}`, className: "glass flex size-10 items-center justify-center rounded-full transition hover:text-primary", "aria-label": "Email", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Mail, { className: "size-4" }) })
+                /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { className: "ml-2 flex items-center gap-1", variants: buttonVariants, children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    motion.a,
+                    {
+                      href: profile.github,
+                      className: "glass flex size-10 items-center justify-center rounded-full transition hover:text-primary",
+                      "aria-label": "GitHub",
+                      variants: buttonVariants,
+                      children: /* @__PURE__ */ jsxRuntimeExports.jsx(Github, { className: "size-4" })
+                    }
+                  ),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    motion.a,
+                    {
+                      href: profile.linkedin,
+                      className: "glass flex size-10 items-center justify-center rounded-full transition hover:text-primary",
+                      "aria-label": "LinkedIn",
+                      variants: buttonVariants,
+                      children: /* @__PURE__ */ jsxRuntimeExports.jsx(Linkedin, { className: "size-4" })
+                    }
+                  ),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    motion.a,
+                    {
+                      href: `mailto:${profile.email}`,
+                      className: "glass flex size-10 items-center justify-center rounded-full transition hover:text-primary",
+                      "aria-label": "Email",
+                      variants: buttonVariants,
+                      children: /* @__PURE__ */ jsxRuntimeExports.jsx(Mail, { className: "size-4" })
+                    }
+                  )
                 ] })
-              ]
-            }
-          )
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "hidden lg:flex items-center justify-end", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
-          motion.div,
-          {
-            animate: { y: [0, -10, 0] },
-            transition: { duration: 6, repeat: Infinity, repeatType: "loop", ease: "easeInOut" },
-            whileHover: { scale: 1.02 },
-            className: "relative flex items-center justify-center w-[420px] h-[420px]",
-            children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 rounded-full bg-gradient-to-br from-transparent via-slate-900/40 to-transparent blur-[40px] opacity-60" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(
-                "div",
-                {
-                  className: "absolute inset-0 rounded-full border-2 border-dashed border-cyan-600/30 animate-spin",
-                  style: { animationDuration: "36s" }
-                }
-              ),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-6 rounded-full border-4 border-dotted border-cyan-700/20" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-10 rounded-full bg-gradient-to-br from-cyan-500/10 via-slate-950 to-blue-500/10 p-1.5 backdrop-blur-sm border border-slate-800/80 shadow-inner" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-14 rounded-full overflow-hidden border-2 border-slate-700/80 bg-slate-950/90 group flex items-center justify-center shadow-[0_30px_60px_rgba(2,6,23,0.8)]", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-                "img",
-                {
-                  src: "https://picsum.photos/seed/nikhilavatar/600/600",
-                  alt: "Nikhil Kumar",
-                  referrerPolicy: "no-referrer",
-                  className: "w-full h-full object-cover grayscale brightness-90 hover:grayscale-0 hover:brightness-100 transition-all duration-500 select-none scale-105 hover:scale-100"
-                }
-              ) }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute -right-6 top-1/3 flex items-center justify-center", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute -right-3 -top-3 w-3 h-3 bg-cyan-400 rounded-full animate-pulse" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-2 h-2 bg-violet-500 rounded-full" })
-              ] }) }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute -bottom-5 px-3 py-1 bg-slate-950/90 border border-slate-800 rounded-full text-[10px] font-mono tracking-widest text-emerald-400 flex items-center gap-2 shadow-lg select-none", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx(Globe, { className: "w-4 h-4 text-cyan-400 animate-spin", style: { animationDuration: "20s" } }),
-                "SYSTEMS_ACTIVE"
               ] })
-            ]
-          }
-        ) })
-      ] }),
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(motion.div, { className: "hidden lg:flex items-center justify-end", variants: avatarWrapperVariants, children: /* @__PURE__ */ jsxRuntimeExports.jsx(AvatarFrame, { layoutId: "avatar", className: "relative flex items-center justify-center w-64 h-64 md:w-80 md:h-80" }) })
+          ]
+        }
+      ),
       /* @__PURE__ */ jsxRuntimeExports.jsx(
         motion.a,
         {
           href: "#about",
-          initial: { opacity: 0 },
-          animate: { opacity: 1 },
-          transition: { delay: 1.2, duration: 0.8 },
           className: "absolute bottom-8 left-1/2 -translate-x-1/2 text-muted-foreground",
           "aria-label": "Scroll down",
+          variants: scrollVariants,
+          initial: "hidden",
+          animate: introReady ? "visible" : "hidden",
           children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
             motion.div,
             {
@@ -531,7 +596,7 @@ function Bunny({ size = 64, className, waving = false }) {
     }
   );
 }
-const about = "This is where it all begins. A quick hello before the climb.";
+const about = "I'll guide you through Nikhil's journey — from classroom experiments to real-world products.";
 const contact = "That's a wrap! Reach out — Nikhil writes back. 👋";
 const bunny = {
   about,
@@ -542,16 +607,13 @@ function About() {
     Section,
     {
       id: "about",
-      eyebrow: "About",
+      eyebrow: "Who Am I?",
       title: /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: "The short version" }),
       description: profile.bio,
       children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid gap-8 md:grid-cols-[1fr_1.2fr] md:gap-12", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "glass relative overflow-hidden rounded-3xl p-6", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "aspect-square w-full rounded-2xl bg-gradient-to-br from-primary/30 via-surface-2 to-accent/30 p-1", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex size-full items-center justify-center rounded-2xl bg-surface", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex size-32 items-center justify-center rounded-full bg-gradient-to-br from-primary to-accent text-5xl font-bold text-primary-foreground", children: profile.name.split(" ").map((n) => n[0]).join("") }) }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 text-center", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "font-display text-lg font-semibold", children: profile.name }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-sm text-muted-foreground", children: profile.education })
-          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "aspect-square w-full rounded-2xl bg-gradient-to-br from-primary/30 via-surface-2 to-accent/30 p-1", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex size-full items-center justify-center rounded-2xl bg-surface", children: /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: "/avatar2.png", alt: "Nikhil Kumar", className: "w-full h-full object-cover grayscale brightness-90 hover:grayscale-0 hover:brightness-100 transition-all duration-500 select-none scale-105 hover:scale-100" }) }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-4 text-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-sm text-muted-foreground", children: profile.education }) }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute -bottom-3 -right-3 opacity-90", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Bunny, { size: 72 }) })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6", children: [
@@ -586,7 +648,8 @@ const timeline = [
     title: "Class 10",
     place: "CBSE Board",
     description: "First taste of programming. Built tiny HTML pages and fell in love with making things appear on a screen.",
-    highlight: "92% · School topper in Science"
+    highlight: "92% · School topper in Science",
+    bunnySize: 40
   },
   {
     id: "class-12",
@@ -594,7 +657,8 @@ const timeline = [
     title: "Class 12 — PCM",
     place: "CBSE Board",
     description: "Physics, Chemistry, Math by day; C and Python by night. Started competitive coding and my first Arduino project.",
-    highlight: "Cleared JEE · State-level science exhibition winner"
+    highlight: "Cleared JEE · State-level science exhibition winner",
+    bunnySize: 55
   },
   {
     id: "mit",
@@ -602,7 +666,8 @@ const timeline = [
     title: "MIT Muzaffarpur",
     place: "B.Tech, Computer Science",
     description: "Formal engineering begins. Data Structures, Operating Systems, Networks — and a lab where ideas finally meet hardware.",
-    highlight: "Lead, Coding Club · IoT lab researcher"
+    highlight: "Lead, Coding Club · IoT lab researcher",
+    bunnySize: 95
   },
   {
     id: "iitm",
@@ -610,7 +675,8 @@ const timeline = [
     title: "IIT Madras — BS Data Science",
     place: "Online Degree (parallel)",
     description: "Took on a parallel BS in Data Science to ground my intuition in math, statistics, and machine learning the rigorous way.",
-    highlight: "Foundation level cleared with distinction"
+    highlight: "Foundation level cleared with distinction",
+    bunnySize: 95
   },
   {
     id: "future",
@@ -618,7 +684,8 @@ const timeline = [
     title: "What's Next",
     place: "Internships → Industry",
     description: "Looking for engineering internships where I can ship real products, then full-time roles building AI-powered, hardware-aware systems.",
-    highlight: "Open to opportunities · Building in public"
+    highlight: "Open to opportunities · Building in public",
+    bunnySize: 100
   }
 ];
 function TimelineSection() {
@@ -739,8 +806,8 @@ const skills = [
       "Python",
       "JavaScript",
       "TypeScript",
-      "Java",
-      "SQL"
+      "HTML",
+      "CSS"
     ]
   },
   {
@@ -750,9 +817,8 @@ const skills = [
       "Next.js",
       "TanStack Start",
       "Node.js",
-      "Express",
-      "Tailwind CSS",
-      "shadcn/ui"
+      "Firebase",
+      "Supabase"
     ]
   },
   {
@@ -760,10 +826,7 @@ const skills = [
     items: [
       "NumPy",
       "Pandas",
-      "scikit-learn",
-      "PyTorch (learning)",
-      "Statistics",
-      "RAG / LLM apps"
+      "Statistics & Probability"
     ]
   },
   {
@@ -782,9 +845,6 @@ const skills = [
     items: [
       "Git & GitHub",
       "Linux",
-      "Docker (learning)",
-      "Figma",
-      "Postman",
       "VS Code"
     ]
   }
@@ -850,9 +910,10 @@ const projects = [
       "ESP32",
       "MQTT",
       "Node.js",
-      "PostgreSQL",
+      "Firebase",
+      "Supabase",
       "Next.js",
-      "Tailwind"
+      "Firestore"
     ],
     challenges: [
       "Power budgeting for solar duty cycle",
@@ -861,75 +922,7 @@ const projects = [
     ],
     gallery: [],
     github: "https://github.com/nikhilkumar/hydrosentinal",
-    demo: "https://hydrosentinal.example.com"
-  },
-  {
-    id: "studybuddy-ai",
-    name: "StudyBuddy AI",
-    year: "2024",
-    status: "Shipped",
-    tagline: "An AI tutor that explains your textbook the way your best teacher would.",
-    overview: "Upload a PDF chapter, get a personalised Socratic tutor that quizzes, explains, and tracks weak spots over time.",
-    problem: "Generic chatbots forget context. Students need a tutor that remembers what they got wrong yesterday.",
-    solution: "RAG over user-uploaded material, spaced-repetition scheduling, and a clean conversational UI.",
-    stack: [
-      "Next.js",
-      "OpenAI",
-      "pgvector",
-      "Supabase"
-    ],
-    challenges: [
-      "Cheap embeddings without losing accuracy",
-      "Latency for long PDFs"
-    ],
-    gallery: [],
-    github: "https://github.com/nikhilkumar/studybuddy",
-    demo: ""
-  },
-  {
-    id: "campus-eats",
-    name: "Campus Eats",
-    year: "2023",
-    status: "Archived",
-    tagline: "A pre-order app for campus canteens — beat the lunch rush.",
-    overview: "Students pre-order, pay, and pick up. Canteens get demand forecasts to cut food waste.",
-    problem: "Long queues, wasted food, no analytics for canteen owners.",
-    solution: "PWA + Razorpay + a tiny ops dashboard. Piloted with 200 students.",
-    stack: [
-      "React",
-      "Express",
-      "MongoDB",
-      "Razorpay"
-    ],
-    challenges: [
-      "Real-time queue updates without burning battery",
-      "Handling failed payments gracefully"
-    ],
-    gallery: [],
-    github: "https://github.com/nikhilkumar/campus-eats",
-    demo: ""
-  },
-  {
-    id: "sensehub",
-    name: "SenseHub",
-    year: "2024",
-    status: "Experiment",
-    tagline: "A plug-and-play sensor hub for makers, kids, and classrooms.",
-    overview: "One board, a dozen sensors, and a drag-and-drop block editor — so an 8-year-old can build their first weather station in 10 minutes.",
-    problem: "Most IoT kits are too fiddly for beginners and too limited for intermediates.",
-    solution: "Auto-detected sensor modules + a visual programming layer that exports real code when you're ready to graduate.",
-    stack: [
-      "ESP32",
-      "MicroPython",
-      "React Flow"
-    ],
-    challenges: [
-      "Sensor auto-detection on a tiny microcontroller",
-      "Designing a block language without dumbing it down"
-    ],
-    gallery: [],
-    github: "https://github.com/nikhilkumar/sensehub",
-    demo: ""
+    demo: "https://hydrosentinal-rose.vercel.com"
   }
 ];
 function Projects() {
@@ -1066,75 +1059,39 @@ function Block({ label, children }) {
 const certificates = [
   {
     id: "c1",
-    title: "Python for Everybody",
-    issuer: "Coursera · University of Michigan",
+    title: "Python Essential 1",
+    issuer: "Cisco Networking Academy",
     category: "Programming",
-    year: "2022",
-    url: "",
-    file: ""
+    year: "2025",
+    url: "/cretificate/python-essential-1.pdf",
+    file: "/cretificate/python-essential-1.pdf"
+  },
+  {
+    id: "c1",
+    title: "Python Essential 2",
+    issuer: "Cisco Networking Academy",
+    category: "Programming",
+    year: "2026",
+    url: "/cretificate/python-essential-2.pdf",
+    file: "/cretificate/python-essential-2.pdf"
   },
   {
     id: "c2",
-    title: "Machine Learning Specialization",
-    issuer: "DeepLearning.AI",
+    title: "Gen AI Academy 2.0",
+    issuer: "Google Cloud",
     category: "Data Science",
     year: "2024",
-    url: "",
-    file: ""
+    url: "cretificate/Hack2skill-CertificateAI-ML.png",
+    file: "cretificate/Hack2skill-CertificateAI-ML.png"
   },
   {
-    id: "c3",
-    title: "IoT Fundamentals",
-    issuer: "Cisco Networking Academy",
-    category: "IoT",
-    year: "2023",
-    url: "",
-    file: ""
-  },
-  {
-    id: "c4",
-    title: "Smart India Hackathon — Finalist",
-    issuer: "Govt. of India",
-    category: "Hackathons",
-    year: "2024",
-    url: "",
-    file: ""
-  },
-  {
-    id: "c5",
-    title: "Full Stack Web Development",
-    issuer: "Meta · Coursera",
-    category: "Courses",
-    year: "2023",
-    url: "",
-    file: ""
-  },
-  {
-    id: "c6",
-    title: "Data Structures & Algorithms in C++",
-    issuer: "NPTEL · IIT Madras",
-    category: "Programming",
-    year: "2023",
-    url: "",
-    file: ""
-  },
-  {
-    id: "c7",
-    title: "Embedded Systems with ESP32",
-    issuer: "Udemy",
-    category: "IoT",
-    year: "2024",
-    url: "",
-    file: ""
-  },
-  {
-    id: "c8",
-    title: "Statistics for Data Science",
-    issuer: "IIT Madras BS",
-    category: "Data Science",
-    year: "2024",
-    url: "",
-    file: ""
+    id: "c2",
+    title: "Gen AI Academy 2.0",
+    issuer: "Google Cloud",
+    category: "AI",
+    year: "2025",
+    url: "Hack2skill-CertificateDATA.png",
+    file: "Hack2skill-CertificateDATA.png"
   }
 ];
 const CATEGORIES = ["All", "Programming", "Data Science", "IoT", "Hackathons", "Courses"];
@@ -1229,38 +1186,17 @@ function Certificates() {
 const achievements = [
   {
     id: "a1",
-    year: "2024",
-    title: "Smart India Hackathon — Grand Finalist",
-    type: "Hackathon",
-    description: "Top 50 nationally with an IoT-based public-safety prototype."
+    year: "2026",
+    title: "IIT Madras Foundation Term 3",
+    type: "Academic",
+    description: "Got 10 SGPA in Term 3 in Python Programming ."
   },
   {
     id: "a2",
-    year: "2024",
-    title: "IIT Madras Foundation — Distinction",
-    type: "Academic",
-    description: "Cleared Foundation level of BS Data Science with distinction."
-  },
-  {
-    id: "a3",
-    year: "2023",
-    title: "Inter-College Coding Contest — Winner",
-    type: "Competition",
-    description: "First place across 40+ teams in algorithmic problem solving."
-  },
-  {
-    id: "a4",
-    year: "2023",
-    title: "MIT Muzaffarpur Merit Scholarship",
-    type: "Scholarship",
-    description: "Awarded for academic performance in the first year."
-  },
-  {
-    id: "a5",
-    year: "2022",
-    title: "JEE Mains — Qualified",
-    type: "Award",
-    description: "Secured admission to MIT Muzaffarpur through JEE."
+    year: "2026",
+    title: "Hackstack 2026 - Finalist",
+    type: "Hackathon",
+    description: "Got selected as a finalist in Hackstack 2026."
   }
 ];
 function Achievements() {
@@ -1299,18 +1235,294 @@ function Achievements() {
     }
   );
 }
+function cn(...inputs) {
+  return twMerge(clsx(inputs));
+}
+const Progress = reactExports.forwardRef(({ className, value, ...props }, ref) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+  Root,
+  {
+    ref,
+    className: cn("relative h-2 w-full overflow-hidden rounded-full bg-primary/20", className),
+    ...props,
+    children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+      Indicator,
+      {
+        className: "h-full w-full flex-1 bg-primary transition-all",
+        style: { transform: `translateX(-${100 - (value || 0)}%)` }
+      }
+    )
+  }
+));
+Progress.displayName = Root.displayName;
+const GITHUB_USERNAME = "NIKHILKUMAR-186";
+async function fetchGithub(url) {
+  const response = await fetch(url, {
+    headers: {
+      Accept: "application/vnd.github+json"
+    }
+  });
+  if (!response.ok) {
+    const body = await response.text();
+    const message = response.status === 403 ? "GitHub rate limit exceeded" : response.statusText || body;
+    throw new Error(message);
+  }
+  return response.json();
+}
+async function getGithubProfile() {
+  return fetchGithub(`https://api.github.com/users/${GITHUB_USERNAME}`);
+}
+async function getGithubRepos() {
+  return fetchGithub(
+    `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`
+  );
+}
+function computeStreaks(contributions) {
+  let currentStreak = 0;
+  let longestStreak = 0;
+  let tempStreak = 0;
+  for (const contribution of contributions) {
+    if (contribution.count > 0) {
+      tempStreak += 1;
+      longestStreak = Math.max(longestStreak, tempStreak);
+    } else {
+      tempStreak = 0;
+    }
+  }
+  for (let i = contributions.length - 1; i >= 0; i -= 1) {
+    if (contributions[i].count > 0) {
+      currentStreak += 1;
+    } else {
+      break;
+    }
+  }
+  return { currentStreak, longestStreak };
+}
+async function getGithubContributions() {
+  const response = await fetch(`https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}`);
+  if (!response.ok) {
+    const body = await response.text();
+    const message = response.status === 403 ? "GitHub rate limit exceeded" : response.statusText || body;
+    throw new Error(message);
+  }
+  const payload = await response.json();
+  const contributions = Array.isArray(payload.contributions) ? payload.contributions : [];
+  const totalContributions = typeof payload.totalContributions === "number" ? payload.totalContributions : contributions.reduce((sum, day) => sum + (day.count || 0), 0);
+  const { currentStreak, longestStreak } = computeStreaks(contributions);
+  return {
+    totalContributions,
+    currentStreak,
+    longestStreak
+  };
+}
+const PROFILE_URL = profile.github;
+const FEATURED_REPO_NAMES = ["hydrosentinal"];
 const STAGES = [
-  { label: "First Repo", note: "A blinking LED, committed with pride.", icon: GitCommitHorizontal },
-  { label: "First Major Project", note: "Campus Eats — my first deployed app with real users.", icon: GitBranch },
-  { label: "Now", note: "Shipping HydroSentinal and contributing to OSS.", icon: Star },
-  { label: "Next", note: "Open-source IoT toolkit for classrooms.", icon: GitBranch }
+  { label: "First Repo", note: "First programming experiments.", icon: GitCommitHorizontal },
+  { label: "First Major Project", note: "Hardware + Software projects.", icon: GitBranch },
+  { label: "Now", note: "Building HydroSentinal and learning Data Science.", icon: Star },
+  { label: "Next", note: "AI-powered IoT systems and open source contributions.", icon: Rocket }
 ];
-const STATS = [
-  { label: "Public Repos", value: "24+" },
-  { label: "Contributions / yr", value: "800+" },
-  { label: "Top Languages", value: "TS · Py · C++" }
-];
+const languageIconMap = {
+  TypeScript: CodeXml,
+  JavaScript: CodeXml,
+  Python: CodeXml,
+  "C++": CodeXml,
+  Java: CodeXml,
+  Rust: CodeXml,
+  Go: CodeXml
+};
+const fadeUp = {
+  initial: { opacity: 0, y: 18 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.45, ease: "easeOut" }
+};
+function formatDate(value) {
+  return format(new Date(value), "LLL d, yyyy");
+}
+function RepoCard({ repo, featured }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    motion.a,
+    {
+      ...fadeUp,
+      href: repo.html_url,
+      target: "_blank",
+      rel: "noreferrer",
+      className: `glass block rounded-3xl border border-border/70 p-4 transition hover:-translate-y-0.5 hover:border-primary/50 ${featured ? "border-primary/40 bg-surface/90 shadow-[0_0_0_1px_rgba(59,130,246,0.25)]" : "bg-surface/70"}`,
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 text-sm text-muted-foreground", children: [
+              featured && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "rounded-full border border-primary/40 bg-primary/10 px-2 py-1 text-xs uppercase tracking-[0.25em] text-primary", children: "Featured" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-semibold text-foreground", children: repo.name })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 text-sm leading-6 text-muted-foreground", children: repo.description ?? "No description available." })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 text-sm text-muted-foreground", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Star, { className: "size-4 text-primary" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: repo.stargazers_count })
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 flex flex-wrap gap-2 text-sm text-muted-foreground", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "inline-flex items-center gap-2 rounded-full border border-border/70 bg-surface/80 px-3 py-1", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(CalendarDays, { className: "size-4 text-primary" }),
+            formatDate(repo.updated_at)
+          ] }),
+          repo.language ? /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "inline-flex items-center gap-2 rounded-full border border-border/70 bg-surface/80 px-3 py-1", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(GitBranch, { className: "size-4 text-primary" }),
+            repo.language
+          ] }) : null
+        ] })
+      ]
+    }
+  );
+}
+function InsightCard({ label, value, icon: Icon, accent }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { ...fadeUp, className: "glass rounded-3xl border border-border/70 p-4", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between gap-3", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs uppercase tracking-[0.25em] text-muted-foreground", children: label }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `inline-flex h-8 w-8 items-center justify-center rounded-full ${accent}`, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { className: "size-4" }) })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-4 text-3xl font-display font-semibold text-foreground", children: value })
+  ] });
+}
+function LanguageBar({ language, percent }) {
+  const Icon = languageIconMap[language] ?? CodeXml;
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { ...fadeUp, className: "space-y-3", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between gap-3 text-sm text-muted-foreground", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { className: "size-4" }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: language })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "font-semibold text-foreground", children: [
+        percent,
+        "%"
+      ] })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Progress, { value: percent })
+  ] });
+}
+function SkeletonCard() {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "glass rounded-2xl p-6 animate-pulse", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mb-4 h-4 w-40 rounded-full bg-border/60" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-3", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-3 rounded-full bg-border/60" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-3 rounded-full bg-border/60 w-5/6" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "h-8 rounded-full bg-border/60" })
+    ] })
+  ] });
+}
 function Github_() {
+  const [profileData, setProfileData] = reactExports.useState(null);
+  const [repos, setRepos] = reactExports.useState([]);
+  const [contributionData, setContributionData] = reactExports.useState(null);
+  const [loading, setLoading] = reactExports.useState(true);
+  const [error, setError] = reactExports.useState(null);
+  reactExports.useEffect(() => {
+    let cancelled = false;
+    async function loadGithubData() {
+      setLoading(true);
+      setError(null);
+      try {
+        const [profileResponse, reposResponse, contributionsResponse] = await Promise.all([
+          getGithubProfile(),
+          getGithubRepos(),
+          getGithubContributions()
+        ]);
+        if (!cancelled) {
+          setProfileData(profileResponse);
+          setRepos(reposResponse);
+          setContributionData(contributionsResponse);
+        }
+      } catch (err) {
+        if (!cancelled) {
+          setError(err instanceof Error ? err.message : "Unable to fetch GitHub data right now.");
+        }
+      } finally {
+        if (!cancelled) {
+          setLoading(false);
+        }
+      }
+    }
+    loadGithubData();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+  const languageStats = reactExports.useMemo(() => {
+    const counts = repos.reduce((acc, repo) => {
+      if (repo.language) {
+        acc[repo.language] = (acc[repo.language] ?? 0) + 1;
+      }
+      return acc;
+    }, {});
+    const languages = Object.entries(counts).sort((a, b) => b[1] - a[1]).map(([language, count]) => ({ language, count }));
+    const total = languages.reduce((sum, item) => sum + item.count, 0);
+    return languages.map((item) => ({
+      ...item,
+      percent: total ? Math.round(item.count / total * 100) : 0
+    }));
+  }, [repos]);
+  const featuredRepo = reactExports.useMemo(
+    () => repos.find((repo) => FEATURED_REPO_NAMES.includes(repo.name.toLowerCase())),
+    [repos]
+  );
+  const latestRepos = reactExports.useMemo(() => {
+    if (!repos.length) {
+      return [];
+    }
+    const remaining = repos.filter((repo) => repo.id !== featuredRepo?.id);
+    return [
+      ...featuredRepo ? [featuredRepo] : [],
+      ...remaining.slice(0, 3 - Number(Boolean(featuredRepo)))
+    ];
+  }, [repos, featuredRepo]);
+  const stats = [
+    {
+      label: "Public Repos",
+      value: profileData ? profileData.public_repos.toLocaleString() : "—",
+      icon: GitBranch
+    },
+    {
+      label: "Followers",
+      value: profileData ? profileData.followers.toLocaleString() : "—",
+      icon: Users
+    },
+    {
+      label: "Following",
+      value: profileData ? profileData.following.toLocaleString() : "—",
+      icon: Activity
+    },
+    {
+      label: "Joined",
+      value: profileData ? new Date(profileData.created_at).getFullYear().toString() : "—",
+      icon: Sparkles
+    },
+    {
+      label: "Total Commits",
+      value: contributionData ? contributionData.totalContributions.toLocaleString() : "—",
+      icon: TrendingUp
+    }
+  ];
+  const insights = [
+    {
+      label: "Total Contributions",
+      value: contributionData ? contributionData.totalContributions.toLocaleString() : "—",
+      icon: Activity,
+      accent: "bg-primary/15 text-primary"
+    },
+    {
+      label: "Current Streak",
+      value: contributionData ? `${contributionData.currentStreak}d` : "—",
+      icon: Users,
+      accent: "bg-emerald-500/15 text-emerald-400"
+    },
+    {
+      label: "Longest Streak",
+      value: contributionData ? `${contributionData.longestStreak}d` : "—",
+      icon: Sparkles,
+      accent: "bg-violet-500/15 text-violet-400"
+    }
+  ];
   return /* @__PURE__ */ jsxRuntimeExports.jsx(
     Section,
     {
@@ -1321,35 +1533,91 @@ function Github_() {
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "gradient-text", children: "growth story" })
       ] }),
       description: "The repos, the rewrites, the late-night commits. Here's the arc.",
-      children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid gap-6 md:grid-cols-[1fr_1.4fr]", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "glass space-y-4 rounded-2xl p-6", children: [
-          STATS.map((s) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-baseline justify-between border-b border-border/60 pb-3 last:border-0 last:pb-0", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm text-muted-foreground", children: s.label }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-display text-xl font-bold gradient-text", children: s.value })
-          ] }, s.label)),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs(
-            "a",
-            {
-              href: profile.github,
-              target: "_blank",
-              rel: "noreferrer",
-              className: "mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition hover:scale-[1.02]",
-              children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx(Github, { className: "size-4" }),
-                " View profile"
-              ]
-            }
-          )
+      children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid gap-6 xl:grid-cols-[1.2fr_0.8fr]", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "glass rounded-3xl p-6", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-4 sm:grid-cols-2 xl:grid-cols-3", children: stats.map((stat) => /* @__PURE__ */ reactExports.createElement(motion.div, { ...fadeUp, key: stat.label, className: "glass rounded-3xl border border-border/70 bg-surface/80 p-4" }, /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 text-xs uppercase tracking-[0.25em] text-muted-foreground", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary", children: /* @__PURE__ */ jsxRuntimeExports.jsx(stat.icon, { className: "size-4" }) }),
+              stat.label
+            ] }), /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-4 text-3xl font-display font-semibold text-foreground", children: stat.value }))) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-4 grid gap-4 sm:grid-cols-3", children: insights.map((insight) => /* @__PURE__ */ jsxRuntimeExports.jsx(InsightCard, { label: insight.label, value: insight.value, icon: insight.icon, accent: insight.accent }, insight.label)) })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "glass rounded-3xl p-6", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-4 flex flex-wrap items-center justify-between gap-4", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm uppercase tracking-[0.2em] text-primary", children: "Contribution Activity" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "mt-2 text-xl font-semibold text-foreground", children: "GitHub heatmap" })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "inline-flex items-center gap-2 rounded-full border border-border/70 bg-surface/80 px-3 py-2 text-xs text-muted-foreground", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(Users, { className: "size-4 text-primary" }),
+                " Live"
+              ] })
+            ] }),
+            loading && /* @__PURE__ */ jsxRuntimeExports.jsx(SkeletonCard, {}),
+            !loading && error && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "rounded-3xl border border-border/70 bg-surface/80 p-6 text-center text-sm text-muted-foreground", children: "Unable to fetch GitHub data right now." }),
+            !loading && !error && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "overflow-hidden rounded-3xl border border-border/70 bg-surface/70 p-3", style: { minHeight: 240 }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+              GitHubCalendar,
+              {
+                username: "NIKHILKUMAR-186",
+                theme: {
+                  light: ["#0f172a", "#0f172a", "#2563eb", "#1d4ed8", "#0ea5e9"]
+                },
+                blockMargin: 4,
+                blockSize: 12,
+                fontSize: 11,
+                showWeekdayLabels: false,
+                showMonthLabels: true
+              }
+            ) })
+          ] })
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "relative space-y-3", children: STAGES.map((s, i) => {
-          const Icon = s.icon;
-          return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "glass flex items-start gap-4 rounded-2xl p-5", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex size-9 shrink-0 items-center justify-center rounded-lg bg-accent/15 text-accent", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { className: "size-4" }) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-xs font-semibold uppercase tracking-wider text-primary", children: s.label }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-foreground/90", children: s.note })
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid gap-6 xl:grid-cols-[1fr_0.8fr]", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "glass rounded-3xl p-6", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-4 flex items-center justify-between gap-4", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm uppercase tracking-[0.2em] text-primary", children: "Latest Repositories" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "mt-2 text-xl font-semibold text-foreground", children: "Most recent work" })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs uppercase tracking-[0.2em] text-muted-foreground", children: "3 repos" })
+            ] }),
+            loading && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-4", children: Array.from({ length: 3 }).map((_, index) => /* @__PURE__ */ jsxRuntimeExports.jsx(SkeletonCard, {}, index)) }),
+            !loading && error && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "rounded-3xl border border-border/70 bg-surface/80 p-6 text-center text-sm text-muted-foreground", children: "Unable to fetch GitHub data right now." }),
+            !loading && !error && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
+              latestRepos.map((repo) => /* @__PURE__ */ jsxRuntimeExports.jsx(RepoCard, { repo, featured: repo.id === featuredRepo?.id }, repo.id)),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                "a",
+                {
+                  href: `${PROFILE_URL}?tab=repositories`,
+                  target: "_blank",
+                  rel: "noreferrer",
+                  className: "mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground transition hover:scale-[1.02]",
+                  children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(Github, { className: "size-4" }),
+                    " View All Repositories"
+                  ]
+                }
+              )
             ] })
-          ] }, i);
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "glass rounded-3xl p-6", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-4 flex items-center justify-between gap-4", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm uppercase tracking-[0.2em] text-primary", children: "Top Languages" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "mt-2 text-xl font-semibold text-foreground", children: "Language impact" })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs uppercase tracking-[0.2em] text-muted-foreground", children: "Live" })
+            ] }),
+            loading && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-4", children: Array.from({ length: 4 }).map((_, index) => /* @__PURE__ */ jsxRuntimeExports.jsx(SkeletonCard, {}, index)) }),
+            !loading && !error && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-4", children: languageStats.map((language) => /* @__PURE__ */ jsxRuntimeExports.jsx(LanguageBar, { language: language.language, percent: language.percent }, language.language)) }),
+            !loading && error && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "rounded-3xl border border-border/70 bg-surface/80 p-6 text-center text-sm text-muted-foreground", children: "Unable to fetch GitHub data right now." })
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-6 md:grid-cols-2 xl:grid-cols-4", children: STAGES.map((stage) => {
+          const Icon = stage.icon;
+          return /* @__PURE__ */ reactExports.createElement(motion.div, { ...fadeUp, key: stage.label, className: "glass flex items-start gap-4 rounded-3xl p-5 transition hover:border-primary/40" }, /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex size-9 shrink-0 items-center justify-center rounded-lg bg-accent/15 text-accent", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { className: "size-4" }) }), /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-xs font-semibold uppercase tracking-wider text-primary", children: stage.label }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-foreground/90", children: stage.note })
+          ] }));
         }) })
       ] })
     }
@@ -1587,11 +1855,12 @@ function ContactLink({
   );
 }
 function Home() {
+  const [introExiting, setIntroExiting] = reactExports.useState(false);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(CinematicIntro, {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(CinematicIntro, { onExitStart: () => setIntroExiting(true) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(SmoothScroll, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsx(Nav, {}),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Hero, {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(Hero, { introReady: introExiting }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(About, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsx(TimelineSection, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsx(Now, {}),

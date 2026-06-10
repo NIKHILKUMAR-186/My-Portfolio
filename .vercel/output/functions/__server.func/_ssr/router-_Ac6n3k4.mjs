@@ -15,7 +15,7 @@ import "crypto";
 import "async_hooks";
 import "stream";
 import "../_libs/isbot.mjs";
-const appCss = "/assets/styles-C2otZSu9.css";
+const appCss = "/assets/styles-CpFPu__Y.css";
 function reportLovableError(error, context = {}) {
   if (typeof window === "undefined") return;
   window.__lovableEvents?.captureException?.(
@@ -144,7 +144,7 @@ const Route$1 = createFileRoute("/sitemap.xml")({
     }
   }
 });
-const $$splitComponentImporter = () => import("./index-DBtOEsXR.mjs");
+const $$splitComponentImporter = () => import("./index-DrusaxOx.mjs");
 const Route = createFileRoute("/")({
   head: () => ({
     meta: [{

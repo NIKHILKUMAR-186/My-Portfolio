@@ -36,8 +36,11 @@ export function AvatarFrame({
       <div className="absolute top-[10%] left-[10%] w-3 h-3 bg-cyan-400 rounded-full animate-ping pointer-events-none" />
       <div className="absolute bottom-[20%] right-[8%] w-2 h-2 bg-indigo-500 rounded-full pointer-events-none" />
       <div className="absolute -bottom-2 px-3 py-1 bg-slate-950/90 border border-slate-800 rounded-lg text-[9px] font-mono tracking-widest text-emerald-400 flex items-center gap-1.5 shadow-lg select-none">
-        <Globe className="w-3 h-3 text-cyan-400 animate-spin" style={{ animationDuration: "20s" }} />
-        BTech in IT • MIT Muzaffarpur  ​ ​ ​ ​ ​ ​ ​ ​ ​ ​ ​ ​ ​ ​ BS Data Science • IIT Madras
+        <Globe
+          className="w-3 h-3 text-cyan-400 animate-spin"
+          style={{ animationDuration: "20s" }}
+        />
+        BTech in IT • MIT Muzaffarpur ​ ​ ​ ​ ​ ​ ​ ​ ​ ​ ​ ​ ​ ​ BS Data Science • IIT Madras
       </div>
     </motion.div>
   );
