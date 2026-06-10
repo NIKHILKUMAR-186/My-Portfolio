@@ -1,10 +1,74 @@
 [
-  { "id": "c1", "title": "Python for Everybody", "issuer": "Coursera · University of Michigan", "category": "Programming", "year": "2022", "url": "", "file": "" },
-  { "id": "c2", "title": "Machine Learning Specialization", "issuer": "DeepLearning.AI", "category": "Data Science", "year": "2024", "url": "", "file": "" },
-  { "id": "c3", "title": "IoT Fundamentals", "issuer": "Cisco Networking Academy", "category": "IoT", "year": "2023", "url": "", "file": "" },
-  { "id": "c4", "title": "Smart India Hackathon — Finalist", "issuer": "Govt. of India", "category": "Hackathons", "year": "2024", "url": "", "file": "" },
-  { "id": "c5", "title": "Full Stack Web Development", "issuer": "Meta · Coursera", "category": "Courses", "year": "2023", "url": "", "file": "" },
-  { "id": "c6", "title": "Data Structures & Algorithms in C++", "issuer": "NPTEL · IIT Madras", "category": "Programming", "year": "2023", "url": "", "file": "" },
-  { "id": "c7", "title": "Embedded Systems with ESP32", "issuer": "Udemy", "category": "IoT", "year": "2024", "url": "", "file": "" },
-  { "id": "c8", "title": "Statistics for Data Science", "issuer": "IIT Madras BS", "category": "Data Science", "year": "2024", "url": "", "file": "" }
+  {
+    "id": "c1",
+    "title": "Python for Everybody",
+    "issuer": "Coursera · University of Michigan",
+    "category": "Programming",
+    "year": "2022",
+    "url": "",
+    "file": ""
+  },
+  {
+    "id": "c2",
+    "title": "Machine Learning Specialization",
+    "issuer": "DeepLearning.AI",
+    "category": "Data Science",
+    "year": "2024",
+    "url": "",
+    "file": ""
+  },
+  {
+    "id": "c3",
+    "title": "IoT Fundamentals",
+    "issuer": "Cisco Networking Academy",
+    "category": "IoT",
+    "year": "2023",
+    "url": "",
+    "file": ""
+  },
+  {
+    "id": "c4",
+    "title": "Smart India Hackathon — Finalist",
+    "issuer": "Govt. of India",
+    "category": "Hackathons",
+    "year": "2024",
+    "url": "",
+    "file": ""
+  },
+  {
+    "id": "c5",
+    "title": "Full Stack Web Development",
+    "issuer": "Meta · Coursera",
+    "category": "Courses",
+    "year": "2023",
+    "url": "",
+    "file": ""
+  },
+  {
+    "id": "c6",
+    "title": "Data Structures & Algorithms in C++",
+    "issuer": "NPTEL · IIT Madras",
+    "category": "Programming",
+    "year": "2023",
+    "url": "",
+    "file": ""
+  },
+  {
+    "id": "c7",
+    "title": "Embedded Systems with ESP32",
+    "issuer": "Udemy",
+    "category": "IoT",
+    "year": "2024",
+    "url": "",
+    "file": ""
+  },
+  {
+    "id": "c8",
+    "title": "Statistics for Data Science",
+    "issuer": "IIT Madras BS",
+    "category": "Data Science",
+    "year": "2024",
+    "url": "",
+    "file": ""
+  }
 ]

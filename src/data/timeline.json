@@ -5,7 +5,8 @@
     "title": "Class 10",
     "place": "CBSE Board",
     "description": "First taste of programming. Built tiny HTML pages and fell in love with making things appear on a screen.",
-    "highlight": "92% · School topper in Science"
+    "highlight": "92% · School topper in Science",
+    "bunnySize": 40
   },
   {
     "id": "class-12",
@@ -13,7 +14,8 @@
     "title": "Class 12 — PCM",
     "place": "CBSE Board",
     "description": "Physics, Chemistry, Math by day; C and Python by night. Started competitive coding and my first Arduino project.",
-    "highlight": "Cleared JEE · State-level science exhibition winner"
+    "highlight": "Cleared JEE · State-level science exhibition winner",
+  "bunnySize": 55
   },
   {
     "id": "mit",
@@ -21,7 +23,8 @@
     "title": "MIT Muzaffarpur",
     "place": "B.Tech, Computer Science",
     "description": "Formal engineering begins. Data Structures, Operating Systems, Networks — and a lab where ideas finally meet hardware.",
-    "highlight": "Lead, Coding Club · IoT lab researcher"
+    "highlight": "Lead, Coding Club · IoT lab researcher",
+  "bunnySize": 95
   },
   {
     "id": "iitm",
@@ -29,7 +32,8 @@
     "title": "IIT Madras — BS Data Science",
     "place": "Online Degree (parallel)",
     "description": "Took on a parallel BS in Data Science to ground my intuition in math, statistics, and machine learning the rigorous way.",
-    "highlight": "Foundation level cleared with distinction"
+    "highlight": "Foundation level cleared with distinction",
+  "bunnySize": 95
   },
   {
     "id": "future",
@@ -37,6 +41,7 @@
     "title": "What's Next",
     "place": "Internships → Industry",
     "description": "Looking for engineering internships where I can ship real products, then full-time roles building AI-powered, hardware-aware systems.",
-    "highlight": "Open to opportunities · Building in public"
+    "highlight": "Open to opportunities · Building in public",
+  "bunnySize": 100
   }
 ]

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { CinematicIntro } from "@/components/cinematic-intro";
 import { SmoothScroll } from "@/components/smooth-scroll";
@@ -40,12 +41,14 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
+  const [introExiting, setIntroExiting] = useState(false);
+
   return (
     <>
-      <CinematicIntro />
+      <CinematicIntro onExitStart={() => setIntroExiting(true)} />
       <SmoothScroll />
       <Nav />
-      <Hero />
+      <Hero introReady={introExiting} />
       <About />
       <TimelineSection />
       <Now />
