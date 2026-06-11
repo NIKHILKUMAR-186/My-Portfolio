@@ -1,39 +1,43 @@
 [
   {
     "id": "class-10",
-    "year": "2019",
-    "title": "Class 10",
+    "year": "2022",
+    "title": "Class 10 - Cambrian Public School",
     "place": "CBSE Board",
     "description": "First taste of programming. Built tiny HTML pages and fell in love with making things appear on a screen.",
-    "highlight": "92% · School topper in Science",
-    "bunnySize": 40
+    "highlight": "",
+    "bunnySize": 40,  
+    "website": "https://cambrianpublicschool.com/"
   },
   {
     "id": "class-12",
-    "year": "2021",
-    "title": "Class 12 — PCM",
+    "year": "2024",
+    "title": "Class 12 — PCM - Star International School",
     "place": "CBSE Board",
-    "description": "Physics, Chemistry, Math by day; C and Python by night. Started competitive coding and my first Arduino project.",
+    "description": "Dived deeper into physics , C and math. Started competitive programming and robotics, which sparked my passion for problem-solving and building.",
     "highlight": "Cleared JEE · State-level science exhibition winner",
-  "bunnySize": 55
-  },
-  {
-    "id": "mit",
-    "year": "2022",
-    "title": "MIT Muzaffarpur",
-    "place": "B.Tech, Computer Science",
-    "description": "Formal engineering begins. Data Structures, Operating Systems, Networks — and a lab where ideas finally meet hardware.",
-    "highlight": "Lead, Coding Club · IoT lab researcher",
-  "bunnySize": 95
+    "bunnySize": 55,
+    "website": "https://www.mitmuzaffarpur.org/"
   },
   {
     "id": "iitm",
-    "year": "2023",
+    "year": "2025",
     "title": "IIT Madras — BS Data Science",
-    "place": "Online Degree (parallel)",
+    "place": "Online Degree (Dual Degree)",
     "description": "Took on a parallel BS in Data Science to ground my intuition in math, statistics, and machine learning the rigorous way.",
-    "highlight": "Foundation level cleared with distinction",
-  "bunnySize": 95
+    "highlight": "Topped in Maths1 and python programing with grade A and S respectively  ",
+    "bunnySize": 95,
+    "website": "https://study.iitm.ac.in/ds/"
+  },
+  {
+    "id": "mit",
+    "year": "2025",
+    "title": "MIT Muzaffarpur",
+    "place": "B.Tech, Information Technology",
+    "description": "Formal engineering begins. Data Structures, Operating Systems, Networks — and a lab where ideas finally meet hardware.",
+    "highlight": "",
+    "bunnySize": 95,
+    "website": "https://www.mitmuzaffarpur.org/"
   },
   {
     "id": "future",
@@ -42,6 +46,6 @@
     "place": "Internships → Industry",
     "description": "Looking for engineering internships where I can ship real products, then full-time roles building AI-powered, hardware-aware systems.",
     "highlight": "Open to opportunities · Building in public",
-  "bunnySize": 100
+    "bunnySize": 100
   }
 ]

@@ -2636,8 +2636,8 @@ function useInView(ref, { root, margin, amount, once = false, initial = false } 
 }
 export {
   AnimatePresence as A,
-  useTransform as a,
-  useInView as b,
+  useScroll as a,
+  useTransform as b,
   motion as m,
-  useScroll as u
+  useInView as u
 };

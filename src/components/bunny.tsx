@@ -1,30 +1,44 @@
-import { motion } from "framer-motion";
+import { motion, type MotionValue } from "framer-motion";
 
 type Props = {
-  size?: number;
+  size?: number | string | MotionValue<number | string>;
   className?: string;
   waving?: boolean;
+  showTrail?: boolean;
 };
 
 /**
  * Minimal SVG bunny mascot — Nikhil's storytelling companion.
  * Pure SVG, no images, scales crisply. Optional gentle "wave" animation.
  */
-export function Bunny({ size = 64, className, waving = false }: Props) {
+export function Bunny({ size = 64, className, waving = false, showTrail = false }: Props) {
   return (
-    <motion.svg
-      width={size}
-      height={size}
-      viewBox="0 0 100 110"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      aria-label="Bunny mascot"
-      role="img"
-      initial={{ y: 0 }}
-      animate={{ y: [0, -4, 0] }}
-      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-    >
+    <div className={`relative inline-flex ${className ?? ""}`}>
+      {showTrail && (
+        <motion.div
+          className="pointer-events-none absolute inset-0 -z-10 flex items-center justify-center"
+          initial={{ opacity: 0.16 }}
+          animate={{ opacity: [0.16, 0.08, 0.16], y: [0, -3, 0] }}
+          transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <span className="absolute -left-4 top-2 h-6 w-6 rounded-full bg-cyan-400/15 blur-2xl" />
+          <span className="absolute -right-3 bottom-5 h-5 w-5 rounded-full bg-sky-400/10 blur-2xl" />
+          <span className="absolute left-1/2 top-1/3 h-4 w-4 -translate-x-1/2 rounded-full bg-cyan-300/15 blur-2xl" />
+        </motion.div>
+      )}
+      <motion.svg
+        width={size}
+        height={size}
+        viewBox="0 0 100 110"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="block"
+        aria-label="Bunny mascot"
+        role="img"
+        initial={{ y: 0 }}
+        animate={{ y: [0, -4, 0] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+      >
       {/* Ears */}
       <motion.g
         animate={{ rotate: waving ? [0, -8, 8, -4, 0] : 0 }}
@@ -77,5 +91,6 @@ export function Bunny({ size = 64, className, waving = false }: Props) {
       {/* Body hint */}
       <ellipse cx="50" cy="92" rx="14" ry="10" fill="var(--surface-2)" stroke="var(--primary)" strokeWidth="1.5" />
     </motion.svg>
+    </div>
   );
 }

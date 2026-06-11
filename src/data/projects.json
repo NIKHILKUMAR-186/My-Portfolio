@@ -10,8 +10,8 @@
     "solution": "Low-cost ESP32 nodes + cloud aggregation + an open dashboard. Designed to be repaired locally with off-the-shelf parts.",
     "stack": ["ESP32", "MQTT", "Node.js", "Firebase", "Supabase" ,  "Next.js", "Firestore"],
     "challenges": ["Power budgeting for solar duty cycle", "Calibrating cheap pH probes against lab-grade reference", "Designing a watertight, repairable enclosure"],
-    "gallery": [],
-    "github": "https://github.com/nikhilkumar/hydrosentinal",
+    "gallery": ["/hydrosentinal/1.png"],
+    "github": "https://github.com/NIKHILKUMAR-186/HYDROSENTINAL",
     "demo": "https://hydrosentinal-rose.vercel.com"
   }
 ]

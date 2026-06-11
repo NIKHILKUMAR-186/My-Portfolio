@@ -5,8 +5,8 @@ import { G as GitHubCalendar } from "../_libs/react-github-calendar.mjs";
 import { R as Root, I as Indicator } from "../_libs/radix-ui__react-progress.mjs";
 import { c as clsx } from "../_libs/clsx.mjs";
 import { t as twMerge } from "../_libs/tailwind-merge.mjs";
-import { A as AnimatePresence, m as motion, u as useScroll, a as useTransform, b as useInView } from "../_libs/framer-motion.mjs";
-import { S as Sun, M as Moon, G as Github, L as Linkedin, a as Mail, A as ArrowDown, b as Sparkles, C as Compass, B as BookOpen, H as Hammer, c as ChevronRight, d as Search, F as FileText, D as Download, T as Trophy, e as GitBranch, U as Users, f as Activity, g as TrendingUp, h as GitCommitHorizontal, i as Star, R as Rocket, j as Music, k as Lightbulb, W as Wrench, l as Award, m as Link2, n as Globe, X, E as ExternalLink, o as CalendarDays, p as CodeXml } from "../_libs/lucide-react.mjs";
+import { u as useInView, A as AnimatePresence, m as motion, a as useScroll, b as useTransform } from "../_libs/framer-motion.mjs";
+import { S as Sun, M as Moon, G as Github, L as Linkedin, a as Mail, A as ArrowDown, b as Sparkles, C as Compass, B as BookOpen, H as Hammer, c as ChevronRight, d as Search, F as FileText, D as Download, T as Trophy, e as GitBranch, f as TrendingUp, g as Activity, U as Users, R as Rocket, h as GitCommitHorizontal, i as Star, j as Music, k as Lightbulb, W as Wrench, l as Award, m as Link2, n as Globe, X, E as ExternalLink, o as CalendarDays, p as CodeXml } from "../_libs/lucide-react.mjs";
 import { c as format } from "../_libs/date-fns.mjs";
 import "../_libs/tanstack__router-core.mjs";
 import "../_libs/tanstack__history.mjs";
@@ -101,7 +101,7 @@ const avatarVariants = {
     opacity: 1,
     scale: [0.96, 1],
     y: 0,
-    transition: { duration: 1.1, ease: [0.22, 1, 0.36, 1] }
+    transition: { duration: 1.1, ease: "easeOut" }
   }
 };
 function CinematicIntro({ onExitStart }) {
@@ -516,85 +516,101 @@ function Section({ id, eyebrow, title: title2, description, children, className 
     )
   ] }) });
 }
-function Bunny({ size = 64, className, waving = false }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
-    motion.svg,
-    {
-      width: size,
-      height: size,
-      viewBox: "0 0 100 110",
-      fill: "none",
-      xmlns: "http://www.w3.org/2000/svg",
-      className,
-      "aria-label": "Bunny mascot",
-      role: "img",
-      initial: { y: 0 },
-      animate: { y: [0, -4, 0] },
-      transition: { duration: 3, repeat: Infinity, ease: "easeInOut" },
-      children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs(
-          motion.g,
-          {
-            animate: { rotate: waving ? [0, -8, 8, -4, 0] : 0 },
-            transition: { duration: 1.4, repeat: waving ? Infinity : 0, ease: "easeInOut" },
-            style: { transformOrigin: "50px 60px" },
-            children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(
-                "path",
-                {
-                  d: "M36 48 C32 28, 34 10, 40 8 C46 6, 46 26, 44 46 Z",
-                  fill: "var(--surface-2)",
-                  stroke: "var(--primary)",
-                  strokeWidth: "1.5"
-                }
-              ),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M40 42 C38 28, 40 16, 41 14", stroke: "var(--accent)", strokeWidth: "1.5", strokeLinecap: "round" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(
-                "path",
-                {
-                  d: "M64 48 C68 28, 66 10, 60 8 C54 6, 54 26, 56 46 Z",
-                  fill: "var(--surface-2)",
-                  stroke: "var(--primary)",
-                  strokeWidth: "1.5"
-                }
-              ),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M60 42 C62 28, 60 16, 59 14", stroke: "var(--accent)", strokeWidth: "1.5", strokeLinecap: "round" })
-            ]
-          }
-        ),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("ellipse", { cx: "50", cy: "62", rx: "22", ry: "20", fill: "var(--surface-2)", stroke: "var(--primary)", strokeWidth: "1.5" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          motion.circle,
-          {
-            cx: "42",
-            cy: "60",
-            r: "2.2",
-            fill: "var(--foreground)",
-            animate: { scaleY: [1, 1, 0.1, 1] },
-            transition: { duration: 4, repeat: Infinity, times: [0, 0.92, 0.96, 1] },
-            style: { transformOrigin: "42px 60px" }
-          }
-        ),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          motion.circle,
-          {
-            cx: "58",
-            cy: "60",
-            r: "2.2",
-            fill: "var(--foreground)",
-            animate: { scaleY: [1, 1, 0.1, 1] },
-            transition: { duration: 4, repeat: Infinity, times: [0, 0.92, 0.96, 1] },
-            style: { transformOrigin: "58px 60px" }
-          }
-        ),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M48 67 L52 67 L50 70 Z", fill: "var(--accent)" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M48 71 Q50 73 52 71", stroke: "var(--foreground)", strokeWidth: "1.2", fill: "none", strokeLinecap: "round" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "38", cy: "68", r: "2", fill: "var(--primary)", opacity: "0.35" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "62", cy: "68", r: "2", fill: "var(--primary)", opacity: "0.35" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("ellipse", { cx: "50", cy: "92", rx: "14", ry: "10", fill: "var(--surface-2)", stroke: "var(--primary)", strokeWidth: "1.5" })
-      ]
-    }
-  );
+function Bunny({ size = 64, className, waving = false, showTrail = false }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `relative inline-flex ${className ?? ""}`, children: [
+    showTrail && /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      motion.div,
+      {
+        className: "pointer-events-none absolute inset-0 -z-10 flex items-center justify-center",
+        initial: { opacity: 0.16 },
+        animate: { opacity: [0.16, 0.08, 0.16], y: [0, -3, 0] },
+        transition: { duration: 4.2, repeat: Infinity, ease: "easeInOut" },
+        children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute -left-4 top-2 h-6 w-6 rounded-full bg-cyan-400/15 blur-2xl" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute -right-3 bottom-5 h-5 w-5 rounded-full bg-sky-400/10 blur-2xl" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute left-1/2 top-1/3 h-4 w-4 -translate-x-1/2 rounded-full bg-cyan-300/15 blur-2xl" })
+        ]
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      motion.svg,
+      {
+        width: size,
+        height: size,
+        viewBox: "0 0 100 110",
+        fill: "none",
+        xmlns: "http://www.w3.org/2000/svg",
+        className: "block",
+        "aria-label": "Bunny mascot",
+        role: "img",
+        initial: { y: 0 },
+        animate: { y: [0, -4, 0] },
+        transition: { duration: 3, repeat: Infinity, ease: "easeInOut" },
+        children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            motion.g,
+            {
+              animate: { rotate: waving ? [0, -8, 8, -4, 0] : 0 },
+              transition: { duration: 1.4, repeat: waving ? Infinity : 0, ease: "easeInOut" },
+              style: { transformOrigin: "50px 60px" },
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "path",
+                  {
+                    d: "M36 48 C32 28, 34 10, 40 8 C46 6, 46 26, 44 46 Z",
+                    fill: "var(--surface-2)",
+                    stroke: "var(--primary)",
+                    strokeWidth: "1.5"
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M40 42 C38 28, 40 16, 41 14", stroke: "var(--accent)", strokeWidth: "1.5", strokeLinecap: "round" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "path",
+                  {
+                    d: "M64 48 C68 28, 66 10, 60 8 C54 6, 54 26, 56 46 Z",
+                    fill: "var(--surface-2)",
+                    stroke: "var(--primary)",
+                    strokeWidth: "1.5"
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M60 42 C62 28, 60 16, 59 14", stroke: "var(--accent)", strokeWidth: "1.5", strokeLinecap: "round" })
+              ]
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("ellipse", { cx: "50", cy: "62", rx: "22", ry: "20", fill: "var(--surface-2)", stroke: "var(--primary)", strokeWidth: "1.5" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            motion.circle,
+            {
+              cx: "42",
+              cy: "60",
+              r: "2.2",
+              fill: "var(--foreground)",
+              animate: { scaleY: [1, 1, 0.1, 1] },
+              transition: { duration: 4, repeat: Infinity, times: [0, 0.92, 0.96, 1] },
+              style: { transformOrigin: "42px 60px" }
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            motion.circle,
+            {
+              cx: "58",
+              cy: "60",
+              r: "2.2",
+              fill: "var(--foreground)",
+              animate: { scaleY: [1, 1, 0.1, 1] },
+              transition: { duration: 4, repeat: Infinity, times: [0, 0.92, 0.96, 1] },
+              style: { transformOrigin: "58px 60px" }
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M48 67 L52 67 L50 70 Z", fill: "var(--accent)" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M48 71 Q50 73 52 71", stroke: "var(--foreground)", strokeWidth: "1.2", fill: "none", strokeLinecap: "round" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "38", cy: "68", r: "2", fill: "var(--primary)", opacity: "0.35" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "62", cy: "68", r: "2", fill: "var(--primary)", opacity: "0.35" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("ellipse", { cx: "50", cy: "92", rx: "14", ry: "10", fill: "var(--surface-2)", stroke: "var(--primary)", strokeWidth: "1.5" })
+        ]
+      }
+    )
+  ] });
 }
 const about = "I'll guide you through Nikhil's journey — from classroom experiments to real-world products.";
 const contact = "That's a wrap! Reach out — Nikhil writes back. 👋";
@@ -602,7 +618,7 @@ const bunny = {
   about,
   contact
 };
-function About() {
+function About({ journeyStarted }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsx(
     Section,
     {
@@ -614,7 +630,17 @@ function About() {
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "glass relative overflow-hidden rounded-3xl p-6", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "aspect-square w-full rounded-2xl bg-gradient-to-br from-primary/30 via-surface-2 to-accent/30 p-1", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex size-full items-center justify-center rounded-2xl bg-surface", children: /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: "/avatar2.png", alt: "Nikhil Kumar", className: "w-full h-full object-cover grayscale brightness-90 hover:grayscale-0 hover:brightness-100 transition-all duration-500 select-none scale-105 hover:scale-100" }) }) }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-4 text-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-sm text-muted-foreground", children: profile.education }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute -bottom-3 -right-3 opacity-90", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Bunny, { size: 72 }) })
+          /* @__PURE__ */ jsxRuntimeExports.jsx(AnimatePresence, { mode: "wait", children: !journeyStarted && /* @__PURE__ */ jsxRuntimeExports.jsx(
+            motion.div,
+            {
+              layoutId: "journey-bunny",
+              className: "absolute -bottom-3 -right-3 opacity-90",
+              initial: { opacity: 0, y: 14 },
+              animate: { opacity: 1, y: 0 },
+              exit: { opacity: 0, y: -18, transition: { duration: 0.25 } },
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx(Bunny, { size: 72, showTrail: true })
+            }
+          ) })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
@@ -644,39 +670,43 @@ function About() {
 const timeline = [
   {
     id: "class-10",
-    year: "2019",
-    title: "Class 10",
+    year: "2022",
+    title: "Class 10 - Cambrian Public School",
     place: "CBSE Board",
     description: "First taste of programming. Built tiny HTML pages and fell in love with making things appear on a screen.",
-    highlight: "92% · School topper in Science",
-    bunnySize: 40
+    highlight: "",
+    bunnySize: 40,
+    website: "https://cambrianpublicschool.com/"
   },
   {
     id: "class-12",
-    year: "2021",
-    title: "Class 12 — PCM",
+    year: "2024",
+    title: "Class 12 — PCM - Star International School",
     place: "CBSE Board",
-    description: "Physics, Chemistry, Math by day; C and Python by night. Started competitive coding and my first Arduino project.",
+    description: "Dived deeper into physics , C and math. Started competitive programming and robotics, which sparked my passion for problem-solving and building.",
     highlight: "Cleared JEE · State-level science exhibition winner",
-    bunnySize: 55
-  },
-  {
-    id: "mit",
-    year: "2022",
-    title: "MIT Muzaffarpur",
-    place: "B.Tech, Computer Science",
-    description: "Formal engineering begins. Data Structures, Operating Systems, Networks — and a lab where ideas finally meet hardware.",
-    highlight: "Lead, Coding Club · IoT lab researcher",
-    bunnySize: 95
+    bunnySize: 55,
+    website: "https://www.mitmuzaffarpur.org/"
   },
   {
     id: "iitm",
-    year: "2023",
+    year: "2025",
     title: "IIT Madras — BS Data Science",
-    place: "Online Degree (parallel)",
+    place: "Online Degree (Dual Degree)",
     description: "Took on a parallel BS in Data Science to ground my intuition in math, statistics, and machine learning the rigorous way.",
-    highlight: "Foundation level cleared with distinction",
-    bunnySize: 95
+    highlight: "Topped in Maths1 and python programing with grade A and S respectively  ",
+    bunnySize: 95,
+    website: "https://study.iitm.ac.in/ds/"
+  },
+  {
+    id: "mit",
+    year: "2025",
+    title: "MIT Muzaffarpur",
+    place: "B.Tech, Information Technology",
+    description: "Formal engineering begins. Data Structures, Operating Systems, Networks — and a lab where ideas finally meet hardware.",
+    highlight: "",
+    bunnySize: 95,
+    website: "https://www.mitmuzaffarpur.org/"
   },
   {
     id: "future",
@@ -688,15 +718,28 @@ const timeline = [
     bunnySize: 100
   }
 ];
-function TimelineSection() {
-  const ref = reactExports.useRef(null);
+function TimelineSection({ timelineRef, showJourneyBunny }) {
+  const selfRef = reactExports.useRef(null);
+  const sectionRef = timelineRef ?? selfRef;
   const { scrollYProgress } = useScroll({
-    target: ref,
+    target: sectionRef,
     offset: ["start 80%", "end 30%"]
   });
   const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
-  const bunnyY = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+  const bunnyTop = useTransform(scrollYProgress, [0, 0.18, 0.36, 0.54, 0.72, 1], ["6%", "22%", "38%", "54%", "72%", "92%"]);
+  const bunnySize = useTransform(scrollYProgress, [0, 0.22, 0.44, 0.66, 0.88, 1], [32, 40, 52, 64, 80, 80]);
+  const hopOffset = useTransform(
+    scrollYProgress,
+    [0, 0.12, 0.16, 0.28, 0.32, 0.44, 0.48, 0.6, 0.64, 0.76, 0.8, 0.92, 0.96, 1],
+    [0, -10, 0, -10, 0, -10, 0, -10, 0, -8, 0, -6, 0, 0]
+  );
+  const rocketGlow = useTransform(
+    scrollYProgress,
+    [0.92, 0.98, 1],
+    ["0px 0px 0px rgba(14,165,233,0)", "0px 0px 25px rgba(14,165,233,0.15)", "0px 0px 40px rgba(14,165,233,0.32)"]
+  );
+  const glowScale = useTransform(scrollYProgress, [0.92, 0.98, 1], [1, 1.03, 1.08]);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
     Section,
     {
       id: "timeline",
@@ -704,54 +747,131 @@ function TimelineSection() {
       title: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
         "From ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "gradient-text", children: "classroom" }),
-        " to ",
+        " to",
+        " ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "gradient-text", children: "campus" })
       ] }),
       description: "Every milestone on the way. Bunny will hop along — scroll to follow.",
-      children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { ref, className: "relative pl-8 md:pl-0", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute left-4 top-0 h-full w-px bg-border md:left-1/2 md:-translate-x-px", "aria-hidden": true }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          motion.div,
-          {
-            className: "absolute left-4 top-0 w-px bg-gradient-to-b from-primary via-primary to-accent md:left-1/2 md:-translate-x-px",
-            style: { height: lineHeight },
-            "aria-hidden": true
-          }
-        ),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          motion.div,
-          {
-            className: "absolute left-4 z-10 -translate-x-1/2 md:left-1/2",
-            style: { top: bunnyY },
-            children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "-translate-y-1/2", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Bunny, { size: 48 }) })
-          }
-        ),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-16 md:space-y-24", children: timeline.map((item, i) => {
-          const isLeft = i % 2 === 0;
-          return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-8 flex items-center justify-between", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm text-muted-foreground", children: "Journey Progress" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-semibold text-primary", children: "85%" })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { ref: sectionRef, className: "relative pl-8 md:pl-0", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "div",
+            {
+              className: "absolute left-4 top-0 h-full w-px bg-border md:left-1/2 md:-translate-x-px",
+              "aria-hidden": true
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
             motion.div,
             {
-              initial: { opacity: 0, y: 40 },
-              whileInView: { opacity: 1, y: 0 },
-              viewport: { once: true, margin: "-20%" },
-              transition: { duration: 0.6 },
-              className: `relative grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-12 ${isLeft ? "" : "md:[direction:rtl]"}`,
-              children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `${isLeft ? "md:pr-12 md:text-right" : "md:pl-12 md:[direction:ltr]"}`, children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "glass rounded-2xl p-6 transition hover:border-primary/40", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-xs font-semibold tracking-wider text-primary", children: item.year }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "mt-2 font-display text-2xl font-bold", children: item.title }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-sm text-muted-foreground", children: item.place }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 text-foreground/90", children: item.description }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-4 inline-flex rounded-full bg-accent/15 px-3 py-1 text-xs font-medium text-accent", children: item.highlight })
-                ] }) }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute left-4 top-6 -translate-x-1/2 md:left-1/2", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "size-4 rounded-full border-2 border-primary bg-background glow-cyan" }) }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "hidden md:block" })
-              ]
-            },
-            item.id
-          );
-        }) })
-      ] })
+              className: "absolute left-4 top-0 w-px bg-gradient-to-b from-primary via-primary to-accent md:left-1/2 md:-translate-x-px",
+              style: { height: lineHeight },
+              "aria-hidden": true
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(AnimatePresence, { mode: "wait", children: showJourneyBunny && /* @__PURE__ */ jsxRuntimeExports.jsx(
+            motion.div,
+            {
+              layoutId: "journey-bunny",
+              className: "absolute left-4 z-10 -translate-x-1/2 md:left-1/2",
+              style: {
+                top: bunnyTop,
+                y: hopOffset,
+                width: bunnySize,
+                height: bunnySize,
+                boxShadow: rocketGlow,
+                scale: glowScale
+              },
+              initial: { opacity: 0, y: 24 },
+              animate: { opacity: 1 },
+              exit: { opacity: 0, y: -18, transition: { duration: 0.25 } },
+              transition: { duration: 0.7, ease: "easeOut" },
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "relative -translate-y-1/2", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Bunny, { size: "100%", showTrail: true }) })
+            }
+          ) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "div",
+            {
+              className: "\n    absolute\n    left-4\n    md:left-1/2\n    top-[80%]\n    -translate-x-1/2\n    z-20\n    rounded-full\n    bg-primary\n    px-4\n    py-2\n    text-xs\n    font-semibold\n    text-background\n    shadow-lg\n    shadow-primary/50\n  ",
+              children: "🚀 YOU ARE HERE"
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "div",
+            {
+              className: "\n    absolute\n    left-10\n    md:left-[55%]\n    top-[10%]\n    z-20\n    rounded-xl\n    border\n    border-primary/30\n    bg-surface/80\n    px-3\n    py-2\n    text-xs\n    backdrop-blur\n  ",
+              children: "🐰 Keep scrolling..."
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-16 md:space-y-24", children: timeline.map((item, i) => {
+            const isLeft = i % 2 === 0;
+            return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              motion.div,
+              {
+                initial: { opacity: 0, y: 40 },
+                whileInView: { opacity: 1, y: 0 },
+                viewport: { once: true, margin: "-20%" },
+                transition: { duration: 0.6 },
+                className: `relative grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-12 ${isLeft ? "" : "md:[direction:rtl]"}`,
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "div",
+                    {
+                      className: `${isLeft ? "md:pr-12 md:text-right" : "md:pl-12 md:[direction:ltr]"}`,
+                      children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                        "div",
+                        {
+                          className: "\nglass\nrounded-2xl\np-6\ntransition-all\nduration-500\nhover:border-primary/40\nhover:shadow-[0_0_30px_rgba(0,255,255,0.15)]\nhover:-translate-y-1\n",
+                          children: [
+                            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-xs font-semibold tracking-wider text-primary", children: item.year }),
+                            /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "mt-2 font-display text-2xl font-bold", children: item.title }),
+                            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-sm text-muted-foreground", children: item.place }),
+                            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 text-foreground/90", children: item.description }),
+                            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-2 inline-flex rounded-full bg-accent/15 px-3 py-1 text-xm font-medium text-accent", children: item.website && /* @__PURE__ */ jsxRuntimeExports.jsx(
+                              "a",
+                              {
+                                href: item.website,
+                                target: "_blank",
+                                rel: "noopener noreferrer",
+                                className: "hover:underline",
+                                children: "Visit Website"
+                              }
+                            ) }),
+                            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-2 " }),
+                            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-4 inline-flex rounded-full bg-accent/15 px-3 py-1 text-xs font-medium text-accent", children: item.highlight }),
+                            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-2 " }),
+                            item.id === "future" && /* @__PURE__ */ jsxRuntimeExports.jsx(
+                              motion.div,
+                              {
+                                animate: {
+                                  scale: [1, 1.07, 1]
+                                },
+                                transition: {
+                                  repeat: Infinity,
+                                  duration: 1.5
+                                },
+                                className: "mt-3 text-xl",
+                                children: "🎉🐰🎉"
+                              }
+                            )
+                          ]
+                        }
+                      )
+                    }
+                  ),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute left-4 top-6 -translate-x-1/2 md:left-1/2", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "size-4 rounded-full border-2 border-primary bg-background glow-cyan" }) }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "hidden md:block" })
+                ]
+              },
+              item.id
+            );
+          }) })
+        ] })
+      ]
     }
   );
 }
@@ -920,8 +1040,10 @@ const projects = [
       "Calibrating cheap pH probes against lab-grade reference",
       "Designing a watertight, repairable enclosure"
     ],
-    gallery: [],
-    github: "https://github.com/nikhilkumar/hydrosentinal",
+    gallery: [
+      "/hydrosentinal/1.png"
+    ],
+    github: "https://github.com/NIKHILKUMAR-186/HYDROSENTINAL",
     demo: "https://hydrosentinal-rose.vercel.com"
   }
 ];
@@ -954,7 +1076,14 @@ function Projects() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "mt-2 font-display text-2xl font-bold", children: p.name })
               ] }) }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 text-foreground/85", children: p.tagline }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-4 flex flex-wrap gap-1.5", children: p.stack.slice(0, 5).map((s) => /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "rounded-full bg-surface-2 px-2 py-0.5 text-xs text-muted-foreground", children: s }, s)) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-4 flex flex-wrap gap-1.5", children: p.stack.slice(0, 5).map((s) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "span",
+                {
+                  className: "rounded-full bg-surface-2 px-2 py-0.5 text-xs text-muted-foreground",
+                  children: s
+                },
+                s
+              )) }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-5 inline-flex items-center gap-1 text-sm font-medium text-primary opacity-0 transition group-hover:opacity-100", children: "Read case study →" })
             ]
           },
@@ -1006,7 +1135,14 @@ function ProjectModal({ project, onClose }) {
               /* @__PURE__ */ jsxRuntimeExports.jsx(Block, { label: "Solution", children: project.solution }),
               /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mb-2 text-xs font-semibold uppercase tracking-wider text-primary", children: "Stack" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-1.5", children: project.stack.map((s) => /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "rounded-full border border-border bg-surface-2 px-2.5 py-1 text-xs", children: s }, s)) })
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-1.5", children: project.stack.map((s) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "span",
+                  {
+                    className: "rounded-full border border-border bg-surface-2 px-2.5 py-1 text-xs",
+                    children: s
+                  },
+                  s
+                )) })
               ] }),
               /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mb-2 text-xs font-semibold uppercase tracking-wider text-primary", children: "Challenges" }),
@@ -1014,7 +1150,31 @@ function ProjectModal({ project, onClose }) {
                   /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-accent", children: "▸" }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: c })
                 ] }, c)) })
-              ] })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mb-2 text-xs font-semibold uppercase tracking-wider text-primary", children: "Screenshots" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "div",
+                  {
+                    className: "\nflex\ngap-4\noverflow-x-auto\nscroll-smooth\nsnap-x\nsnap-mandatory\npb-4\nscrollbar-thin\n",
+                    children: project.gallery.map((img, index) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      "div",
+                      {
+                        className: "\n          flex-shrink-0\n          w-72\n          h-44\n          rounded-xl\n          overflow-hidden\n          border\n          border-white/10\n          snap-start\n          cursor-pointer\n          group\n        ",
+                        children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                          "img",
+                          {
+                            src: img,
+                            alt: `Screenshot ${index + 1}`,
+                            className: "\n            w-full\n            h-full\n            object-cover\n            transition-transform\n            duration-300\n            group-hover:scale-105\n          "
+                          }
+                        )
+                      },
+                      index
+                    ))
+                  }
+                )
+              ] }) })
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-7 flex flex-wrap gap-2", children: [
               project.github && /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -1376,7 +1536,12 @@ function RepoCard({ repo, featured }) {
     }
   );
 }
-function InsightCard({ label, value, icon: Icon, accent }) {
+function InsightCard({
+  label,
+  value,
+  icon: Icon,
+  accent
+}) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { ...fadeUp, className: "glass rounded-3xl border border-border/70 p-4", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between gap-3", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs uppercase tracking-[0.25em] text-muted-foreground", children: label }),
@@ -1476,22 +1641,23 @@ function Github_() {
       ...remaining.slice(0, 3 - Number(Boolean(featuredRepo)))
     ];
   }, [repos, featuredRepo]);
+  const activeRepos = reactExports.useMemo(() => repos.length, [repos]);
   const stats = [
     {
       label: "Public Repos",
       value: profileData ? profileData.public_repos.toLocaleString() : "—",
       icon: GitBranch
     },
-    {
-      label: "Followers",
-      value: profileData ? profileData.followers.toLocaleString() : "—",
-      icon: Users
-    },
-    {
-      label: "Following",
-      value: profileData ? profileData.following.toLocaleString() : "—",
-      icon: Activity
-    },
+    // {
+    //   label: "Followers",
+    //   value: profileData ? profileData.followers.toLocaleString() : "—",
+    //   icon: Users,
+    // },
+    // {
+    //   label: "Following",
+    //   value: profileData ? profileData.following.toLocaleString() : "—",
+    //   icon: Activity,
+    // },
     {
       label: "Joined",
       value: profileData ? new Date(profileData.created_at).getFullYear().toString() : "—",
@@ -1509,19 +1675,19 @@ function Github_() {
       value: contributionData ? contributionData.totalContributions.toLocaleString() : "—",
       icon: Activity,
       accent: "bg-primary/15 text-primary"
-    },
-    {
-      label: "Current Streak",
-      value: contributionData ? `${contributionData.currentStreak}d` : "—",
-      icon: Users,
-      accent: "bg-emerald-500/15 text-emerald-400"
-    },
-    {
-      label: "Longest Streak",
-      value: contributionData ? `${contributionData.longestStreak}d` : "—",
-      icon: Sparkles,
-      accent: "bg-violet-500/15 text-violet-400"
     }
+    // {
+    //   label: "Current Streak",
+    //   value: contributionData ? `${contributionData.currentStreak}d` : "—",
+    //   icon: Users,
+    //   accent: "bg-emerald-500/15 text-emerald-400",
+    // },
+    // {
+    //   label: "Longest Streak",
+    //   value: contributionData ? `${contributionData.longestStreak}d` : "—",
+    //   icon: Sparkles,
+    //   accent: "bg-violet-500/15 text-violet-400",
+    // },
   ];
   return /* @__PURE__ */ jsxRuntimeExports.jsx(
     Section,
@@ -1534,42 +1700,157 @@ function Github_() {
       ] }),
       description: "The repos, the rewrites, the late-night commits. Here's the arc.",
       children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid gap-6 xl:grid-cols-[1.2fr_0.8fr]", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "glass rounded-3xl p-6", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-4 sm:grid-cols-2 xl:grid-cols-3", children: stats.map((stat) => /* @__PURE__ */ reactExports.createElement(motion.div, { ...fadeUp, key: stat.label, className: "glass rounded-3xl border border-border/70 bg-surface/80 p-4" }, /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 text-xs uppercase tracking-[0.25em] text-muted-foreground", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-6 xl:grid-cols-[1.2fr_0.8fr]", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "glass rounded-3xl p-6", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-4 sm:grid-cols-2 xl:grid-cols-3", children: stats.map((stat) => /* @__PURE__ */ reactExports.createElement(
+            motion.div,
+            {
+              ...fadeUp,
+              key: stat.label,
+              className: "glass rounded-3xl border border-border/70 bg-surface/80 p-4"
+            },
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 text-xs uppercase tracking-[0.25em] text-muted-foreground", children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary", children: /* @__PURE__ */ jsxRuntimeExports.jsx(stat.icon, { className: "size-4" }) }),
               stat.label
-            ] }), /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-4 text-3xl font-display font-semibold text-foreground", children: stat.value }))) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-4 grid gap-4 sm:grid-cols-3", children: insights.map((insight) => /* @__PURE__ */ jsxRuntimeExports.jsx(InsightCard, { label: insight.label, value: insight.value, icon: insight.icon, accent: insight.accent }, insight.label)) })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "glass rounded-3xl p-6", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-4 flex flex-wrap items-center justify-between gap-4", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm uppercase tracking-[0.2em] text-primary", children: "Contribution Activity" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "mt-2 text-xl font-semibold text-foreground", children: "GitHub heatmap" })
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "inline-flex items-center gap-2 rounded-full border border-border/70 bg-surface/80 px-3 py-2 text-xs text-muted-foreground", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx(Users, { className: "size-4 text-primary" }),
-                " Live"
-              ] })
             ] }),
-            loading && /* @__PURE__ */ jsxRuntimeExports.jsx(SkeletonCard, {}),
-            !loading && error && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "rounded-3xl border border-border/70 bg-surface/80 p-6 text-center text-sm text-muted-foreground", children: "Unable to fetch GitHub data right now." }),
-            !loading && !error && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "overflow-hidden rounded-3xl border border-border/70 bg-surface/70 p-3", style: { minHeight: 240 }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-              GitHubCalendar,
-              {
-                username: "NIKHILKUMAR-186",
-                theme: {
-                  light: ["#0f172a", "#0f172a", "#2563eb", "#1d4ed8", "#0ea5e9"]
-                },
-                blockMargin: 4,
-                blockSize: 12,
-                fontSize: 11,
-                showWeekdayLabels: false,
-                showMonthLabels: true
-              }
-            ) })
-          ] })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-4 text-3xl font-display font-semibold text-foreground", children: stat.value })
+          )) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-4 grid gap-4 sm:grid-cols-2", children: insights.map((insight) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+            InsightCard,
+            {
+              label: insight.label,
+              value: insight.value,
+              icon: insight.icon,
+              accent: insight.accent
+            },
+            insight.label
+          )) })
+        ] }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "glass rounded-3xl p-6", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-4 flex flex-wrap items-center justify-between gap-4", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm uppercase tracking-[0.2em] text-primary", children: "Contribution Activity" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "mt-2 text-xl font-semibold text-foreground", children: "GitHub heatmap" })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "inline-flex items-center gap-2 rounded-full border border-border/70 bg-surface/80 px-3 py-2 text-xs text-muted-foreground", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(Users, { className: "size-4 text-primary" }),
+              " Live"
+            ] })
+          ] }),
+          loading && /* @__PURE__ */ jsxRuntimeExports.jsx(SkeletonCard, {}),
+          !loading && error && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "rounded-3xl border border-border/70 bg-surface/80 p-6 text-center text-sm text-muted-foreground", children: "Unable to fetch GitHub data right now." }),
+          !loading && !error && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "rounded-3xl border border-border/70 bg-surface/70 p-2", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            motion.div,
+            {
+              ...fadeUp,
+              className: "overflow-x-auto pr-2",
+              initial: { opacity: 0, y: 6 },
+              animate: { opacity: 1, y: 0 },
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mb-3 flex items-center justify-between gap-3", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-sm text-muted-foreground", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-medium text-foreground", children: contributionData?.totalContributions ?? "—" }),
+                  " ",
+                  "contributions in the last year"
+                ] }) }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start gap-3", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("style", { children: `
+                      /* Tighter calendar look, cyan/blue palette, and selective weekday labels */
+                      .react-activity-calendar { filter: none; }
+                      .react-activity-calendar .react-activity-calendar-weekday { fill: rgba(148,163,184,0.9); font-size:10px; }
+                      .react-activity-calendar .react-activity-calendar-month { fill: rgba(148,163,184,0.9); font-size:12px; }
+                      .react-activity-calendar .react-activity-calendar-weekday:nth-child(1),
+                      .react-activity-calendar .react-activity-calendar-weekday:nth-child(3),
+                      .react-activity-calendar .react-activity-calendar-weekday:nth-child(5) { display: block; }
+                      .react-activity-calendar .react-activity-calendar-weekday:nth-child(2),
+                      .react-activity-calendar .react-activity-calendar-weekday:nth-child(4),
+                      .react-activity-calendar .react-activity-calendar-weekday:nth-child(6),
+                      .react-activity-calendar .react-activity-calendar-weekday:nth-child(7) { display: none; }
+                      /* Make blocks slightly smaller and denser */
+                      .react-activity-calendar .react-activity-calendar-day { shape-rendering: crispEdges; }
+                    ` }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "-ml-2 hidden min-w-[36px] flex-col items-start gap-6 pr-2 text-xs text-muted-foreground sm:flex", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-1", children: "Mon" }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-1", children: "Wed" }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-1", children: "Fri" })
+                  ] }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    GitHubCalendar,
+                    {
+                      username: "NIKHILKUMAR-186",
+                      transformData: (data) => data,
+                      blockMargin: 3,
+                      blockSize: 10,
+                      fontSize: 11,
+                      showWeekdayLabels: true,
+                      showMonthLabels: true,
+                      theme: {
+                        light: [
+                          "#0b1220",
+                          "#033a56",
+                          "#026aa2",
+                          "#0ea5e9",
+                          "#7dd3fc"
+                        ]
+                      }
+                    }
+                  ) })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-3 flex items-center justify-between gap-4", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 text-sm text-muted-foreground", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs", children: "Less" }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-1", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "h-3 w-3 rounded-sm bg-[#033a56]" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "h-3 w-3 rounded-sm bg-[#026aa2]" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "h-3 w-3 rounded-sm bg-[#0ea5e9]" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "h-3 w-3 rounded-sm bg-[#7dd3fc]" })
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs", children: "More" })
+                  ] }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-sm text-muted-foreground", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-medium text-foreground", children: "Hover" }),
+                    " for details"
+                  ] })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    InsightCard,
+                    {
+                      label: "Total Commits",
+                      value: contributionData ? contributionData.totalContributions.toLocaleString() : "—",
+                      icon: TrendingUp,
+                      accent: "bg-primary/15 text-primary"
+                    }
+                  ),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    InsightCard,
+                    {
+                      label: "Current Streak",
+                      value: contributionData ? `${contributionData.currentStreak}d` : "—",
+                      icon: Sparkles,
+                      accent: "bg-primary/15 text-primary"
+                    }
+                  ),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    InsightCard,
+                    {
+                      label: "Longest Streak",
+                      value: contributionData ? `${contributionData.longestStreak}d` : "—",
+                      icon: Rocket,
+                      accent: "bg-primary/15 text-primary"
+                    }
+                  ),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    InsightCard,
+                    {
+                      label: "Active Repositories",
+                      value: activeRepos.toString(),
+                      icon: GitBranch,
+                      accent: "bg-primary/15 text-primary"
+                    }
+                  )
+                ] })
+              ]
+            }
+          ) })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid gap-6 xl:grid-cols-[1fr_0.8fr]", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "glass rounded-3xl p-6", children: [
@@ -1608,16 +1889,32 @@ function Github_() {
               /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs uppercase tracking-[0.2em] text-muted-foreground", children: "Live" })
             ] }),
             loading && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-4", children: Array.from({ length: 4 }).map((_, index) => /* @__PURE__ */ jsxRuntimeExports.jsx(SkeletonCard, {}, index)) }),
-            !loading && !error && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-4", children: languageStats.map((language) => /* @__PURE__ */ jsxRuntimeExports.jsx(LanguageBar, { language: language.language, percent: language.percent }, language.language)) }),
+            !loading && !error && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-4", children: languageStats.map((language) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+              LanguageBar,
+              {
+                language: language.language,
+                percent: language.percent
+              },
+              language.language
+            )) }),
             !loading && error && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "rounded-3xl border border-border/70 bg-surface/80 p-6 text-center text-sm text-muted-foreground", children: "Unable to fetch GitHub data right now." })
           ] })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-6 md:grid-cols-2 xl:grid-cols-4", children: STAGES.map((stage) => {
           const Icon = stage.icon;
-          return /* @__PURE__ */ reactExports.createElement(motion.div, { ...fadeUp, key: stage.label, className: "glass flex items-start gap-4 rounded-3xl p-5 transition hover:border-primary/40" }, /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex size-9 shrink-0 items-center justify-center rounded-lg bg-accent/15 text-accent", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { className: "size-4" }) }), /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-xs font-semibold uppercase tracking-wider text-primary", children: stage.label }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-foreground/90", children: stage.note })
-          ] }));
+          return /* @__PURE__ */ reactExports.createElement(
+            motion.div,
+            {
+              ...fadeUp,
+              key: stage.label,
+              className: "glass flex items-start gap-4 rounded-3xl p-5 transition hover:border-primary/40"
+            },
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex size-9 shrink-0 items-center justify-center rounded-lg bg-accent/15 text-accent", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { className: "size-4" }) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-xs font-semibold uppercase tracking-wider text-primary", children: stage.label }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-foreground/90", children: stage.note })
+            ] })
+          );
         }) })
       ] })
     }
@@ -1856,13 +2153,17 @@ function ContactLink({
 }
 function Home() {
   const [introExiting, setIntroExiting] = reactExports.useState(false);
+  const timelineRef = reactExports.useRef(null);
+  const timelineInView = useInView(timelineRef, {
+    margin: "0px 0px -40% 0px"
+  });
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(CinematicIntro, { onExitStart: () => setIntroExiting(true) }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(SmoothScroll, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsx(Nav, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsx(Hero, { introReady: introExiting }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(About, {}),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(TimelineSection, {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(About, { journeyStarted: timelineInView }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(TimelineSection, { timelineRef, showJourneyBunny: timelineInView }),
     /* @__PURE__ */ jsxRuntimeExports.jsx(Now, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsx(Skills, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsx(Projects, {}),

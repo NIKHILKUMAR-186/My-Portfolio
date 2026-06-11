@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { useInView } from "framer-motion";
 import { createFileRoute } from "@tanstack/react-router";
 import { CinematicIntro } from "@/components/cinematic-intro";
 import { SmoothScroll } from "@/components/smooth-scroll";
@@ -43,14 +44,17 @@ export const Route = createFileRoute("/")({
 function Home() {
   const [introExiting, setIntroExiting] = useState(false);
 
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const timelineInView = useInView(timelineRef, { margin: "0px 0px -40% 0px" });
+
   return (
     <>
       <CinematicIntro onExitStart={() => setIntroExiting(true)} />
       <SmoothScroll />
       <Nav />
       <Hero introReady={introExiting} />
-      <About />
-      <TimelineSection />
+      <About journeyStarted={timelineInView} />
+      <TimelineSection timelineRef={timelineRef} showJourneyBunny={timelineInView} />
       <Now />
       <Skills />
       <Projects />

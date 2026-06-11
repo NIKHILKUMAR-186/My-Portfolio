@@ -2,7 +2,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Section } from "../section";
 import projects from "@/data/projects.json";
-import { Github, ExternalLink, X } from "lucide-react";
+import { Github, ExternalLink, X, Download } from "lucide-react";
 
 type Project = (typeof projects)[number];
 
@@ -13,7 +13,11 @@ export function Projects() {
     <Section
       id="projects"
       eyebrow="Work"
-      title={<>Things I've <span className="gradient-text">actually built</span></>}
+      title={
+        <>
+          Things I've <span className="gradient-text">actually built</span>
+        </>
+      }
       description="Each one is its own little story — click to read the case study."
     >
       <div className="grid gap-4 md:grid-cols-2">
@@ -37,7 +41,10 @@ export function Projects() {
             <p className="mt-3 text-foreground/85">{p.tagline}</p>
             <div className="mt-4 flex flex-wrap gap-1.5">
               {p.stack.slice(0, 5).map((s) => (
-                <span key={s} className="rounded-full bg-surface-2 px-2 py-0.5 text-xs text-muted-foreground">
+                <span
+                  key={s}
+                  className="rounded-full bg-surface-2 px-2 py-0.5 text-xs text-muted-foreground"
+                >
                   {s}
                 </span>
               ))}
@@ -81,7 +88,9 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
           <X className="size-4" />
         </button>
 
-        <div className="text-xs text-muted-foreground">{project.year} · {project.status}</div>
+        <div className="text-xs text-muted-foreground">
+          {project.year} · {project.status}
+        </div>
         <h3 className="mt-1 font-display text-3xl font-bold">{project.name}</h3>
         <p className="mt-2 text-lg text-muted-foreground">{project.tagline}</p>
 
@@ -91,10 +100,15 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
           <Block label="Solution">{project.solution}</Block>
 
           <div>
-            <div className="mb-2 text-xs font-semibold uppercase tracking-wider text-primary">Stack</div>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider text-primary">
+              Stack
+            </div>
             <div className="flex flex-wrap gap-1.5">
               {project.stack.map((s) => (
-                <span key={s} className="rounded-full border border-border bg-surface-2 px-2.5 py-1 text-xs">
+                <span
+                  key={s}
+                  className="rounded-full border border-border bg-surface-2 px-2.5 py-1 text-xs"
+                >
                   {s}
                 </span>
               ))}
@@ -102,7 +116,9 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
           </div>
 
           <div>
-            <div className="mb-2 text-xs font-semibold uppercase tracking-wider text-primary">Challenges</div>
+            <div className="mb-2 text-xs font-semibold uppercase tracking-wider text-primary">
+              Challenges
+            </div>
             <ul className="space-y-1.5 text-foreground/90">
               {project.challenges.map((c) => (
                 <li key={c} className="flex gap-2">
@@ -111,6 +127,58 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
                 </li>
               ))}
             </ul>
+          </div>
+          <div>
+            {/* <div className="mb-2 text-xs font-semibold uppercase tracking-wider text-primary">Screenshots</div> */}
+            <div>
+              <div className="mb-2 text-xs font-semibold uppercase tracking-wider text-primary">
+                Screenshots
+              </div>
+
+              <div
+                className="
+flex
+gap-4
+overflow-x-auto
+scroll-smooth
+snap-x
+snap-mandatory
+pb-4
+scrollbar-thin
+"
+              >
+                {project.gallery.map((img, index) => (
+                  <div
+                    key={index}
+                    className="
+          flex-shrink-0
+          w-72
+          h-44
+          rounded-xl
+          overflow-hidden
+          border
+          border-white/10
+          snap-start
+          cursor-pointer
+          group
+        "
+                  >
+                    <img
+                      src={img}
+                      alt={`Screenshot ${index + 1}`}
+                      className="
+            w-full
+            h-full
+            object-cover
+            transition-transform
+            duration-300
+            group-hover:scale-105
+          "
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 
@@ -144,7 +212,9 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
 function Block({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div>
-      <div className="mb-1 text-xs font-semibold uppercase tracking-wider text-primary">{label}</div>
+      <div className="mb-1 text-xs font-semibold uppercase tracking-wider text-primary">
+        {label}
+      </div>
       <p className="text-foreground/90">{children}</p>
     </div>
   );

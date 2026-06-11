@@ -197,3 +197,16 @@
   background-size: 200% 100%;
   animation: shimmer 2.5s linear infinite;
 }
+
+.scrollbar-thin::-webkit-scrollbar {
+  height: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: rgba(0, 255, 255, 0.3);
+  border-radius: 999px;
+}
