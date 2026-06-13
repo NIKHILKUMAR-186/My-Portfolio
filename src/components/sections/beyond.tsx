@@ -2,10 +2,22 @@ import { Section } from "../section";
 import { Music, Lightbulb, BookOpen, Wrench } from "lucide-react";
 
 const ITEMS = [
-  { label: "Singing", icon: Music, note: "An old hobby that keeps the perfectionist in me kind." },
-  { label: "Tech tinkering", icon: Lightbulb, note: "Taking apart anything with a battery. Mostly reassembling it." },
-  { label: "Reading", icon: BookOpen, note: "Slow non-fiction, sci-fi, and the occasional founder memoir." },
-  { label: "Building", icon: Wrench, note: "Side projects that don't need to ship — but often do." },
+  { label: "Listening Music", icon: Music, note: "An old hobby that keeps me energetic and prevent me from getting bored." },
+  {
+    label: "Tech tinkering",
+    icon: Lightbulb,
+    note: "Taking apart anything with a battery and some components. Mostly reassembling it.",
+  },
+  {
+    label: "Reading",
+    icon: BookOpen,
+    note: "Slow non-fiction, sci-fi, and the occasional founder memoir.",
+  },
+  {
+    label: "Building",
+    icon: Wrench,
+    note: "Side projects that don't need to ship — but often do.",
+  },
 ];
 
 export function Beyond() {
@@ -13,7 +25,11 @@ export function Beyond() {
     <Section
       id="beyond"
       eyebrow="Beyond coding"
-      title={<>The <span className="gradient-text">human</span> side</>}
+      title={
+        <>
+          The <span className="gradient-text">human</span> side
+        </>
+      }
       description="Engineers are people too. Here's what fills the rest of my hours."
     >
       <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-4">

@@ -14,6 +14,8 @@ const SECTIONS = [
 export function Nav() {
   const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [scrolled, setScrolled] = useState(false);
+  const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+  const [online, setOnline] = useState<boolean>(typeof navigator !== "undefined" ? navigator.onLine : true);
 
   useEffect(() => {
     const saved = (typeof window !== "undefined" && localStorage.getItem("nk-theme")) as "dark" | "light" | null;
@@ -32,6 +34,26 @@ export function Nav() {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const onBeforeInstall = (e: any) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+    };
+
+    const onOnline = () => setOnline(true);
+    const onOffline = () => setOnline(false);
+
+    window.addEventListener("beforeinstallprompt", onBeforeInstall as any);
+    window.addEventListener("online", onOnline);
+    window.addEventListener("offline", onOffline);
+
+    return () => {
+      window.removeEventListener("beforeinstallprompt", onBeforeInstall as any);
+      window.removeEventListener("online", onOnline);
+      window.removeEventListener("offline", onOffline);
+    };
   }, []);
 
   return (
@@ -69,6 +91,28 @@ export function Nav() {
         >
           {theme === "dark" ? <Sun className="size-4" /> : <Moon className="size-4" />}
         </button>
+        <div className="ml-3 flex items-center gap-2">
+          {!online && (
+            <div className="glass rounded-full px-3 py-1 text-xs font-semibold text-foreground">Offline Mode</div>
+          )}
+
+          {deferredPrompt && (
+            <button
+              onClick={async () => {
+                try {
+                  deferredPrompt.prompt();
+                  const choiceResult = await deferredPrompt.userChoice;
+                  setDeferredPrompt(null);
+                } catch {
+                  setDeferredPrompt(null);
+                }
+              }}
+              className="glass hidden md:inline-flex items-center rounded-full px-3 py-1 text-sm font-semibold text-foreground"
+            >
+              Install Portfolio
+            </button>
+          )}
+        </div>
       </div>
     </header>
   );

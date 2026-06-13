@@ -63,7 +63,7 @@ function formatDate(value: string) {
 function RepoCard({ repo, featured }: { repo: GithubRepo; featured?: boolean }) {
   return (
     <motion.a
-      {...fadeUp}
+      //   {...fadeUp}
       href={repo.html_url}
       target="_blank"
       rel="noreferrer"
@@ -120,7 +120,10 @@ function InsightCard({
   accent: string;
 }) {
   return (
-    <motion.div {...fadeUp} className="glass rounded-3xl border border-border/70 p-4">
+    <motion.div
+      // {...fadeUp}
+      className="glass rounded-3xl border border-border/70 p-4"
+    >
       <div className="flex items-center justify-between gap-3">
         <span className="text-xs uppercase tracking-[0.25em] text-muted-foreground">{label}</span>
         <span className={`inline-flex h-8 w-8 items-center justify-center rounded-full ${accent}`}>
@@ -136,7 +139,10 @@ function LanguageBar({ language, percent }: { language: string; percent: number 
   const Icon = languageIconMap[language] ?? Code2;
 
   return (
-    <motion.div {...fadeUp} className="space-y-3">
+    <motion.div
+      // {...fadeUp}
+      className="space-y-3"
+    >
       <div className="flex items-center justify-between gap-3 text-sm text-muted-foreground">
         <div className="flex items-center gap-2">
           <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary">
@@ -313,7 +319,7 @@ export function Github_() {
             <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
               {stats.map((stat) => (
                 <motion.div
-                  {...fadeUp}
+                  // {...fadeUp}
                   key={stat.label}
                   className="glass rounded-3xl border border-border/70 bg-surface/80 p-4"
                 >
@@ -342,121 +348,121 @@ export function Github_() {
               ))}
             </div>
           </div>
-          </div>
+        </div>
 
-          <div className="glass rounded-3xl p-6">
-            <div className="mb-4 flex flex-wrap items-center justify-between gap-4">
-              <div>
-                <p className="text-sm uppercase tracking-[0.2em] text-primary">
-                  Contribution Activity
-                </p>
-                <h3 className="mt-2 text-xl font-semibold text-foreground">GitHub heatmap</h3>
-              </div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-surface/80 px-3 py-2 text-xs text-muted-foreground">
-                <Users className="size-4 text-primary" /> Live
-              </div>
+        <div className="glass rounded-3xl p-6">
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <p className="text-sm uppercase tracking-[0.2em] text-primary">
+                Contribution Activity
+              </p>
+              <h3 className="mt-2 text-xl font-semibold text-foreground">GitHub heatmap</h3>
             </div>
-            {loading && <SkeletonCard />}
-            {!loading && error && (
-              <div className="rounded-3xl border border-border/70 bg-surface/80 p-6 text-center text-sm text-muted-foreground">
-                Unable to fetch GitHub data right now.
-              </div>
-            )}
-            {!loading && !error && (
-              <div className="rounded-3xl border border-border/70 bg-surface/70 p-2">
-                <motion.div
-                  {...fadeUp}
-                  className="overflow-x-auto pr-2"
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                >
-                  <div className="mb-3 flex items-center justify-between gap-3">
-                    <div className="text-sm text-muted-foreground">
-                      <span className="font-medium text-foreground">
-                        {contributionData?.totalContributions ?? "—"}
-                      </span>{' '}
-                      contributions in the last year
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3">
-                    <style>{`\n                      /* Tighter calendar look, cyan/blue palette, and selective weekday labels */\n                      .react-activity-calendar { filter: none; }\n                      .react-activity-calendar .react-activity-calendar-weekday { fill: rgba(148,163,184,0.9); font-size:10px; }\n                      .react-activity-calendar .react-activity-calendar-month { fill: rgba(148,163,184,0.9); font-size:12px; }\n                      .react-activity-calendar .react-activity-calendar-weekday:nth-child(1),\n                      .react-activity-calendar .react-activity-calendar-weekday:nth-child(3),\n                      .react-activity-calendar .react-activity-calendar-weekday:nth-child(5) { display: block; }\n                      .react-activity-calendar .react-activity-calendar-weekday:nth-child(2),\n                      .react-activity-calendar .react-activity-calendar-weekday:nth-child(4),\n                      .react-activity-calendar .react-activity-calendar-weekday:nth-child(6),\n                      .react-activity-calendar .react-activity-calendar-weekday:nth-child(7) { display: none; }\n                      /* Make blocks slightly smaller and denser */\n                      .react-activity-calendar .react-activity-calendar-day { shape-rendering: crispEdges; }\n                    `}</style>
-
-                    <div className="-ml-2 hidden min-w-[36px] flex-col items-start gap-6 pr-2 text-xs text-muted-foreground sm:flex">
-                      <div className="mt-1">Mon</div>
-                      <div className="mt-1">Wed</div>
-                      <div className="mt-1">Fri</div>
-                    </div>
-
-                    <div className="flex-1">
-                      <GitHubCalendar
-                        username="NIKHILKUMAR-186"
-                        transformData={(data) => data}
-                        blockMargin={3}
-                        blockSize={10}
-                        fontSize={11}
-                        showWeekdayLabels={true}
-                        showMonthLabels={true}
-                        theme={{
-                          light: [
-                            '#0b1220',
-                            '#033a56',
-                            '#026aa2',
-                            '#0ea5e9',
-                            '#7dd3fc',
-                          ],
-                        }}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="mt-3 flex items-center justify-between gap-4">
-                    <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                      <span className="text-xs">Less</span>
-                      <div className="flex items-center gap-1">
-                        <span className="h-3 w-3 rounded-sm bg-[#033a56]" />
-                        <span className="h-3 w-3 rounded-sm bg-[#026aa2]" />
-                        <span className="h-3 w-3 rounded-sm bg-[#0ea5e9]" />
-                        <span className="h-3 w-3 rounded-sm bg-[#7dd3fc]" />
-                      </div>
-                      <span className="text-xs">More</span>
-                    </div>
-
-                    <div className="text-sm text-muted-foreground">
-                      <span className="font-medium text-foreground">Hover</span> for details
-                    </div>
-                  </div>
-
-                  <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
-                    <InsightCard
-                      label="Total Commits"
-                      value={contributionData ? contributionData.totalContributions.toLocaleString() : '—'}
-                      icon={TrendingUp}
-                      accent="bg-primary/15 text-primary"
-                    />
-                    <InsightCard
-                      label="Current Streak"
-                      value={contributionData ? `${contributionData.currentStreak}d` : '—'}
-                      icon={Sparkles}
-                      accent="bg-primary/15 text-primary"
-                    />
-                    <InsightCard
-                      label="Longest Streak"
-                      value={contributionData ? `${contributionData.longestStreak}d` : '—'}
-                      icon={Rocket}
-                      accent="bg-primary/15 text-primary"
-                    />
-                    <InsightCard
-                      label="Active Repositories"
-                      value={activeRepos.toString()}
-                      icon={GitBranch}
-                      accent="bg-primary/15 text-primary"
-                    />
-                  </div>
-                </motion.div>
-              </div>
-            )}
+            <div className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-surface/80 px-3 py-2 text-xs text-muted-foreground">
+              <Users className="size-4 text-primary" /> Live
+            </div>
           </div>
+          {loading && <SkeletonCard />}
+          {!loading && error && (
+            <div className="rounded-3xl border border-border/70 bg-surface/80 p-6 text-center text-sm text-muted-foreground">
+              Unable to fetch GitHub data right now.
+            </div>
+          )}
+          {!loading && !error && (
+            <div className="rounded-3xl border border-border/70 bg-surface/70 p-2">
+              <motion.div
+                // {...fadeUp}
+                className="overflow-x-auto pr-2"
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+              >
+                <div className="mb-3 flex items-center justify-between gap-3">
+                  <div className="text-sm text-muted-foreground">
+                    <span className="font-medium text-foreground">
+                      {contributionData?.totalContributions ?? "—"}
+                    </span>{" "}
+                    contributions in the last year
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <style>{`\n                      /* Tighter calendar look, cyan/blue palette, and selective weekday labels */\n                      .react-activity-calendar { filter: none; }\n                      .react-activity-calendar .react-activity-calendar-weekday { fill: rgba(148,163,184,0.9); font-size:10px; }\n                      .react-activity-calendar .react-activity-calendar-month { fill: rgba(148,163,184,0.9); font-size:12px; }\n                      .react-activity-calendar .react-activity-calendar-weekday:nth-child(1),\n                      .react-activity-calendar .react-activity-calendar-weekday:nth-child(3),\n                      .react-activity-calendar .react-activity-calendar-weekday:nth-child(5) { display: block; }\n                      .react-activity-calendar .react-activity-calendar-weekday:nth-child(2),\n                      .react-activity-calendar .react-activity-calendar-weekday:nth-child(4),\n                      .react-activity-calendar .react-activity-calendar-weekday:nth-child(6),\n                      .react-activity-calendar .react-activity-calendar-weekday:nth-child(7) { display: none; }\n                      /* Make blocks slightly smaller and denser */\n                      .react-activity-calendar .react-activity-calendar-day { shape-rendering: crispEdges; }\n                    `}</style>
+
+                  <div className="-ml-2 hidden min-w-[36px] flex-col items-start gap-6 pr-2 text-xs text-muted-foreground sm:flex">
+                    <div className="mt-1">Mon</div>
+                    <div className="mt-1">Wed</div>
+                    <div className="mt-1">Fri</div>
+                  </div>
+
+                  <div className="flex-1">
+                    <GitHubCalendar
+                      username="NIKHILKUMAR-186"
+                      transformData={(data) => data}
+                      blockMargin={3}
+                      blockSize={10}
+                      fontSize={11}
+                      showWeekdayLabels={true}
+                      showMonthLabels={true}
+                      theme={{
+                        light: ["#11161d", "#335540", "#133e22", "#31723d", "#56d364"],
+                        dark: ["#11161d", "#335540", "#133e22", "#31723d", "#56d364"],
+                      }}
+                    />
+                  </div>
+                </div>
+
+                <div className="mt-3 flex items-center justify-between gap-4">
+                  <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                    <span className="text-xs">Less</span>
+                    <div className="flex items-center gap-1">
+                      <span className="h-3 w-3 rounded-sm bg-[#11161d]" />
+                      <span className="h-3 w-3 rounded-sm bg-[#133e22]" />
+                      <span className="h-3 w-3 rounded-sm bg-[#31723d]" />
+                      <span className="h-3 w-3 rounded-sm bg-[#56d364]" />
+                    </div>
+                    <span className="text-xs">More</span>
+                  </div>
+
+                  <div className="text-sm text-muted-foreground">
+                    <span className="font-medium text-foreground">Hover</span> for details
+                  </div>
+                </div>
+
+                <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
+                  <InsightCard
+                    label="Total Contributions"
+                    value={
+                      contributionData ? contributionData.totalContributions.toLocaleString() : "—"
+                    }
+                    icon={TrendingUp}
+                    accent="bg-primary/15 text-primary"
+                  />
+                  <InsightCard
+                    label="Joined"
+                    value={
+                      profileData ? new Date(profileData.created_at).getFullYear().toString() : "—"
+                    }
+                    icon={Sparkles}
+                    accent="bg-primary/15 text-primary"
+                  />
+
+                  <InsightCard
+                    label="Longest Streak"
+                    value={contributionData ? `${contributionData.longestStreak}d` : "—"}
+                    icon={Rocket}
+                    accent="bg-primary/15 text-primary"
+                  />
+                  <InsightCard
+                    label="Active Repositories"
+                    value={activeRepos.toString()}
+                    icon={GitBranch}
+                    accent="bg-primary/15 text-primary"
+                  />
+                </div>
+              </motion.div>
+            </div>
+          )}
+        </div>
         {/* </div> */}
 
         <div className="grid gap-6 xl:grid-cols-[1fr_0.8fr]">
@@ -504,10 +510,10 @@ export function Github_() {
           <div className="glass rounded-3xl p-6">
             <div className="mb-4 flex items-center justify-between gap-4">
               <div>
-                <p className="text-sm uppercase tracking-[0.2em] text-primary">Top Languages</p>
-                <h3 className="mt-2 text-xl font-semibold text-foreground">Language impact</h3>
+                <p className="text-sm uppercase tracking-[0.2em] text-primary">Most used Languages</p>
+                <h3 className="mt-2 text-sm font-semibold text-foreground">Language Stats</h3>
               </div>
-              <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Live</span>
+              {/* <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Live</span> */}
             </div>
             {loading && (
               <div className="space-y-4">
@@ -535,12 +541,12 @@ export function Github_() {
           </div>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+        {/* <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
           {STAGES.map((stage) => {
             const Icon = stage.icon;
             return (
               <motion.div
-                {...fadeUp}
+                // {...fadeUp}
                 key={stage.label}
                 className="glass flex items-start gap-4 rounded-3xl p-5 transition hover:border-primary/40"
               >
@@ -556,7 +562,7 @@ export function Github_() {
               </motion.div>
             );
           })}
-        </div>
+        </div> */}
       </div>
     </Section>
   );

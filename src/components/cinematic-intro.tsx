@@ -33,19 +33,17 @@ interface CinematicIntroProps {
 }
 
 export function CinematicIntro({ onExitStart }: CinematicIntroProps) {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
   const [step, setStep] = useState(0);
 
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    setShow(true);
-  }, []);
+
 
   useEffect(() => {
     if (!show) return;
 
     const lastIndex = MESSAGES.length - 1;
     const delay = step === lastIndex ? 1700 : 1700;
+    // const delay = 900;
 
     const timer = setTimeout(() => {
       if (step === lastIndex) {

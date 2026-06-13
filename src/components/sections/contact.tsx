@@ -17,8 +17,8 @@ export function Contact() {
         <div className="glass rounded-3xl p-8">
           <div className="grid gap-3">
             <ContactLink href={`mailto:${profile.email}`} icon={Mail} label="Email" value={profile.email} />
-            <ContactLink href={profile.github} icon={Github} label="GitHub" value="@nikhilkumar" />
-            <ContactLink href={profile.linkedin} icon={Linkedin} label="LinkedIn" value="/in/nikhilkumar" />
+            <ContactLink href={profile.github} icon={Github} label="GitHub" value="@NIKHILKUMAR-186" />
+            <ContactLink href={profile.linkedin} icon={Linkedin} label="LinkedIn" value="/in/nikhil-kumar-b288a7303" />
             <ContactLink href={profile.resume} icon={FileText} label="Resume" value="Download PDF" />
           </div>
         </div>

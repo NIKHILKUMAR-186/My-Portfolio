@@ -3,8 +3,13 @@ import profile from "@/data/profile.json";
 import { FileText, Award, Trophy, Link2 } from "lucide-react";
 
 const LINKS = [
-  { label: "Resume (PDF)", icon: FileText, href: "/resume.pdf", note: "Latest CV — always current." },
-  { label: "Certificate Vault", icon: Award, href: "#certificates", note: "Searchable & filterable." },
+  { label: "Resume", icon: FileText, href: "/resume.pdf", note: "Paper That Defines me." },
+  {
+    label: "Certificate Vault",
+    icon: Award,
+    href: "#certificates",
+    note: "Searchable & filterable.",
+  },
   { label: "Achievements", icon: Trophy, href: "#achievements", note: "Awards & recognitions." },
   { label: "All Links", icon: Link2, href: "#contact", note: "GitHub · LinkedIn · Email." },
 ];
@@ -14,7 +19,11 @@ export function ResumeHub() {
     <Section
       id="resume"
       eyebrow="Resume Hub"
-      title={<>Everything, in <span className="gradient-text">one place</span></>}
+      title={
+        <>
+          Everything, in <span className="gradient-text">one place</span>
+        </>
+      }
       description="A single starting point for recruiters. Pick your poison."
     >
       <div className="grid gap-3 md:grid-cols-2">
@@ -39,7 +48,10 @@ export function ResumeHub() {
         })}
       </div>
       <p className="mt-6 text-center text-sm text-muted-foreground">
-        Prefer email? <a href={`mailto:${profile.email}`} className="text-primary hover:underline">{profile.email}</a>
+        Prefer email?{" "}
+        <a href={`mailto:${profile.email}`} className="text-primary hover:underline">
+          {profile.email}
+        </a>
       </p>
     </Section>
   );
