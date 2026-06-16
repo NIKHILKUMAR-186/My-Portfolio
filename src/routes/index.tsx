@@ -63,8 +63,8 @@ function Home() {
       <Github_ />
       <Learning />
       <Beyond />
-      <Roadmap />
-      <ResumeHub />
+      {/* <Roadmap /> */}
+      {/* <ResumeHub /> */}
       <Contact />
     </>
   );

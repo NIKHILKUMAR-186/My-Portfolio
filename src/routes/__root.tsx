@@ -13,8 +13,9 @@ import { ProgressProvider } from "../lib/progression";
 import { SecretPanel } from "../components/secret-panel";
 import { SecretTerminal } from "../components/secret-terminal";
 import { BunnyAIGuide } from "../components/bunny-ai-guide";
+import { FloatingBunny } from "../components/floating-bunny";
 import { Completion } from "../components/completion";
-
+import { ResetProtocolButton } from "../components/reset-protocol-button";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
@@ -161,6 +162,8 @@ function RootComponent() {
         </main>
         <SecretPanel />
         <SecretTerminal />
+        <FloatingBunny />
+        <ResetProtocolButton />
         <BunnyAIGuide />
         <Completion />
       </ProgressProvider>

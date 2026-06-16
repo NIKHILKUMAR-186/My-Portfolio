@@ -1,217 +1,69 @@
-// Progression provider and state for the Bunny Protocol (TSX to allow JSX)
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
-
-export type AchievementRarity = "common" | "rare" | "legendary";
-
-export type AchievementDefinition = {
-  id: string;
-  title: string;
-  description: string;
-  hint: string;
-  reward: string;
-  rarity: AchievementRarity;
-};
+import { ACHIEVEMENTS, type AchievementDefinition, XP_BY_RARITY } from "./achievements";
+import { REWARDS, type RewardDefinition } from "./rewards";
+import { HIDDEN_CLUES, type HiddenClueDefinition } from "./hidden-clues";
 
 export type AchievementState = AchievementDefinition & {
   unlocked: boolean;
-  unlockedAt?: number;
+};
+
+export type RewardState = RewardDefinition & {
+  unlocked: boolean;
+};
+
+export type ClueState = HiddenClueDefinition & {
+  discovered: boolean;
 };
 
 export type ProgressState = {
   unlockedIds: string[];
+  discoveredClues: string[];
   visitedSections: string[];
-  hiddenClues: string[];
   panelOpened: boolean;
-  terminalOpened: boolean;
-  bunnyClicks: number;
   panelTabsVisited: string[];
+  terminalOpened: boolean;
   terminalCommands: string[];
-  accessDeniedVisited: boolean;
+  themeHoverMs: number;
+  finalEventTriggered: boolean;
 };
 
-const STORAGE_KEY = "bunny-protocol-progress-v1";
-const DEFAULT_STATE: ProgressState = {
-  unlockedIds: [],
-  visitedSections: [],
-  hiddenClues: [],
-  panelOpened: false,
-  terminalOpened: false,
-  bunnyClicks: 0,
-  panelTabsVisited: [],
-  terminalCommands: [],
-  accessDeniedVisited: false,
-};
+const STORAGE_KEY = "bunny-protocol-state-v2";
+const LEVELS = [
+  { threshold: 0, title: "Explorer" },
+  { threshold: 100, title: "Builder" },
+  { threshold: 250, title: "Creator" },
+  { threshold: 500, title: "Innovator" },
+  { threshold: 900, title: "Architect" },
+  { threshold: 1400, title: "Visionary" },
+  { threshold: 2100, title: "Legend" },
+];
 
+const REQUIRED_XP_FOR_VAULT = 1000;
 const SECTION_IDS = [
   "about",
   "timeline",
   "now",
   "skills",
   "projects",
+  "achievements",
+  "certificates",
+  "github",
   "learning",
-  "roadmap",
+  "beyond",
   "contact",
 ];
 
-export const ACHIEVEMENT_DEFINITIONS: AchievementDefinition[] = [
-  {
-    id: "first-step",
-    title: "First Step",
-    description: "Open the hidden Bunny Protocol panel and reveal the interface.",
-    hint: "A quiet icon at the edge of your view opens the first gate.",
-    reward: "Discovery Archive",
-    rarity: "common",
-  },
-  {
-    id: "explorer",
-    title: "Explorer",
-    description: "Visit every major section of the portfolio.",
-    hint: "The whole story is never found in one place.",
-    reward: "Developer Dashboard",
-    rarity: "rare",
-  },
-  {
-    id: "night-watcher",
-    title: "Night Watcher",
-    description: "Hover the theme toggle for five seconds.",
-    hint: "The stars hide secrets.",
-    reward: "Special Theme",
-    rarity: "common",
-  },
-  {
-    id: "terminal-hacker",
-    title: "Terminal Hacker",
-    description: "Open the secret terminal with the keyboard shortcut.",
-    hint: "Some conversations happen in the dark.",
-    reward: "Developer Notes",
-    rarity: "rare",
-  },
-  {
-    id: "bunny-whisperer",
-    title: "Bunny Whisperer",
-    description: "Type the secret command 'bunny' in the terminal.",
-    hint: "The guide answers when called.",
-    reward: "Bunny Lore",
-    rarity: "rare",
-  },
-  {
-    id: "best-bunny-friend",
-    title: "Best Bunny Friend",
-    description: "Click the Bunny icon ten times.",
-    hint: "Some friends stay quiet until noticed.",
-    reward: "Behind the Scenes Gallery",
-    rarity: "common",
-  },
-  {
-    id: "secret-scroll",
-    title: "Secret Scroll",
-    description: "Open the Hints tab inside the secret panel.",
-    hint: "The right tab does not always shout its name.",
-    reward: "Cryptic Guidance",
-    rarity: "common",
-  },
-  {
-    id: "reward-collector",
-    title: "Reward Collector",
-    description: "Visit the Rewards tab in the Bunny Protocol panel.",
-    hint: "Meaning is not only in the mission, but in the prize.",
-    reward: "Future Roadmap",
-    rarity: "rare",
-  },
-  {
-    id: "lore-keeper",
-    title: "Lore Keeper",
-    description: "Open the Bunny Lore section of the panel.",
-    hint: "Every legend has a library.",
-    reward: "Founder Notes",
-    rarity: "rare",
-  },
-  {
-    id: "secret-scout",
-    title: "Secret Scout",
-    description: "Open every panel tab at least once.",
-    hint: "The interface itself is part of the journey.",
-    reward: "Enhanced Resume",
-    rarity: "rare",
-  },
-  {
-    id: "code-sleuth",
-    title: "Code Sleuth",
-    description: "Use the 'unlock' command in the terminal.",
-    hint: "Not every gate accepts the same key.",
-    reward: "Developer Notes",
-    rarity: "rare",
-  },
-  {
-    id: "access-curiosity",
-    title: "Access Curiosity",
-    description: "Visit the access denied page and prove you are still searching.",
-    hint: "Curiosity alone is not enough.",
-    reward: "Hidden Timeline",
-    rarity: "rare",
-  },
-  {
-    id: "hidden-trail",
-    title: "Hidden Trail",
-    description: "Find five hidden clues scattered through the portfolio.",
-    hint: "Secrets are only visible if you look closely.",
-    reward: "Vault Access",
-    rarity: "legendary",
-  },
-  {
-    id: "panel-architect",
-    title: "Panel Architect",
-    description: "Build your progress by opening every panel section.",
-    hint: "A tool is only useful when it has been explored.",
-    reward: "Founder Notes",
-    rarity: "rare",
-  },
-  {
-    id: "curious-explorer",
-    title: "Curious Explorer",
-    description: "Unlock every achievement in the Bunny Protocol.",
-    hint: "You didn't just visit the portfolio. You completed it.",
-    reward: "Secret Vault Access",
-    rarity: "legendary",
-  },
-];
-
-export const HINTS = [
-  "Psst... look deeper.",
-  "You missed something.",
-  "Curious minds find hidden doors.",
-  "Not every path is visible.",
-  "A silent icon protects a secret.",
-];
-
-export const REWARDS = [
-  {
-    title: "Behind The Scenes",
-    description: "Early designs, failed drafts, and the creative process that shaped this portfolio.",
-  },
-  {
-    title: "Developer Dashboard",
-    description: "Live metrics about commits, repos, languages and streaks in one premium panel.",
-  },
-  {
-    title: "Founder Notes",
-    description: "Private lessons learned while building products and refining systems.",
-  },
-  {
-    title: "Future Roadmap",
-    description: "Upcoming ideas, AI concepts, and product ambitions for the next chapter.",
-  },
-  {
-    title: "Secret Resume",
-    description: "An enhanced recruiter-ready career summary with premium context.",
-  },
-];
-
-export const BUNNY_LORE = [
-  "The Bunny Protocol began as a secret interface for curious visitors.",
-  "Each unlocked milestone represents a deeper layer of the portfolio narrative.",
-  "The guide is here for those who choose to explore rather than only consume.",
-];
+const DEFAULT_STATE: ProgressState = {
+  unlockedIds: [],
+  discoveredClues: [],
+  visitedSections: [],
+  panelOpened: false,
+  panelTabsVisited: [],
+  terminalOpened: false,
+  terminalCommands: [],
+  themeHoverMs: 0,
+  finalEventTriggered: false,
+};
 
 function loadState(): ProgressState {
   if (typeof window === "undefined") return DEFAULT_STATE;
@@ -226,38 +78,110 @@ function loadState(): ProgressState {
 
 function saveState(state: ProgressState) {
   if (typeof window === "undefined") return;
-  window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  try {
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch {
+    // ignore localStorage failures
+  }
+}
+
+function calculateXp(state: ProgressState) {
+  const achievementXp = ACHIEVEMENTS.reduce((total, achievement) => {
+    return total + (state.unlockedIds.includes(achievement.id) ? XP_BY_RARITY[achievement.rarity] : 0);
+  }, 0);
+  const clueXp = state.discoveredClues.length * 10;
+  return achievementXp + clueXp;
+}
+
+export function getLevelInfo(xp: number) {
+  const levelIndex = LEVELS.reduce((currentIndex, level, index) => {
+    return xp >= level.threshold ? index : currentIndex;
+  }, 0);
+  const current = LEVELS[Math.min(levelIndex, LEVELS.length - 1)];
+  const next = LEVELS[Math.min(levelIndex + 1, LEVELS.length - 1)];
+  const progress = next.threshold > current.threshold ? Math.min(100, Math.round(((xp - current.threshold) / (next.threshold - current.threshold)) * 100)) : 100;
+  return {
+    xp,
+    level: Math.min(levelIndex + 1, LEVELS.length),
+    title: current.title,
+    progress,
+    currentThreshold: current.threshold,
+    nextThreshold: next.threshold,
+    nextTitle: next.title,
+  };
 }
 
 function getAchievementState(state: ProgressState): AchievementState[] {
-  return ACHIEVEMENT_DEFINITIONS.map((achievement) => ({
+  return ACHIEVEMENTS.map((achievement) => ({
     ...achievement,
     unlocked: state.unlockedIds.includes(achievement.id),
-    unlockedAt: state.unlockedIds.includes(achievement.id) ? Date.now() : undefined,
   }));
 }
 
-function hasUnlocked(state: ProgressState, id: string) {
-  return state.unlockedIds.includes(id);
+function getRewardState(state: ProgressState): RewardState[] {
+  return REWARDS.map((reward) => ({
+    ...reward,
+    unlocked: state.unlockedIds.includes(reward.unlockAchievementId),
+  }));
 }
 
-const ALL_ACHIEVEMENT_IDS = ACHIEVEMENT_DEFINITIONS.map((achievement) => achievement.id);
+function getClueState(state: ProgressState): ClueState[] {
+  return HIDDEN_CLUES.map((clue) => ({
+    ...clue,
+    discovered: state.discoveredClues.includes(clue.id),
+  }));
+}
 
-export const ProgressContext = createContext<{
+function allAchievementsUnlocked(state: ProgressState) {
+  return ACHIEVEMENTS.every((achievement) => state.unlockedIds.includes(achievement.id));
+}
+
+function allCluesDiscovered(state: ProgressState) {
+  return HIDDEN_CLUES.every((clue) => state.discoveredClues.includes(clue.id));
+}
+
+export const HINTS = [
+  "Curiosity unlocks more than doors — it unlocks stories.",
+  "The Bunny Protocol is listening to the choices you make.",
+  "A hidden gate responds to actions, not promises.",
+  "Every reward is a signal that you followed the right thread.",
+];
+
+export const BUNNY_LORE = [
+  "The first Bunny came from a line of quiet experiments.",
+  "It only reveals its secrets to visitors who pay attention.",
+  "Rare achievements are not earned in a moment, but through a path.",
+  "The vault is both a reward and a checkpoint for the curious.",
+];
+
+export type ProgressContextType = {
   state: ProgressState;
   achievements: AchievementState[];
-  unlockAchievement: (id: string) => void;
-  recordBunnyClick: () => void;
-  reportSectionVisit: (id: string) => void;
-  findHiddenClue: (id: string) => void;
-  markPanelOpened: () => void;
-  markTerminalOpened: () => void;
-  markPanelTabVisited: (tab: string) => void;
-  recordTerminalCommand: (command: string) => void;
-  markAccessDeniedVisited: () => void;
-  canAccessVault: boolean;
+  rewards: RewardState[];
+  clues: ClueState[];
+  xp: number;
+  levelInfo: ReturnType<typeof getLevelInfo>;
+  vaultUnlocked: boolean;
+  finalEventPending: boolean;
   completed: boolean;
-} | null>(null);
+  unlockAchievement: (id: string) => void;
+  discoverClue: (id: string) => void;
+  findHiddenClue: (id: string) => void;
+  visitSection: (id: string) => void;
+  markPanelOpened: () => void;
+  markPanelTabVisited: (tab: string) => void;
+  markTerminalOpened: () => void;
+  recordTerminalCommand: (command: string) => void;
+  markThemeHover: (ms: number) => void;
+  markFinalEventTriggered: () => void;
+  markAccessDeniedVisited: () => void;
+};
+
+const ProgressContext = createContext<ProgressContextType | null>(null);
+
+function mergeIds(prev: string[], next: string[]) {
+  return Array.from(new Set([...prev, ...next]));
+}
 
 export function ProgressProvider({ children }: { children: ReactNode }) {
   const [state, setState] = useState<ProgressState>(DEFAULT_STATE);
@@ -277,121 +201,138 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     });
   };
 
-  const recordBunnyClick = () => {
+  const discoverClue = (id: string) => {
     setState((current) => {
-      const nextCount = current.bunnyClicks + 1;
-      const updated = { ...current, bunnyClicks: nextCount };
-      if (nextCount >= 10 && !current.unlockedIds.includes("best-bunny-friend")) {
-        updated.unlockedIds = [...updated.unlockedIds, "best-bunny-friend"];
-      }
-      return updated;
-    });
-  };
-
-  const reportSectionVisit = (id: string) => {
-    if (!SECTION_IDS.includes(id)) return;
-    setState((current) => {
-      if (current.visitedSections.includes(id)) return current;
-      const visitedSections = [...current.visitedSections, id];
-      return { ...current, visitedSections };
+      if (current.discoveredClues.includes(id)) return current;
+      return { ...current, discoveredClues: [...current.discoveredClues, id] };
     });
   };
 
   const findHiddenClue = (id: string) => {
     setState((current) => {
-      if (current.hiddenClues.includes(id)) return current;
-      return { ...current, hiddenClues: [...current.hiddenClues, id] };
+      if (current.discoveredClues.includes(id)) return current;
+      return { ...current, discoveredClues: [...current.discoveredClues, id] };
     });
   };
 
-  const markPanelOpened = () => {
+  const markAccessDeniedVisited = () => setState((current) => (current.visitedSections.includes("access-denied") ? current : { ...current, visitedSections: [...current.visitedSections, "access-denied"] }));
+
+  const visitSection = (id: string) => {
+    if (!SECTION_IDS.includes(id)) return;
     setState((current) => {
-      if (current.panelOpened) return current;
-      return { ...current, panelOpened: true };
+      if (current.visitedSections.includes(id)) return current;
+      return { ...current, visitedSections: [...current.visitedSections, id] };
     });
   };
 
-  const markTerminalOpened = () => {
-    setState((current) => {
-      if (current.terminalOpened) return current;
-      return { ...current, terminalOpened: true };
-    });
-  };
+  const markPanelOpened = () => setState((current) => (current.panelOpened ? current : { ...current, panelOpened: true }));
 
-  const markPanelTabVisited = (tab: string) => {
-    setState((current) => {
-      if (current.panelTabsVisited.includes(tab)) return current;
-      return { ...current, panelTabsVisited: [...current.panelTabsVisited, tab] };
-    });
-  };
+  const markPanelTabVisited = (tab: string) => setState((current) => {
+    if (current.panelTabsVisited.includes(tab)) return current;
+    return { ...current, panelTabsVisited: [...current.panelTabsVisited, tab] };
+  });
 
-  const recordTerminalCommand = (command: string) => {
-    setState((current) => {
-      if (current.terminalCommands.includes(command)) {
-        return current;
-      }
-      return { ...current, terminalCommands: [...current.terminalCommands, command] };
-    });
-  };
+  const markTerminalOpened = () => setState((current) => (current.terminalOpened ? current : { ...current, terminalOpened: true }));
 
-  const markAccessDeniedVisited = () => {
-    setState((current) => {
-      if (current.accessDeniedVisited) return current;
-      return { ...current, accessDeniedVisited: true };
-    });
+  const recordTerminalCommand = (command: string) => setState((current) => {
+    if (current.terminalCommands.includes(command)) return current;
+    return { ...current, terminalCommands: [...current.terminalCommands, command] };
+  });
+
+  const markThemeHover = (ms: number) => setState((current) => {
+    const nextMs = current.themeHoverMs + ms;
+    return { ...current, themeHoverMs: nextMs };
+  });
+
+  const markFinalEventTriggered = () => setState((current) => (current.finalEventTriggered ? current : { ...current, finalEventTriggered: true }));
+
+  const resetProgress = () => {
+    setState({ ...DEFAULT_STATE, panelOpened: true, terminalCommands: [], themeHoverMs: 0 });
+    if (typeof window !== "undefined") {
+      window.localStorage.removeItem(STORAGE_KEY);
+    }
   };
 
   useEffect(() => {
     setState((current) => {
       let next = current;
       const unlock = (id: string) => {
-        if (next.unlockedIds.includes(id)) return;
-        next = { ...next, unlockedIds: [...next.unlockedIds, id] };
+        if (!next.unlockedIds.includes(id)) {
+          next = { ...next, unlockedIds: [...next.unlockedIds, id] };
+        }
       };
 
       if (current.panelOpened) unlock("first-step");
       if (SECTION_IDS.every((id) => current.visitedSections.includes(id))) unlock("explorer");
-      if (current.bunnyClicks >= 10) unlock("best-bunny-friend");
       if (current.terminalOpened) unlock("terminal-hacker");
       if (current.terminalCommands.includes("bunny")) unlock("bunny-whisperer");
       if (current.terminalCommands.includes("unlock")) unlock("code-sleuth");
       if (current.panelTabsVisited.includes("Hints")) unlock("secret-scroll");
       if (current.panelTabsVisited.includes("Rewards")) unlock("reward-collector");
       if (current.panelTabsVisited.includes("Bunny Lore")) unlock("lore-keeper");
-      if (current.panelTabsVisited.length >= 5) unlock("secret-scout");
-      if (current.accessDeniedVisited) unlock("access-curiosity");
-      if (current.hiddenClues.length >= 5) unlock("hidden-trail");
-      const requiredIds = ACHIEVEMENT_DEFINITIONS.filter((achievement) => achievement.id !== "curious-explorer").map((achievement) => achievement.id);
+      if (current.panelTabsVisited.length >= 5) unlock("panel-architect");
+      if (current.visitedSections.includes("achievements")) unlock("achievement-collector");
+      if (current.visitedSections.includes("certificates")) unlock("certificate-keeper");
+      if (current.visitedSections.includes("github")) unlock("github-explorer");
+      if (current.visitedSections.includes("learning")) unlock("learning-journeyer");
+      if (current.visitedSections.includes("beyond")) unlock("beyond-adventurer");
+      if (current.themeHoverMs >= 5000) unlock("theme-patient");
+      if (current.discoveredClues.length >= 5) unlock("clue-seeker");
+      if (current.discoveredClues.length >= 10) unlock("hidden-trail");
+      if (current.unlockedIds.length >= 18 && calculateXp(current) >= 900) unlock("vault-aspirant");
+
+      const requiredIds = ACHIEVEMENTS.filter((achievement) => achievement.id !== "curious-explorer").map((achievement) => achievement.id);
       if (requiredIds.every((id) => next.unlockedIds.includes(id))) {
         unlock("curious-explorer");
       }
+
+      if (next.unlockedIds.length === current.unlockedIds.length) {
+        return current;
+      }
+
       return next;
     });
-  }, [state.bunnyClicks, state.panelOpened, state.terminalOpened, state.panelTabsVisited, state.terminalCommands, state.visitedSections, state.accessDeniedVisited, state.hiddenClues]);
+  }, [state.panelOpened, state.visitedSections, state.terminalOpened, state.terminalCommands, state.panelTabsVisited, state.themeHoverMs, state.discoveredClues]);
 
   const achievements = useMemo(() => getAchievementState(state), [state]);
-  const canAccessVault = useMemo(
-    () => ALL_ACHIEVEMENT_IDS.every((id) => state.unlockedIds.includes(id)),
-    [state.unlockedIds],
+  const rewards = useMemo(() => getRewardState(state), [state]);
+  const clues = useMemo(() => getClueState(state), [state]);
+  const xp = useMemo(() => calculateXp(state), [state]);
+  const levelInfo = useMemo(() => getLevelInfo(xp), [xp]);
+  const vaultUnlocked = useMemo(
+    () => allAchievementsUnlocked(state) && allCluesDiscovered(state) && xp >= REQUIRED_XP_FOR_VAULT,
+    [state, xp],
   );
-  const completed = useMemo(() => canAccessVault, [canAccessVault]);
+  const completed = useMemo(() => vaultUnlocked, [vaultUnlocked]);
+  const finalEventPending = useMemo(
+    () => vaultUnlocked && !state.finalEventTriggered,
+    [vaultUnlocked, state.finalEventTriggered],
+  );
 
   return (
     <ProgressContext.Provider
       value={{
         state,
         achievements,
-        unlockAchievement,
-        recordBunnyClick,
-        reportSectionVisit,
-        findHiddenClue,
-        markPanelOpened,
-        markTerminalOpened,
-        markPanelTabVisited,
-        recordTerminalCommand,
-        markAccessDeniedVisited,
-        canAccessVault,
+        rewards,
+        clues,
+        xp,
+        levelInfo,
+        vaultUnlocked,
+        finalEventPending,
         completed,
+        unlockAchievement,
+        discoverClue,
+        findHiddenClue,
+        visitSection,
+        markPanelOpened,
+        markPanelTabVisited,
+        markTerminalOpened,
+        recordTerminalCommand,
+        markThemeHover,
+        markFinalEventTriggered,
+        markAccessDeniedVisited,
+        resetProgress,
       }}
     >
       {children}

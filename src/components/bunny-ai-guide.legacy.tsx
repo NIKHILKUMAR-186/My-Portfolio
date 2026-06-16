@@ -1,6 +1,8 @@
-import { AnimatePresence, motion } from "framer-motion";
+// BunnyAIGuide: shows occasional cryptic hints as speech bubbles
 import { useEffect, useState } from "react";
-import { useProgress, HINTS } from "../lib/progression";
+import { motion, AnimatePresence } from "framer-motion";
+import { HINTS } from "../lib/progression";
+import { useProgress } from "../lib/progression";
 
 export function BunnyAIGuide() {
   const [visible, setVisible] = useState(false);
@@ -8,13 +10,13 @@ export function BunnyAIGuide() {
   const { state } = useProgress();
 
   useEffect(() => {
-    const interval = window.setInterval(() => {
+    const base = 14000 + Math.random() * 8000;
+    const timer = window.setInterval(() => {
       setHintIndex((current) => (current + 1) % HINTS.length);
       setVisible(true);
-      window.setTimeout(() => setVisible(false), 4200 + Math.random() * 1400);
-    }, 16000 + Math.random() * 8000);
-
-    return () => window.clearInterval(interval);
+      window.setTimeout(() => setVisible(false), 4200 + Math.random() * 1800);
+    }, base);
+    return () => window.clearInterval(timer);
   }, [state.unlockedIds.length]);
 
   return (

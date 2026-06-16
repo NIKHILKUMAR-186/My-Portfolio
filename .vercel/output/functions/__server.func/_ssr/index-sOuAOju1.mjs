@@ -1,12 +1,13 @@
 import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { L as Lenis } from "../_libs/lenis.mjs";
 import { L as Link } from "../_libs/tanstack__react-router.mjs";
+import { B as Bunny } from "./router-CTA9DVq3.mjs";
 import { G as GitHubCalendar } from "../_libs/react-github-calendar.mjs";
 import { R as Root, I as Indicator } from "../_libs/radix-ui__react-progress.mjs";
 import { c as clsx } from "../_libs/clsx.mjs";
 import { t as twMerge } from "../_libs/tailwind-merge.mjs";
 import { u as useInView, A as AnimatePresence, m as motion, a as useScroll, b as useTransform } from "../_libs/framer-motion.mjs";
-import { S as Sun, M as Moon, G as Github, L as Linkedin, a as Mail, A as ArrowDown, b as Sparkles, C as Compass, B as BookOpen, H as Hammer, c as ChevronRight, d as Search, F as FileText, D as Download, T as Trophy, e as GitBranch, f as TrendingUp, g as Activity, U as Users, R as Rocket, h as GitCommitHorizontal, i as Star, j as Music, k as Lightbulb, W as Wrench, l as Award, m as Link2, n as Globe, X, E as ExternalLink, o as CalendarDays, p as CodeXml } from "../_libs/lucide-react.mjs";
+import { d as Sun, M as Moon, G as Github, L as Linkedin, e as Mail, f as ArrowDown, a as Sparkles, C as Compass, B as BookOpen, H as Hammer, g as ChevronRight, h as Search, F as FileText, D as Download, i as Trophy, j as GitBranch, k as TrendingUp, l as Activity, U as Users, m as CalendarDays, R as Rocket, n as Music, o as Lightbulb, W as Wrench, p as Globe, X, E as ExternalLink, q as Star, r as CodeXml } from "../_libs/lucide-react.mjs";
 import { c as format } from "../_libs/date-fns.mjs";
 import "../_libs/tanstack__router-core.mjs";
 import "../_libs/tanstack__history.mjs";
@@ -21,6 +22,10 @@ import "crypto";
 import "async_hooks";
 import "stream";
 import "../_libs/isbot.mjs";
+import "../_libs/tanstack__query-core.mjs";
+import "../_libs/tanstack__react-query.mjs";
+import "../_libs/motion-dom.mjs";
+import "../_libs/motion-utils.mjs";
 import "../_libs/react-activity-calendar.mjs";
 import "../_libs/floating-ui__react.mjs";
 import "../_libs/floating-ui__utils.mjs";
@@ -32,8 +37,6 @@ import "../_libs/radix-ui__react-context.mjs";
 import "../_libs/radix-ui__react-primitive.mjs";
 import "../_libs/radix-ui__react-slot.mjs";
 import "../_libs/radix-ui__react-compose-refs.mjs";
-import "../_libs/motion-dom.mjs";
-import "../_libs/motion-utils.mjs";
 function AvatarFrame({
   layoutId,
   className = "",
@@ -62,7 +65,7 @@ function AvatarFrame({
             src: imageSrc,
             alt,
             referrerPolicy: "no-referrer",
-            className: "w-full h-full object-cover grayscale brightness-90 hover:grayscale-0 hover:brightness-100 transition-all duration-500 select-none scale-105 hover:scale-100"
+            className: "w-full h-full object-cover brightness-90 hover:grayscale-0 hover:brightness-100 transition-all duration-500 select-none scale-105 hover:scale-100"
           }
         ) }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute top-[10%] left-[10%] w-3 h-3 bg-cyan-400 rounded-full animate-ping pointer-events-none" }),
@@ -105,12 +108,8 @@ const avatarVariants = {
   }
 };
 function CinematicIntro({ onExitStart }) {
-  const [show, setShow] = reactExports.useState(false);
+  const [show, setShow] = reactExports.useState(true);
   const [step, setStep] = reactExports.useState(0);
-  reactExports.useEffect(() => {
-    if (typeof window === "undefined") return;
-    setShow(true);
-  }, []);
   reactExports.useEffect(() => {
     if (!show) return;
     const lastIndex = MESSAGES.length - 1;
@@ -227,6 +226,8 @@ const SECTIONS = [
 function Nav() {
   const [theme, setTheme] = reactExports.useState("dark");
   const [scrolled, setScrolled] = reactExports.useState(false);
+  const [deferredPrompt, setDeferredPrompt] = reactExports.useState(null);
+  const [online, setOnline] = reactExports.useState(typeof navigator !== "undefined" ? navigator.onLine : true);
   reactExports.useEffect(() => {
     const saved = typeof window !== "undefined" && localStorage.getItem("nk-theme");
     if (saved) setTheme(saved);
@@ -242,6 +243,22 @@ function Nav() {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  reactExports.useEffect(() => {
+    const onBeforeInstall = (e) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+    };
+    const onOnline = () => setOnline(true);
+    const onOffline = () => setOnline(false);
+    window.addEventListener("beforeinstallprompt", onBeforeInstall);
+    window.addEventListener("online", onOnline);
+    window.addEventListener("offline", onOffline);
+    return () => {
+      window.removeEventListener("beforeinstallprompt", onBeforeInstall);
+      window.removeEventListener("online", onOnline);
+      window.removeEventListener("offline", onOffline);
+    };
   }, []);
   return /* @__PURE__ */ jsxRuntimeExports.jsx(
     "header",
@@ -273,13 +290,32 @@ function Nav() {
             "aria-label": "Toggle theme",
             children: theme === "dark" ? /* @__PURE__ */ jsxRuntimeExports.jsx(Sun, { className: "size-4" }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Moon, { className: "size-4" })
           }
-        )
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "ml-3 flex items-center gap-2", children: [
+          !online && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "glass rounded-full px-3 py-1 text-xs font-semibold text-foreground", children: "Offline Mode" }),
+          deferredPrompt && /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "button",
+            {
+              onClick: async () => {
+                try {
+                  deferredPrompt.prompt();
+                  const choiceResult = await deferredPrompt.userChoice;
+                  setDeferredPrompt(null);
+                } catch {
+                  setDeferredPrompt(null);
+                }
+              },
+              className: "glass hidden md:inline-flex items-center rounded-full px-3 py-1 text-sm font-semibold text-foreground",
+              children: "Install Portfolio"
+            }
+          )
+        ] })
       ] })
     }
   );
 }
 const name = "Nikhil Kumar";
-const title = "Engineer · Learner · Builder";
+const title = "Building products where software, data and hardware meet.";
 const tagline = "Building things that matter — from circuits to code.";
 const education = "B.Tech, MIT Muzaffarpur  ·  BS Data Science, IIT Madras";
 const bio = "I'm Nikhil Kumar, an engineering student exploring the intersection of software, data, and embedded systems. Currently pursuing B.Tech at MIT Muzaffarpur and BS in Data Science at IIT Madras, I enjoy turning ideas into real products — from IoT hardware prototypes to full-stack applications. My goal is simple: Learn deeply, build publicly, and solve meaningful problems.";
@@ -516,102 +552,6 @@ function Section({ id, eyebrow, title: title2, description, children, className 
     )
   ] }) });
 }
-function Bunny({ size = 64, className, waving = false, showTrail = false }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `relative inline-flex ${className ?? ""}`, children: [
-    showTrail && /* @__PURE__ */ jsxRuntimeExports.jsxs(
-      motion.div,
-      {
-        className: "pointer-events-none absolute inset-0 -z-10 flex items-center justify-center",
-        initial: { opacity: 0.16 },
-        animate: { opacity: [0.16, 0.08, 0.16], y: [0, -3, 0] },
-        transition: { duration: 4.2, repeat: Infinity, ease: "easeInOut" },
-        children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute -left-4 top-2 h-6 w-6 rounded-full bg-cyan-400/15 blur-2xl" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute -right-3 bottom-5 h-5 w-5 rounded-full bg-sky-400/10 blur-2xl" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute left-1/2 top-1/3 h-4 w-4 -translate-x-1/2 rounded-full bg-cyan-300/15 blur-2xl" })
-        ]
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs(
-      motion.svg,
-      {
-        width: size,
-        height: size,
-        viewBox: "0 0 100 110",
-        fill: "none",
-        xmlns: "http://www.w3.org/2000/svg",
-        className: "block",
-        "aria-label": "Bunny mascot",
-        role: "img",
-        initial: { y: 0 },
-        animate: { y: [0, -4, 0] },
-        transition: { duration: 3, repeat: Infinity, ease: "easeInOut" },
-        children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs(
-            motion.g,
-            {
-              animate: { rotate: waving ? [0, -8, 8, -4, 0] : 0 },
-              transition: { duration: 1.4, repeat: waving ? Infinity : 0, ease: "easeInOut" },
-              style: { transformOrigin: "50px 60px" },
-              children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  "path",
-                  {
-                    d: "M36 48 C32 28, 34 10, 40 8 C46 6, 46 26, 44 46 Z",
-                    fill: "var(--surface-2)",
-                    stroke: "var(--primary)",
-                    strokeWidth: "1.5"
-                  }
-                ),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M40 42 C38 28, 40 16, 41 14", stroke: "var(--accent)", strokeWidth: "1.5", strokeLinecap: "round" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx(
-                  "path",
-                  {
-                    d: "M64 48 C68 28, 66 10, 60 8 C54 6, 54 26, 56 46 Z",
-                    fill: "var(--surface-2)",
-                    stroke: "var(--primary)",
-                    strokeWidth: "1.5"
-                  }
-                ),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M60 42 C62 28, 60 16, 59 14", stroke: "var(--accent)", strokeWidth: "1.5", strokeLinecap: "round" })
-              ]
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("ellipse", { cx: "50", cy: "62", rx: "22", ry: "20", fill: "var(--surface-2)", stroke: "var(--primary)", strokeWidth: "1.5" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            motion.circle,
-            {
-              cx: "42",
-              cy: "60",
-              r: "2.2",
-              fill: "var(--foreground)",
-              animate: { scaleY: [1, 1, 0.1, 1] },
-              transition: { duration: 4, repeat: Infinity, times: [0, 0.92, 0.96, 1] },
-              style: { transformOrigin: "42px 60px" }
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            motion.circle,
-            {
-              cx: "58",
-              cy: "60",
-              r: "2.2",
-              fill: "var(--foreground)",
-              animate: { scaleY: [1, 1, 0.1, 1] },
-              transition: { duration: 4, repeat: Infinity, times: [0, 0.92, 0.96, 1] },
-              style: { transformOrigin: "58px 60px" }
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M48 67 L52 67 L50 70 Z", fill: "var(--accent)" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M48 71 Q50 73 52 71", stroke: "var(--foreground)", strokeWidth: "1.2", fill: "none", strokeLinecap: "round" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "38", cy: "68", r: "2", fill: "var(--primary)", opacity: "0.35" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "62", cy: "68", r: "2", fill: "var(--primary)", opacity: "0.35" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("ellipse", { cx: "50", cy: "92", rx: "14", ry: "10", fill: "var(--surface-2)", stroke: "var(--primary)", strokeWidth: "1.5" })
-        ]
-      }
-    )
-  ] });
-}
 const about = "I'll guide you through Nikhil's journey — from classroom experiments to real-world products.";
 const contact = "That's a wrap! Reach out — Nikhil writes back. 👋";
 const bunny = {
@@ -628,7 +568,7 @@ function About({ journeyStarted }) {
       description: profile.bio,
       children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid gap-8 md:grid-cols-[1fr_1.2fr] md:gap-12", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "glass relative overflow-hidden rounded-3xl p-6", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "aspect-square w-full rounded-2xl bg-gradient-to-br from-primary/30 via-surface-2 to-accent/30 p-1", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex size-full items-center justify-center rounded-2xl bg-surface", children: /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: "/avatar2.png", alt: "Nikhil Kumar", className: "w-full h-full object-cover grayscale brightness-90 hover:grayscale-0 hover:brightness-100 transition-all duration-500 select-none scale-105 hover:scale-100" }) }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "aspect-square w-full rounded-2xl bg-gradient-to-br from-primary/30 via-surface-2 to-accent/30 p-1", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex size-full items-center justify-center rounded-2xl bg-surface", children: /* @__PURE__ */ jsxRuntimeExports.jsx("img", { src: "/avatar2.png", alt: "Nikhil Kumar", className: "w-full h-full object-cover  brightness-90 hover:grayscale-0 hover:brightness-100 transition-all duration-500 select-none scale-105 hover:scale-100" }) }) }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-4 text-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-sm text-muted-foreground", children: profile.education }) }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(AnimatePresence, { mode: "wait", children: !journeyStarted && /* @__PURE__ */ jsxRuntimeExports.jsx(
             motion.div,
@@ -876,7 +816,7 @@ function TimelineSection({ timelineRef, showJourneyBunny }) {
   );
 }
 const updated = "Nov 2026";
-const items = [{ "label": "Building", "text": "HydroSentinal v2 — adding LoRa for off-grid deployment." }, { "label": "Learning", "text": "PyTorch fundamentals and applied statistics at IIT Madras." }, { "label": "Exploring", "text": "On-device ML for low-power microcontrollers." }, { "label": "Reading", "text": "'Designing Data-Intensive Applications' — Martin Kleppmann." }];
+const items = [{ "label": "Building", "text": "HydroSentinal v2 — adding additional features." }, { "label": "Learning", "text": "NumPy and Pandas and applied statistics at IIT Madras." }, { "label": "Exploring", "text": "Multiple ways to increase problem solving skills." }, { "label": "Reading", "text": "'The Immortals of Meluha' — Amish Tripathi." }];
 const now = {
   updated,
   items
@@ -1415,25 +1355,47 @@ const Progress = reactExports.forwardRef(({ className, value, ...props }, ref) =
 ));
 Progress.displayName = Root.displayName;
 const GITHUB_USERNAME = "NIKHILKUMAR-186";
-async function fetchGithub(url) {
-  const response = await fetch(url, {
-    headers: {
-      Accept: "application/vnd.github+json"
+async function fetchGithub(url, cacheKey) {
+  try {
+    const response = await fetch(url, {
+      headers: {
+        Accept: "application/vnd.github+json"
+      }
+    });
+    if (!response.ok) {
+      const body = await response.text();
+      const message = response.status === 403 ? "GitHub rate limit exceeded" : response.statusText || body;
+      throw new Error(message);
     }
-  });
-  if (!response.ok) {
-    const body = await response.text();
-    const message = response.status === 403 ? "GitHub rate limit exceeded" : response.statusText || body;
-    throw new Error(message);
+    const data = await response.json();
+    if (cacheKey && typeof window !== "undefined" && window.localStorage) {
+      try {
+        window.localStorage.setItem(cacheKey, JSON.stringify({ ts: Date.now(), data }));
+      } catch {
+      }
+    }
+    return data;
+  } catch (err) {
+    if (typeof window !== "undefined" && window.localStorage && cacheKey) {
+      try {
+        const raw = window.localStorage.getItem(cacheKey);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          return parsed.data;
+        }
+      } catch {
+      }
+    }
+    throw err;
   }
-  return response.json();
 }
 async function getGithubProfile() {
-  return fetchGithub(`https://api.github.com/users/${GITHUB_USERNAME}`);
+  return fetchGithub(`https://api.github.com/users/${GITHUB_USERNAME}`, "github_profile_v1");
 }
 async function getGithubRepos() {
   return fetchGithub(
-    `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`
+    `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`,
+    "github_repos_v1"
   );
 }
 function computeStreaks(contributions) {
@@ -1458,30 +1420,46 @@ function computeStreaks(contributions) {
   return { currentStreak, longestStreak };
 }
 async function getGithubContributions() {
-  const response = await fetch(`https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}`);
-  if (!response.ok) {
-    const body = await response.text();
-    const message = response.status === 403 ? "GitHub rate limit exceeded" : response.statusText || body;
-    throw new Error(message);
+  const url = `https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}`;
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      const body = await response.text();
+      const message = response.status === 403 ? "GitHub rate limit exceeded" : response.statusText || body;
+      throw new Error(message);
+    }
+    const payload = await response.json();
+    const contributions = Array.isArray(payload.contributions) ? payload.contributions : [];
+    const totalContributions = typeof payload.totalContributions === "number" ? payload.totalContributions : contributions.reduce((sum, day) => sum + (day.count || 0), 0);
+    const { currentStreak, longestStreak } = computeStreaks(contributions);
+    const result = {
+      totalContributions,
+      currentStreak,
+      longestStreak
+    };
+    if (typeof window !== "undefined" && window.localStorage) {
+      try {
+        window.localStorage.setItem("github_contributions_v1", JSON.stringify({ ts: Date.now(), data: result }));
+      } catch {
+      }
+    }
+    return result;
+  } catch (err) {
+    if (typeof window !== "undefined" && window.localStorage) {
+      try {
+        const raw = window.localStorage.getItem("github_contributions_v1");
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          return parsed.data;
+        }
+      } catch {
+      }
+    }
+    throw err;
   }
-  const payload = await response.json();
-  const contributions = Array.isArray(payload.contributions) ? payload.contributions : [];
-  const totalContributions = typeof payload.totalContributions === "number" ? payload.totalContributions : contributions.reduce((sum, day) => sum + (day.count || 0), 0);
-  const { currentStreak, longestStreak } = computeStreaks(contributions);
-  return {
-    totalContributions,
-    currentStreak,
-    longestStreak
-  };
 }
 const PROFILE_URL = profile.github;
 const FEATURED_REPO_NAMES = ["hydrosentinal"];
-const STAGES = [
-  { label: "First Repo", note: "First programming experiments.", icon: GitCommitHorizontal },
-  { label: "First Major Project", note: "Hardware + Software projects.", icon: GitBranch },
-  { label: "Now", note: "Building HydroSentinal and learning Data Science.", icon: Star },
-  { label: "Next", note: "AI-powered IoT systems and open source contributions.", icon: Rocket }
-];
 const languageIconMap = {
   TypeScript: CodeXml,
   JavaScript: CodeXml,
@@ -1491,11 +1469,6 @@ const languageIconMap = {
   Rust: CodeXml,
   Go: CodeXml
 };
-const fadeUp = {
-  initial: { opacity: 0, y: 18 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.45, ease: "easeOut" }
-};
 function formatDate(value) {
   return format(new Date(value), "LLL d, yyyy");
 }
@@ -1503,7 +1476,6 @@ function RepoCard({ repo, featured }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(
     motion.a,
     {
-      ...fadeUp,
       href: repo.html_url,
       target: "_blank",
       rel: "noreferrer",
@@ -1542,29 +1514,41 @@ function InsightCard({
   icon: Icon,
   accent
 }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { ...fadeUp, className: "glass rounded-3xl border border-border/70 p-4", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between gap-3", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs uppercase tracking-[0.25em] text-muted-foreground", children: label }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `inline-flex h-8 w-8 items-center justify-center rounded-full ${accent}`, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { className: "size-4" }) })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-4 text-3xl font-display font-semibold text-foreground", children: value })
-  ] });
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    motion.div,
+    {
+      className: "glass rounded-3xl border border-border/70 p-4",
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between gap-3", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs uppercase tracking-[0.25em] text-muted-foreground", children: label }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `inline-flex h-8 w-8 items-center justify-center rounded-full ${accent}`, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { className: "size-4" }) })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-4 text-3xl font-display font-semibold text-foreground", children: value })
+      ]
+    }
+  );
 }
 function LanguageBar({ language, percent }) {
   const Icon = languageIconMap[language] ?? CodeXml;
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(motion.div, { ...fadeUp, className: "space-y-3", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between gap-3 text-sm text-muted-foreground", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { className: "size-4" }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: language })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "font-semibold text-foreground", children: [
-        percent,
-        "%"
-      ] })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Progress, { value: percent })
-  ] });
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    motion.div,
+    {
+      className: "space-y-3",
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between gap-3 text-sm text-muted-foreground", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { className: "size-4" }) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: language })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "font-semibold text-foreground", children: [
+            percent,
+            "%"
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Progress, { value: percent })
+      ]
+    }
+  );
 }
 function SkeletonCard() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "glass rounded-2xl p-6 animate-pulse", children: [
@@ -1642,7 +1626,7 @@ function Github_() {
     ];
   }, [repos, featuredRepo]);
   const activeRepos = reactExports.useMemo(() => repos.length, [repos]);
-  const stats = [
+  [
     {
       label: "Public Repos",
       value: profileData ? profileData.public_repos.toLocaleString() : "—",
@@ -1669,7 +1653,7 @@ function Github_() {
       icon: TrendingUp
     }
   ];
-  const insights = [
+  [
     {
       label: "Total Contributions",
       value: contributionData ? contributionData.totalContributions.toLocaleString() : "—",
@@ -1700,31 +1684,6 @@ function Github_() {
       ] }),
       description: "The repos, the rewrites, the late-night commits. Here's the arc.",
       children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-6 xl:grid-cols-[1.2fr_0.8fr]", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "glass rounded-3xl p-6", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-4 sm:grid-cols-2 xl:grid-cols-3", children: stats.map((stat) => /* @__PURE__ */ reactExports.createElement(
-            motion.div,
-            {
-              ...fadeUp,
-              key: stat.label,
-              className: "glass rounded-3xl border border-border/70 bg-surface/80 p-4"
-            },
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 text-xs uppercase tracking-[0.25em] text-muted-foreground", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary", children: /* @__PURE__ */ jsxRuntimeExports.jsx(stat.icon, { className: "size-4" }) }),
-              stat.label
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-4 text-3xl font-display font-semibold text-foreground", children: stat.value })
-          )) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-4 grid gap-4 sm:grid-cols-2", children: insights.map((insight) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-            InsightCard,
-            {
-              label: insight.label,
-              value: insight.value,
-              icon: insight.icon,
-              accent: insight.accent
-            },
-            insight.label
-          )) })
-        ] }) }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "glass rounded-3xl p-6", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-4 flex flex-wrap items-center justify-between gap-4", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
@@ -1741,7 +1700,6 @@ function Github_() {
           !loading && !error && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "rounded-3xl border border-border/70 bg-surface/70 p-2", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
             motion.div,
             {
-              ...fadeUp,
               className: "overflow-x-auto pr-2",
               initial: { opacity: 0, y: 6 },
               animate: { opacity: 1, y: 0 },
@@ -1783,13 +1741,8 @@ function Github_() {
                       showWeekdayLabels: true,
                       showMonthLabels: true,
                       theme: {
-                        light: [
-                          "#0b1220",
-                          "#033a56",
-                          "#026aa2",
-                          "#0ea5e9",
-                          "#7dd3fc"
-                        ]
+                        light: ["#11161d", "#335540", "#133e22", "#31723d", "#56d364"],
+                        dark: ["#11161d", "#335540", "#133e22", "#31723d", "#56d364"]
                       }
                     }
                   ) })
@@ -1798,23 +1751,32 @@ function Github_() {
                   /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 text-sm text-muted-foreground", children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs", children: "Less" }),
                     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-1", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "h-3 w-3 rounded-sm bg-[#033a56]" }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "h-3 w-3 rounded-sm bg-[#026aa2]" }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "h-3 w-3 rounded-sm bg-[#0ea5e9]" }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "h-3 w-3 rounded-sm bg-[#7dd3fc]" })
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "h-3 w-3 rounded-sm bg-[#11161d]" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "h-3 w-3 rounded-sm bg-[#133e22]" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "h-3 w-3 rounded-sm bg-[#31723d]" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "h-3 w-3 rounded-sm bg-[#56d364]" })
                     ] }),
                     /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs", children: "More" })
                   ] }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-sm text-muted-foreground", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-medium text-foreground", children: "Hover" }),
-                    " for details"
-                  ] })
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                    "a",
+                    {
+                      href: `${PROFILE_URL}?tab=overview&from=${contributionData?.oldestDate}&to=${contributionData?.newestDate}`,
+                      target: "_blank",
+                      rel: "noreferrer",
+                      className: "inline-flex items-center gap-2 rounded-full border border-border/70 bg-surface/80 px-3 py-2 text-xs text-muted-foreground transition hover:border-primary/50",
+                      children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(CalendarDays, { className: "size-4 text-primary" }),
+                        " View on GitHub"
+                      ]
+                    }
+                  )
                 ] }),
                 /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4", children: [
                   /* @__PURE__ */ jsxRuntimeExports.jsx(
                     InsightCard,
                     {
-                      label: "Total Commits",
+                      label: "Total Contributions",
                       value: contributionData ? contributionData.totalContributions.toLocaleString() : "—",
                       icon: TrendingUp,
                       accent: "bg-primary/15 text-primary"
@@ -1823,8 +1785,8 @@ function Github_() {
                   /* @__PURE__ */ jsxRuntimeExports.jsx(
                     InsightCard,
                     {
-                      label: "Current Streak",
-                      value: contributionData ? `${contributionData.currentStreak}d` : "—",
+                      label: "Joined",
+                      value: profileData ? new Date(profileData.created_at).getFullYear().toString() : "—",
                       icon: Sparkles,
                       accent: "bg-primary/15 text-primary"
                     }
@@ -1881,13 +1843,10 @@ function Github_() {
             ] })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "glass rounded-3xl p-6", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-4 flex items-center justify-between gap-4", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm uppercase tracking-[0.2em] text-primary", children: "Top Languages" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "mt-2 text-xl font-semibold text-foreground", children: "Language impact" })
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs uppercase tracking-[0.2em] text-muted-foreground", children: "Live" })
-            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mb-4 flex items-center justify-between gap-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm uppercase tracking-[0.2em] text-primary", children: "Most used Languages" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "mt-2 text-sm font-semibold text-foreground", children: "Language Stats" })
+            ] }) }),
             loading && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-4", children: Array.from({ length: 4 }).map((_, index) => /* @__PURE__ */ jsxRuntimeExports.jsx(SkeletonCard, {}, index)) }),
             !loading && !error && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-4", children: languageStats.map((language) => /* @__PURE__ */ jsxRuntimeExports.jsx(
               LanguageBar,
@@ -1899,57 +1858,221 @@ function Github_() {
             )) }),
             !loading && error && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "rounded-3xl border border-border/70 bg-surface/80 p-6 text-center text-sm text-muted-foreground", children: "Unable to fetch GitHub data right now." })
           ] })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-6 md:grid-cols-2 xl:grid-cols-4", children: STAGES.map((stage) => {
-          const Icon = stage.icon;
-          return /* @__PURE__ */ reactExports.createElement(
-            motion.div,
-            {
-              ...fadeUp,
-              key: stage.label,
-              className: "glass flex items-start gap-4 rounded-3xl p-5 transition hover:border-primary/40"
-            },
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex size-9 shrink-0 items-center justify-center rounded-lg bg-accent/15 text-accent", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { className: "size-4" }) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-xs font-semibold uppercase tracking-wider text-primary", children: stage.label }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-foreground/90", children: stage.note })
-            ] })
-          );
-        }) })
+        ] })
       ] })
     }
   );
 }
-const STEPS = [
-  { year: "Then", title: "Started with C", note: "Loops, pointers, segfaults. Humbling and addictive." },
-  { year: "↓", title: "Picked up Python", note: "Built my first real scripts, scraped the web, automated chores." },
-  { year: "↓", title: "Got into IoT", note: "Arduino, then ESP32. The day my code blinked an LED across the room, I was hooked." },
-  { year: "Now", title: "Learning AI", note: "PyTorch, statistics, and small on-device models." }
+const MILESTONES = [
+  {
+    id: "html",
+    label: "First Spark - 2022",
+    title: "Started with HTML",
+    subtitle: "HTML",
+    description: "Built basic webpages and discovered how software appears on a screen.",
+    detail: "Build a basic web page consist of Form , Table , lists etc."
+  },
+  {
+    id: "electronics",
+    label: "Hardware Phase - 2022",
+    title: "Started with Electronics",
+    subtitle: "Electronics",
+    description: "Explored circuits , sensors, and how Physics in Circuit Works.",
+    detail: "Built simple circuits using breadboard, learned about voltage, current, and basic components like resistors, capacitors, and LEDs."
+  },
+  {
+    id: "Operating System",
+    label: "OS - 2023",
+    title: "Looked into Linux and worked in ",
+    subtitle: "Operating Systems",
+    description: "Explored the fundamentals of operating systems and gained hands-on experience with Linux.",
+    detail: "Installed Kali Linux, learned basic command-line operations, and understood file systems, processes, and permissions."
+  },
+  {
+    id: "python-2024",
+    label: "Programming Era-2024",
+    title: "Picked up Python",
+    subtitle: "Python",
+    description: "Basic programming, Syntax Learning, and scripting.",
+    detail: "Learned Python syntax, data structures, and built simple scripts to automate tasks and solve problems."
+  },
+  {
+    id: "c-programming-2025",
+    label: "Computer Science",
+    title: "C Programming",
+    subtitle: "C",
+    description: "Memory, syntax, and problem solving.",
+    detail: "Learned C programming fundamentals, including memory management, pointers, and low-level system interactions."
+  },
+  {
+    id: "web-development -2026",
+    label: "Building Products",
+    title: "Web Development",
+    subtitle: "Web",
+    description: "Built websites and hackathon projects.",
+    detail: "Built responsive websites using HTML, CSS, and JavaScript, and participated in hackathons to create innovative web applications."
+  },
+  {
+    id: "iot",
+    label: "Connected Systems - 2026",
+    title: "IoT",
+    subtitle: "IoT",
+    description: "Sensors, communication, and real-time systems.",
+    detail: "Learned about IoT architecture, sensor integration, and real-time data processing, and built IoT projects using microcontrollers and wireless communication."
+  },
+  {
+    id: "ai",
+    label: "Current Mission",
+    title: "NEXT LEVEL",
+    subtitle: "AI",
+    description: "AI + Data Science + IoT — Building intelligent products that combine software, hardware, and machine learning.",
+    destination: true,
+    detail: "Currently working on integrating AI and data science techniques into IoT projects to create intelligent systems that can analyze data, make decisions, and interact with the environment."
+  }
 ];
+function LearningMilestone({
+  milestone,
+  index,
+  isActive,
+  onEnter
+}) {
+  const isLeft = index % 2 === 0;
+  const destination = milestone.destination === true;
+  const connectorOffset = isLeft ? "right-[-2.25rem]" : "left-[-2.25rem]";
+  const connectorOrigin = isLeft ? "0% 50%" : "100% 50%";
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    motion.div,
+    {
+      initial: { opacity: 0, y: 24, x: isLeft ? -24 : 24 },
+      whileInView: { opacity: 1, y: 0, x: 0 },
+      viewport: { once: true, amount: 0.25 },
+      transition: { duration: 0.55, ease: "easeOut" },
+      onViewportEnter: () => onEnter(index),
+      className: `relative grid grid-cols-1 gap-8 md:grid-cols-2 md:items-start ${isLeft ? "" : "md:[direction:rtl]"}`,
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: `${isLeft ? "md:pr-10 md:text-right" : "md:pl-10 md:text-left"}`, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "div",
+          {
+            className: `relative glass rounded-[2rem] border p-6 transition duration-500 hover:-translate-y-1 hover:border-cyan-400/40 hover:shadow-[0_0_30px_rgba(14,165,233,0.15)] ${destination ? "bg-gradient-to-br from-slate-950/95 via-slate-900/95 to-slate-950/95 border-cyan-400/50 shadow-cyan-500/20" : "bg-slate-950/95 border-border/70"} ${isActive ? "shadow-[0_0_40px_rgba(14,165,233,0.18)] border-cyan-300/70" : ""}`,
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col gap-2", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs uppercase tracking-[0.35em] text-cyan-300/80", children: milestone.label }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 flex-wrap", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "rounded-full bg-cyan-500/10 px-3 py-1 text-xs uppercase tracking-[0.32em] text-cyan-200 ring-1 ring-cyan-400/20", children: milestone.subtitle }),
+                  destination && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs font-semibold uppercase tracking-[0.32em] text-cyan-200", children: "Destination" })
+                ] })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: `mt-5 text-2xl font-semibold tracking-tight ${destination ? "text-white" : "text-foreground"}`, children: milestone.title }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-4 text-sm leading-7 text-muted-foreground", children: milestone.description }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-4 text-sm leading-7 text-muted-foreground rounded-lg bg-cyan-500/10  text-xs  text-cyan-100 ring-4 ring-cyan-500/10", children: milestone.detail }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                motion.div,
+                {
+                  className: `hidden md:block absolute top-1/2 ${connectorOffset} h-[2px] w-24 rounded-full bg-cyan-500/20`,
+                  initial: { scaleX: 0 },
+                  whileInView: { scaleX: 1 },
+                  viewport: { once: true, amount: 0.35 },
+                  transition: { duration: 0.55, ease: "easeOut" },
+                  style: { transformOrigin: connectorOrigin }
+                }
+              )
+            ]
+          }
+        ) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "hidden md:block" })
+      ]
+    }
+  );
+}
 function Learning() {
+  const containerRef = reactExports.useRef(null);
+  const [activeIndex, setActiveIndex] = reactExports.useState(0);
+  const [progressPercent, setProgressPercent] = reactExports.useState(0);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+  const lineFill = useTransform(scrollYProgress, [0, 1], ["4%", "100%"]);
+  const bunnyTop = useTransform(scrollYProgress, [0, 0.14, 0.28, 0.42, 0.56, 0.7, 0.84, 1], ["4%", "16%", "28%", "40%", "52%", "64%", "76%", "92%"]);
+  const hopOffset = useTransform(scrollYProgress, [0, 0.14, 0.28, 0.42, 0.56, 0.7, 0.84, 1], [0, -10, 0, -8, 0, -8, 0, 0]);
+  const bunnyScale = useTransform(scrollYProgress, [0, 1], [0.96, 1.04]);
+  reactExports.useEffect(() => {
+    return scrollYProgress.on("change", (latest) => {
+      setProgressPercent(Math.min(100, Math.round(latest * 100)));
+    });
+  }, [scrollYProgress]);
   return /* @__PURE__ */ jsxRuntimeExports.jsx(
     Section,
     {
       id: "learning",
       eyebrow: "Learning Journey",
       title: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-        "What I learned, and ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "gradient-text", children: "when" })
+        "From Curiosity To ",
+        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "gradient-text", children: "Capability" })
       ] }),
-      description: "Skills aren't picked — they're picked up, one stumble at a time.",
-      children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-4 md:grid-cols-4", children: STEPS.map((s, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "glass relative rounded-2xl p-5", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-xs font-semibold uppercase tracking-wider text-primary", children: s.year }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "mt-2 font-display text-lg font-semibold", children: s.title }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-sm text-muted-foreground", children: s.note })
-      ] }, i)) })
+      description: "Every skill started as an experiment. Each step taught me something valuable. This is the path that shaped how I build today.",
+      children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { ref: containerRef, className: "relative overflow-hidden rounded-[2rem] border border-border/70 bg-slate-1500/80 p-6 shadow-2xl shadow-black/25 ring-1 ring-white/5 md:p-8", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "pointer-events-none absolute left-1/2 top-8 h-[calc(100%-4rem)] -translate-x-1/2 w-px bg-border" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          motion.div,
+          {
+            className: "pointer-events-none absolute left-1/2 top-8 -translate-x-1/2 w-px bg-gradient-to-b from-cyan-500 via-cyan-400 to-cyan-500",
+            style: { height: lineFill },
+            "aria-hidden": true
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          motion.div,
+          {
+            style: { top: bunnyTop, y: hopOffset, scale: bunnyScale },
+            className: "pointer-events- absolute left-1/2 z-200 -translate-x-1/2",
+            initial: { opacity: 0, y: 1 },
+            animate: { opacity: 1 },
+            transition: { duration: 0.6, ease: "easeOut" },
+            children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative flex items-center justify-center", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                motion.div,
+                {
+                  className: "absolute -bottom-1 h-3 w-14 rounded-full bg-cyan-400/20 blur-2xl",
+                  animate: { scale: [1, 1.08, 1], opacity: [0.8, 0.95, 0.8] },
+                  transition: { duration: 1.8, repeat: Infinity, ease: "easeInOut" }
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex items-center gap-2 rounded-full bg-slate-950/90 px-3 py-1 text-xs text-muted-foreground shadow-[0_15px_30px_rgba(0,0,0,0.22)]", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Bunny, { size: 56, className: "flex items-center rounded-full shadow-[0_20px_30px_rgba(14,165,233,0.14)]" }) })
+            ] })
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-20 py-8", children: MILESTONES.map((milestone, index) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+          LearningMilestone,
+          {
+            milestone,
+            index,
+            isActive: activeIndex === index,
+            onEnter: setActiveIndex
+          },
+          milestone.id
+        )) })
+      ] })
     }
   );
 }
 const ITEMS = [
-  { label: "Singing", icon: Music, note: "An old hobby that keeps the perfectionist in me kind." },
-  { label: "Tech tinkering", icon: Lightbulb, note: "Taking apart anything with a battery. Mostly reassembling it." },
-  { label: "Reading", icon: BookOpen, note: "Slow non-fiction, sci-fi, and the occasional founder memoir." },
-  { label: "Building", icon: Wrench, note: "Side projects that don't need to ship — but often do." }
+  { label: "Listening Music", icon: Music, note: "An old hobby that keeps me energetic and prevent me from getting bored." },
+  {
+    label: "Tech tinkering",
+    icon: Lightbulb,
+    note: "Taking apart anything with a battery and some components. Mostly reassembling it."
+  },
+  {
+    label: "Reading",
+    icon: BookOpen,
+    note: "Slow non-fiction, sci-fi, and the occasional founder memoir."
+  },
+  {
+    label: "Building",
+    icon: Wrench,
+    note: "Side projects that don't need to ship — but often do."
+  }
 ];
 function Beyond() {
   return /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -1974,109 +2097,6 @@ function Beyond() {
     }
   );
 }
-const roadmap = [
-  {
-    year: "2026",
-    title: "First Engineering Internship",
-    description: "Ship production code at a product company. Learn how real teams build."
-  },
-  {
-    year: "2027",
-    title: "Advanced AI & Systems",
-    description: "Deeper into ML systems, distributed compute, and on-device intelligence."
-  },
-  {
-    year: "2028",
-    title: "Industry Experience",
-    description: "Full-time role building hardware-aware, AI-powered products."
-  },
-  {
-    year: "2030",
-    title: "Build Impactful Products",
-    description: "Lead engineering on products that improve everyday life for millions."
-  }
-];
-function Roadmap() {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    Section,
-    {
-      id: "roadmap",
-      eyebrow: "Roadmap",
-      title: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-        "Where I'm ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "gradient-text", children: "headed" })
-      ] }),
-      description: "A direction, not a deadline.",
-      children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute left-0 right-0 top-6 h-px bg-gradient-to-r from-primary via-accent to-primary opacity-40", "aria-hidden": true }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-6 md:grid-cols-4", children: roadmap.map((r, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-          motion.div,
-          {
-            initial: { opacity: 0, y: 20 },
-            whileInView: { opacity: 1, y: 0 },
-            viewport: { once: true },
-            transition: { delay: i * 0.1 },
-            className: "relative pt-12",
-            children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute left-1/2 top-3 size-6 -translate-x-1/2 rounded-full border-2 border-primary bg-background glow-cyan" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "glass rounded-2xl p-5 text-center", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "font-display text-2xl font-bold gradient-text", children: r.year }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "mt-2 font-semibold", children: r.title }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-sm text-muted-foreground", children: r.description })
-              ] })
-            ]
-          },
-          r.year
-        )) })
-      ] })
-    }
-  );
-}
-const LINKS = [
-  { label: "Resume (PDF)", icon: FileText, href: "/resume.pdf", note: "Latest CV — always current." },
-  { label: "Certificate Vault", icon: Award, href: "#certificates", note: "Searchable & filterable." },
-  { label: "Achievements", icon: Trophy, href: "#achievements", note: "Awards & recognitions." },
-  { label: "All Links", icon: Link2, href: "#contact", note: "GitHub · LinkedIn · Email." }
-];
-function ResumeHub() {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
-    Section,
-    {
-      id: "resume",
-      eyebrow: "Resume Hub",
-      title: /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-        "Everything, in ",
-        /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "gradient-text", children: "one place" })
-      ] }),
-      description: "A single starting point for recruiters. Pick your poison.",
-      children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-3 md:grid-cols-2", children: LINKS.map((l) => {
-          const Icon = l.icon;
-          return /* @__PURE__ */ jsxRuntimeExports.jsxs(
-            "a",
-            {
-              href: l.href,
-              className: "glass group flex items-center gap-4 rounded-2xl p-5 transition hover:-translate-y-0.5 hover:border-primary/50",
-              children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex size-12 items-center justify-center rounded-xl bg-primary/15 text-primary transition group-hover:scale-110", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Icon, { className: "size-5" }) }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "font-semibold", children: l.label }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-sm text-muted-foreground", children: l.note })
-                ] }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-primary opacity-0 transition group-hover:opacity-100", children: "→" })
-              ]
-            },
-            l.label
-          );
-        }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "mt-6 text-center text-sm text-muted-foreground", children: [
-          "Prefer email? ",
-          /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: `mailto:${profile.email}`, className: "text-primary hover:underline", children: profile.email })
-        ] })
-      ]
-    }
-  );
-}
 function Contact() {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(
     Section,
@@ -2092,8 +2112,8 @@ function Contact() {
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid gap-6 md:grid-cols-[1.3fr_1fr]", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "glass rounded-3xl p-8", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid gap-3", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(ContactLink, { href: `mailto:${profile.email}`, icon: Mail, label: "Email", value: profile.email }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(ContactLink, { href: profile.github, icon: Github, label: "GitHub", value: "@nikhilkumar" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(ContactLink, { href: profile.linkedin, icon: Linkedin, label: "LinkedIn", value: "/in/nikhilkumar" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(ContactLink, { href: profile.github, icon: Github, label: "GitHub", value: "@NIKHILKUMAR-186" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(ContactLink, { href: profile.linkedin, icon: Linkedin, label: "LinkedIn", value: "/in/nikhil-kumar-b288a7303" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(ContactLink, { href: profile.resume, icon: FileText, label: "Resume", value: "Download PDF" })
           ] }) }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -2172,8 +2192,6 @@ function Home() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(Github_, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsx(Learning, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsx(Beyond, {}),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Roadmap, {}),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(ResumeHub, {}),
     /* @__PURE__ */ jsxRuntimeExports.jsx(Contact, {})
   ] });
 }
