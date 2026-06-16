@@ -30,7 +30,7 @@ export function AvatarFrame({
           src={imageSrc}
           alt={alt}
           referrerPolicy="no-referrer"
-          className="w-full h-full object-cover grayscale brightness-90 hover:grayscale-0 hover:brightness-100 transition-all duration-500 select-none scale-105 hover:scale-100"
+          className="w-full h-full object-cover brightness-90 hover:grayscale-0 hover:brightness-100 transition-all duration-500 select-none scale-105 hover:scale-100"
         />
       </div>
       <div className="absolute top-[10%] left-[10%] w-3 h-3 bg-cyan-400 rounded-full animate-ping pointer-events-none" />

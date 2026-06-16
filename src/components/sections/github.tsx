@@ -314,7 +314,7 @@ export function Github_() {
       description="The repos, the rewrites, the late-night commits. Here's the arc."
     >
       <div className="space-y-6">
-        <div className="grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
+        {/* <div className="grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
           <div className="glass rounded-3xl p-6">
             <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
               {stats.map((stat) => (
@@ -334,9 +334,9 @@ export function Github_() {
                   </p>
                 </motion.div>
               ))}
-            </div>
+            </div> */}
 
-            <div className="mt-4 grid gap-4 sm:grid-cols-2">
+        {/* <div className="mt-4 grid gap-4 sm:grid-cols-2">
               {insights.map((insight) => (
                 <InsightCard
                   key={insight.label}
@@ -346,9 +346,9 @@ export function Github_() {
                   accent={insight.accent}
                 />
               ))}
-            </div>
-          </div>
-        </div>
+            </div> */}
+        {/* </div>
+        </div> */}
 
         <div className="glass rounded-3xl p-6">
           <div className="mb-4 flex flex-wrap items-center justify-between gap-4">
@@ -423,9 +423,14 @@ export function Github_() {
                     <span className="text-xs">More</span>
                   </div>
 
-                  <div className="text-sm text-muted-foreground">
-                    <span className="font-medium text-foreground">Hover</span> for details
-                  </div>
+                  <a
+                    href={`${PROFILE_URL}?tab=overview&from=${(contributionData as any)?.oldestDate}&to=${(contributionData as any)?.newestDate}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-surface/80 px-3 py-2 text-xs text-muted-foreground transition hover:border-primary/50"
+                  >
+                    <CalendarDays className="size-4 text-primary" /> View on GitHub
+                  </a>
                 </div>
 
                 <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
@@ -510,7 +515,9 @@ export function Github_() {
           <div className="glass rounded-3xl p-6">
             <div className="mb-4 flex items-center justify-between gap-4">
               <div>
-                <p className="text-sm uppercase tracking-[0.2em] text-primary">Most used Languages</p>
+                <p className="text-sm uppercase tracking-[0.2em] text-primary">
+                  Most used Languages
+                </p>
                 <h3 className="mt-2 text-sm font-semibold text-foreground">Language Stats</h3>
               </div>
               {/* <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Live</span> */}

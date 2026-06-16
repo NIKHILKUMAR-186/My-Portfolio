@@ -21,7 +21,7 @@ export function About({ journeyStarted }: AboutProps) {
         <div className="glass relative overflow-hidden rounded-3xl p-6">
           <div className="aspect-square w-full rounded-2xl bg-gradient-to-br from-primary/30 via-surface-2 to-accent/30 p-1">
             <div className="flex size-full items-center justify-center rounded-2xl bg-surface">
-              <img src="/avatar2.png" alt="Nikhil Kumar" className="w-full h-full object-cover grayscale brightness-90 hover:grayscale-0 hover:brightness-100 transition-all duration-500 select-none scale-105 hover:scale-100" />
+              <img src="/avatar2.png" alt="Nikhil Kumar" className="w-full h-full object-cover  brightness-90 hover:grayscale-0 hover:brightness-100 transition-all duration-500 select-none scale-105 hover:scale-100" />
             </div>
           </div>
           <div className="mt-4 text-center">

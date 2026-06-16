@@ -9,6 +9,11 @@ import {
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 import PWARegister from "../components/pwa-register";
+import { ProgressProvider } from "../lib/progression";
+import { SecretPanel } from "../components/secret-panel";
+import { SecretTerminal } from "../components/secret-terminal";
+import { BunnyAIGuide } from "../components/bunny-ai-guide";
+import { Completion } from "../components/completion";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -79,9 +84,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "theme-color", content: "#0b1024" },
-    { name: "apple-mobile-web-app-capable", content: "yes" },
-    { name: "apple-mobile-web-app-status-bar-style", content: "default" },
-    { name: "apple-mobile-web-app-title", content: "Nikhil Kumar — Portfolio" },
+      { name: "apple-mobile-web-app-capable", content: "yes" },
+      { name: "apple-mobile-web-app-status-bar-style", content: "default" },
+      { name: "apple-mobile-web-app-title", content: "Nikhil Kumar — Portfolio" },
       { title: "Nikhil Kumar — Portfolio" },
       { name: "description", content: "Welcome To Profesional portfolio of Nikhil Kumar." },
       { name: "author", content: "Nikhil Kumar" },
@@ -89,8 +94,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:title", content: "Nikhil Kumar — Portfolio" },
       { property: "og:description", content: "Welcome To Profesional portfolio of Nikhil Kumar." },
       { name: "twitter:description", content: "Welcome To Profesional portfolio of Nikhil Kumar." },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/1d95ab60-8f0f-4fd7-a43a-87eed72d5cde" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/1d95ab60-8f0f-4fd7-a43a-87eed72d5cde" },
+      {
+        property: "og:image",
+        content:
+          "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/1d95ab60-8f0f-4fd7-a43a-87eed72d5cde",
+      },
+      {
+        name: "twitter:image",
+        content:
+          "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/1d95ab60-8f0f-4fd7-a43a-87eed72d5cde",
+      },
       { name: "twitter:card", content: "summary_large_image" },
       { property: "og:type", content: "website" },
     ],
@@ -117,6 +130,16 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="en" className="dark">
       <head>
         <HeadContent />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-JF5EW6H39Z');
+      `,
+          }}
+        />
       </head>
       <body>
         {children}
@@ -131,10 +154,16 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <PWARegister />
-      <main>
-        <Outlet />
-      </main>
+      <ProgressProvider>
+        <PWARegister />
+        <main>
+          <Outlet />
+        </main>
+        <SecretPanel />
+        <SecretTerminal />
+        <BunnyAIGuide />
+        <Completion />
+      </ProgressProvider>
     </QueryClientProvider>
   );
 }
