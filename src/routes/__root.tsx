@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 import PWARegister from "../components/pwa-register";
+import HydroBackground from "../components/HydroBackground";
 import { ProgressProvider } from "../lib/progression";
 import { SecretPanel } from "../components/secret-panel";
 import { SecretTerminal } from "../components/secret-terminal";
@@ -157,6 +158,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <ProgressProvider>
         <PWARegister />
+        <HydroBackground />
         <main>
           <Outlet />
         </main>

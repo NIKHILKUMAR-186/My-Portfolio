@@ -1,26 +1,26 @@
 [
   {
-    "id": "class-10",
+    "id": "School",
     "year": "2022",
-    "title": "Class 10 - Cambrian Public School",
-    "place": "CBSE Board",
+    "title": "Class 3 to class 10",
+    "place": "Cambrian Public School -- CBSE Board",
     "description": "First taste of programming. Built tiny HTML pages and fell in love with making things appear on a screen.",
     "highlight": "",
     "bunnySize": 40,  
     "website": "https://cambrianpublicschool.com/"
   },
   {
-    "id": "class-12",
+    "id": "HighScool",
     "year": "2024",
-    "title": "Class 12 — PCM - Star International School",
-    "place": "CBSE Board",
+    "title": "Class 11 and 12 — PCM ",
+    "place": " Star International School -- CBSE Board",
     "description": "Dived deeper into physics , C and math. Started competitive programming and robotics, which sparked my passion for problem-solving and building.",
-    "highlight": "Cleared JEE · State-level science exhibition winner",
+    "highlight": "",
     "bunnySize": 55,
     "website": "https://www.mitmuzaffarpur.org/"
   },
   {
-    "id": "iitm",
+    "id": "IIT MADRAS",
     "year": "2025",
     "title": "IIT Madras — BS Data Science",
     "place": "Online Degree (Dual Degree)",
@@ -30,7 +30,7 @@
     "website": "https://study.iitm.ac.in/ds/"
   },
   {
-    "id": "mit",
+    "id": "MIT Muzaffarpur",
     "year": "2025",
     "title": "MIT Muzaffarpur",
     "place": "B.Tech, Information Technology",

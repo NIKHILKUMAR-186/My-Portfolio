@@ -1,7 +1,7 @@
 import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { L as Lenis } from "../_libs/lenis.mjs";
 import { L as Link } from "../_libs/tanstack__react-router.mjs";
-import { B as Bunny } from "./router-CTA9DVq3.mjs";
+import { B as Bunny } from "./router-BZI4lPyP.mjs";
 import { G as GitHubCalendar } from "../_libs/react-github-calendar.mjs";
 import { R as Root, I as Indicator } from "../_libs/radix-ui__react-progress.mjs";
 import { c as clsx } from "../_libs/clsx.mjs";
