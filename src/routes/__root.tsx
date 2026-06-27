@@ -10,13 +10,6 @@ import {
 import { useEffect, type ReactNode } from "react";
 import PWARegister from "../components/pwa-register";
 import HydroBackground from "../components/HydroBackground";
-import { ProgressProvider } from "../lib/progression";
-import { SecretPanel } from "../components/secret-panel";
-import { SecretTerminal } from "../components/secret-terminal";
-import { BunnyAIGuide } from "../components/bunny-ai-guide";
-import { FloatingBunny } from "../components/floating-bunny";
-import { Completion } from "../components/completion";
-import { ResetProtocolButton } from "../components/reset-protocol-button";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
@@ -156,19 +149,11 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ProgressProvider>
-        <PWARegister />
-        <HydroBackground />
-        <main>
-          <Outlet />
-        </main>
-        <SecretPanel />
-        <SecretTerminal />
-        <FloatingBunny />
-        <ResetProtocolButton />
-        <BunnyAIGuide />
-        <Completion />
-      </ProgressProvider>
+      <PWARegister />
+      <HydroBackground />
+      <main>
+        <Outlet />
+      </main>
     </QueryClientProvider>
   );
 }

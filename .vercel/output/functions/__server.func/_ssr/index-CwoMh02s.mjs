@@ -1,13 +1,12 @@
 import { r as reactExports, j as jsxRuntimeExports } from "../_libs/react.mjs";
 import { L as Lenis } from "../_libs/lenis.mjs";
 import { L as Link } from "../_libs/tanstack__react-router.mjs";
-import { B as Bunny } from "./router-BZI4lPyP.mjs";
 import { G as GitHubCalendar } from "../_libs/react-github-calendar.mjs";
 import { R as Root, I as Indicator } from "../_libs/radix-ui__react-progress.mjs";
 import { c as clsx } from "../_libs/clsx.mjs";
 import { t as twMerge } from "../_libs/tailwind-merge.mjs";
 import { u as useInView, A as AnimatePresence, m as motion, a as useScroll, b as useTransform } from "../_libs/framer-motion.mjs";
-import { d as Sun, M as Moon, G as Github, L as Linkedin, e as Mail, f as ArrowDown, a as Sparkles, C as Compass, B as BookOpen, H as Hammer, g as ChevronRight, h as Search, F as FileText, D as Download, i as Trophy, j as GitBranch, k as TrendingUp, l as Activity, U as Users, m as CalendarDays, R as Rocket, n as Music, o as Lightbulb, W as Wrench, p as Globe, X, E as ExternalLink, q as Star, r as CodeXml } from "../_libs/lucide-react.mjs";
+import { S as Sun, M as Moon, G as Github, L as Linkedin, a as Mail, A as ArrowDown, b as Sparkles, C as Compass, B as BookOpen, H as Hammer, c as ChevronRight, d as Search, F as FileText, D as Download, T as Trophy, e as GitBranch, f as TrendingUp, g as Activity, U as Users, h as CalendarDays, R as Rocket, i as Music, j as Lightbulb, W as Wrench, k as Globe, X, E as ExternalLink, l as Star, m as CodeXml } from "../_libs/lucide-react.mjs";
 import { c as format } from "../_libs/date-fns.mjs";
 import "../_libs/tanstack__router-core.mjs";
 import "../_libs/tanstack__history.mjs";
@@ -22,10 +21,6 @@ import "crypto";
 import "async_hooks";
 import "stream";
 import "../_libs/isbot.mjs";
-import "../_libs/tanstack__query-core.mjs";
-import "../_libs/tanstack__react-query.mjs";
-import "../_libs/motion-dom.mjs";
-import "../_libs/motion-utils.mjs";
 import "../_libs/react-activity-calendar.mjs";
 import "../_libs/floating-ui__react.mjs";
 import "../_libs/floating-ui__utils.mjs";
@@ -37,6 +32,8 @@ import "../_libs/radix-ui__react-context.mjs";
 import "../_libs/radix-ui__react-primitive.mjs";
 import "../_libs/radix-ui__react-slot.mjs";
 import "../_libs/radix-ui__react-compose-refs.mjs";
+import "../_libs/motion-dom.mjs";
+import "../_libs/motion-utils.mjs";
 function AvatarFrame({
   layoutId,
   className = "",
@@ -552,6 +549,102 @@ function Section({ id, eyebrow, title: title2, description, children, className 
     )
   ] }) });
 }
+function Bunny({ size = 64, className, waving = false, showTrail = false }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `relative inline-flex ${className ?? ""}`, children: [
+    showTrail && /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      motion.div,
+      {
+        className: "pointer-events-none absolute inset-0 -z-10 flex items-center justify-center",
+        initial: { opacity: 0.16 },
+        animate: { opacity: [0.16, 0.08, 0.16], y: [0, -3, 0] },
+        transition: { duration: 4.2, repeat: Infinity, ease: "easeInOut" },
+        children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute -left-4 top-2 h-6 w-6 rounded-full bg-cyan-400/15 blur-2xl" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute -right-3 bottom-5 h-5 w-5 rounded-full bg-sky-400/10 blur-2xl" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute left-1/2 top-1/3 h-4 w-4 -translate-x-1/2 rounded-full bg-cyan-300/15 blur-2xl" })
+        ]
+      }
+    ),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      motion.svg,
+      {
+        width: size,
+        height: size,
+        viewBox: "0 0 100 110",
+        fill: "none",
+        xmlns: "http://www.w3.org/2000/svg",
+        className: "block",
+        "aria-label": "Bunny mascot",
+        role: "img",
+        initial: { y: 0 },
+        animate: { y: [0, -4, 0] },
+        transition: { duration: 3, repeat: Infinity, ease: "easeInOut" },
+        children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            motion.g,
+            {
+              animate: { rotate: waving ? [0, -8, 8, -4, 0] : 0 },
+              transition: { duration: 1.4, repeat: waving ? Infinity : 0, ease: "easeInOut" },
+              style: { transformOrigin: "50px 60px" },
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "path",
+                  {
+                    d: "M36 48 C32 28, 34 10, 40 8 C46 6, 46 26, 44 46 Z",
+                    fill: "var(--surface-2)",
+                    stroke: "var(--primary)",
+                    strokeWidth: "1.5"
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M40 42 C38 28, 40 16, 41 14", stroke: "var(--accent)", strokeWidth: "1.5", strokeLinecap: "round" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "path",
+                  {
+                    d: "M64 48 C68 28, 66 10, 60 8 C54 6, 54 26, 56 46 Z",
+                    fill: "var(--surface-2)",
+                    stroke: "var(--primary)",
+                    strokeWidth: "1.5"
+                  }
+                ),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M60 42 C62 28, 60 16, 59 14", stroke: "var(--accent)", strokeWidth: "1.5", strokeLinecap: "round" })
+              ]
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("ellipse", { cx: "50", cy: "62", rx: "22", ry: "20", fill: "var(--surface-2)", stroke: "var(--primary)", strokeWidth: "1.5" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            motion.circle,
+            {
+              cx: "42",
+              cy: "60",
+              r: "2.2",
+              fill: "var(--foreground)",
+              animate: { scaleY: [1, 1, 0.1, 1] },
+              transition: { duration: 4, repeat: Infinity, times: [0, 0.92, 0.96, 1] },
+              style: { transformOrigin: "42px 60px" }
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            motion.circle,
+            {
+              cx: "58",
+              cy: "60",
+              r: "2.2",
+              fill: "var(--foreground)",
+              animate: { scaleY: [1, 1, 0.1, 1] },
+              transition: { duration: 4, repeat: Infinity, times: [0, 0.92, 0.96, 1] },
+              style: { transformOrigin: "58px 60px" }
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M48 67 L52 67 L50 70 Z", fill: "var(--accent)" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("path", { d: "M48 71 Q50 73 52 71", stroke: "var(--foreground)", strokeWidth: "1.2", fill: "none", strokeLinecap: "round" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "38", cy: "68", r: "2", fill: "var(--primary)", opacity: "0.35" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("circle", { cx: "62", cy: "68", r: "2", fill: "var(--primary)", opacity: "0.35" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("ellipse", { cx: "50", cy: "92", rx: "14", ry: "10", fill: "var(--surface-2)", stroke: "var(--primary)", strokeWidth: "1.5" })
+        ]
+      }
+    )
+  ] });
+}
 const about = "I'll guide you through Nikhil's journey — from classroom experiments to real-world products.";
 const contact = "That's a wrap! Reach out — Nikhil writes back. 👋";
 const bunny = {
@@ -609,27 +702,27 @@ function About({ journeyStarted }) {
 }
 const timeline = [
   {
-    id: "class-10",
+    id: "School",
     year: "2022",
-    title: "Class 10 - Cambrian Public School",
-    place: "CBSE Board",
+    title: "Class 3 to class 10",
+    place: "Cambrian Public School -- CBSE Board",
     description: "First taste of programming. Built tiny HTML pages and fell in love with making things appear on a screen.",
     highlight: "",
     bunnySize: 40,
     website: "https://cambrianpublicschool.com/"
   },
   {
-    id: "class-12",
+    id: "HighScool",
     year: "2024",
-    title: "Class 12 — PCM - Star International School",
-    place: "CBSE Board",
+    title: "Class 11 and 12 — PCM ",
+    place: " Star International School -- CBSE Board",
     description: "Dived deeper into physics , C and math. Started competitive programming and robotics, which sparked my passion for problem-solving and building.",
-    highlight: "Cleared JEE · State-level science exhibition winner",
+    highlight: "",
     bunnySize: 55,
     website: "https://www.mitmuzaffarpur.org/"
   },
   {
-    id: "iitm",
+    id: "IIT MADRAS",
     year: "2025",
     title: "IIT Madras — BS Data Science",
     place: "Online Degree (Dual Degree)",
@@ -639,7 +732,7 @@ const timeline = [
     website: "https://study.iitm.ac.in/ds/"
   },
   {
-    id: "mit",
+    id: "MIT Muzaffarpur",
     year: "2025",
     title: "MIT Muzaffarpur",
     place: "B.Tech, Information Technology",
