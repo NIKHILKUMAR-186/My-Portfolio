@@ -3,13 +3,8 @@ import { AnimatePresence, motion, type Variants } from "framer-motion";
 import { AvatarFrame } from "./avatar-frame";
 
 const MESSAGES = [
-  "INITIALIZING...",
-  "Loading Journey...",
-  "Loading Projects...",
-  "READY",
-  "Engineer",
-  "Learner",
-  "Builder",
+  "Welcome to My Portfolio",
+  "Let's Explore Together",
 ];
 
 const messageVariants: Variants = {
