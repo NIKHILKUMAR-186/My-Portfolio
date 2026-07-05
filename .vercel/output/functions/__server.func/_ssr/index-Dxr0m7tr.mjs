@@ -82,13 +82,8 @@ function AvatarFrame({
   );
 }
 const MESSAGES = [
-  "INITIALIZING...",
-  "Loading Journey...",
-  "Loading Projects...",
-  "READY",
-  "Engineer",
-  "Learner",
-  "Builder"
+  "Welcome to My Portfolio",
+  "Let's Explore Together"
 ];
 const messageVariants = {
   hidden: { opacity: 0, y: 24, filter: "blur(10px)" },
@@ -1256,35 +1251,44 @@ const certificates = [
     issuer: "Cisco Networking Academy",
     category: "Programming",
     year: "2025",
-    url: "/cretificate/python-essential-1.pdf",
-    file: "/cretificate/python-essential-1.pdf"
+    url: "/certificate/python-essential-1.pdf",
+    file: "/certificate/python-essential-1.pdf"
   },
   {
-    id: "c1",
+    id: "c2",
     title: "Python Essential 2",
     issuer: "Cisco Networking Academy",
     category: "Programming",
     year: "2026",
-    url: "/cretificate/python-essential-2.pdf",
-    file: "/cretificate/python-essential-2.pdf"
+    url: "/certificate/python-essential-2.pdf",
+    file: "/certificate/python-essential-2.pdf"
   },
   {
-    id: "c2",
+    id: "c3",
     title: "Gen AI Academy 2.0",
     issuer: "Google Cloud",
     category: "Data Science",
     year: "2024",
-    url: "cretificate/Hack2skill-CertificateAI-ML.png",
-    file: "cretificate/Hack2skill-CertificateAI-ML.png"
+    url: "certificate/Hack2skill-CertificateAI-ML.png",
+    file: "certificate/Hack2skill-CertificateAI-ML.png"
   },
   {
-    id: "c2",
+    id: "c4",
     title: "Gen AI Academy 2.0",
     issuer: "Google Cloud",
     category: "AI",
     year: "2025",
-    url: "Hack2skill-CertificateDATA.png",
-    file: "Hack2skill-CertificateDATA.png"
+    url: "certificate/Hack2skill-CertificateDATA.png",
+    file: "certificate/Hack2skill-CertificateDATA.png"
+  },
+  {
+    id: "c5",
+    title: "Tata Gen Ai Job Simulation",
+    issuer: "Forage",
+    category: "AI",
+    year: "2026",
+    url: "certificate/TATA-GEN-AI-Job-simulation.png",
+    file: "certificate/TATA-GEN-AI-Job-simulation.png"
   }
 ];
 const CATEGORIES = ["All", "Programming", "Data Science", "IoT", "Hackathons", "Courses"];
