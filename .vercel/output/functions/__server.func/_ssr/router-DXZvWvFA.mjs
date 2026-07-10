@@ -114,7 +114,7 @@ const HydroBackground = () => {
       observer.disconnect();
     };
   }, []);
-  const shouldAnimate = !performanceMode && !prefersReducedMotion && !isMobile;
+  const shouldAnimate = !performanceMode && !prefersReducedMotion;
   reactExports.useEffect(() => {
     if (!shouldAnimate || theme !== "dark") return;
     const canvas = canvasRef.current;
@@ -128,8 +128,8 @@ const HydroBackground = () => {
     resizeCanvas();
     const particles = [];
     const floatingOrbs = [];
-    const particleCount = 100;
-    const orbCount = 20;
+    const particleCount = isMobile ? 50 : 90;
+    const orbCount = isMobile ? 12 : 24;
     for (let i = 0; i < particleCount; i++) {
       const angle = Math.random() * Math.PI * 2;
       const speed = Math.random() * 0.8 + 0.5;
@@ -308,7 +308,7 @@ const HydroBackground = () => {
     )
   ] });
 };
-const appCss = "/assets/styles-wPKgsBcG.css";
+const appCss = "/assets/styles-Bsk2iLsv.css";
 function reportLovableError(error, context = {}) {
   if (typeof window === "undefined") return;
   window.__lovableEvents?.captureException?.(
@@ -467,7 +467,7 @@ const Route$1 = createFileRoute("/sitemap.xml")({
     }
   }
 });
-const $$splitComponentImporter = () => import("./index-Dxr0m7tr.mjs");
+const $$splitComponentImporter = () => import("./index-CgwdEPx_.mjs");
 const Route = createFileRoute("/")({
   head: () => ({
     meta: [{

@@ -147,7 +147,10 @@ function CinematicIntro({ onExitStart }) {
           /* @__PURE__ */ jsxRuntimeExports.jsx(AnimatePresence, { mode: "wait", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
             motion.h1,
             {
-              className: "max-w-3xl text-4xl font-semibold uppercase tracking-[0.18em] text-foreground sm:text-5xl md:text-6xl lg:text-7xl",
+              className: "max-w-3xl text-4xl font-semibold tracking-[0.18em] text-foreground sm:text-5xl md:text-6xl lg:text-7xl",
+              style: {
+                fontFamily: "oxanium"
+              },
               variants: messageVariants,
               initial: "hidden",
               animate: "visible",
@@ -482,7 +485,7 @@ function Hero({ introReady }) {
                 ] })
               ] })
             ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(motion.div, { className: "hidden lg:flex items-center justify-end", variants: avatarWrapperVariants, children: /* @__PURE__ */ jsxRuntimeExports.jsx(AvatarFrame, { layoutId: "avatar", className: "relative flex items-center justify-center w-64 h-64 md:w-80 md:h-80" }) })
+            /* @__PURE__ */ jsxRuntimeExports.jsx(motion.div, { className: "flex justify-center lg:justify-end mt-10 lg:mt-0", variants: avatarWrapperVariants, children: /* @__PURE__ */ jsxRuntimeExports.jsx(AvatarFrame, { layoutId: "avatar", className: "relative flex items-center justify-center w-64 h-64 md:w-80 md:h-80" }) })
           ]
         }
       ),
