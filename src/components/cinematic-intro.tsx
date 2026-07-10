@@ -1,3 +1,9 @@
+import "@fontsource/orbitron/700.css";
+import "@fontsource/michroma/400.css";
+import "@fontsource/oxanium/600.css";
+import "@fontsource/audiowide/400.css";
+import "@fontsource/space-grotesk/400.css";
+import { GeistSans } from "geist/font/sans";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, type Variants } from "framer-motion";
 import { AvatarFrame } from "./avatar-frame";
@@ -86,7 +92,10 @@ export function CinematicIntro({ onExitStart }: CinematicIntroProps) {
             <AnimatePresence mode="wait">
               <motion.h1
                 key={step}
-                className="max-w-3xl text-4xl font-semibold uppercase tracking-[0.18em] text-foreground sm:text-5xl md:text-6xl lg:text-7xl"
+                className="max-w-3xl text-4xl font-semibold tracking-[0.18em] text-foreground sm:text-5xl md:text-6xl lg:text-7xl"
+                style={{
+    fontFamily: "oxanium",
+  }}
                 variants={messageVariants}
                 initial="hidden"
                 animate="visible"

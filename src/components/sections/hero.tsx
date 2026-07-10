@@ -137,7 +137,7 @@ export function Hero({ introReady }: HeroProps) {
             </motion.div>
           </div>
 
-          <motion.div className="hidden lg:flex items-center justify-end" variants={avatarWrapperVariants}>
+          <motion.div className="flex justify-center lg:justify-end mt-10 lg:mt-0" variants={avatarWrapperVariants}>
             <AvatarFrame layoutId="avatar" className="relative flex items-center justify-center w-64 h-64 md:w-80 md:h-80" />
           </motion.div>
         </motion.div>

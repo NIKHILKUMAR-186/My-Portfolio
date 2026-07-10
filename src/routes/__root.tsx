@@ -11,6 +11,9 @@ import { useEffect, type ReactNode } from "react";
 import PWARegister from "../components/pwa-register";
 import HydroBackground from "../components/HydroBackground";
 import appCss from "../styles.css?url";
+import "@fontsource/space-grotesk/400.css";
+import "@fontsource/space-grotesk/500.css";
+import "@fontsource/space-grotesk/700.css";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {

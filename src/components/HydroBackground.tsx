@@ -63,8 +63,7 @@ const HydroBackground = () => {
     };
   }, []);
 
-  // Adaptive animation: disable on mobile or low-end devices
-  const shouldAnimate = !performanceMode && !prefersReducedMotion && !isMobile;
+ const shouldAnimate = !performanceMode && !prefersReducedMotion;
 
   useEffect(() => {
     if (!shouldAnimate || theme !== "dark") return;
@@ -85,9 +84,9 @@ const HydroBackground = () => {
     const particles: Particle[] = [];
     const floatingOrbs: FloatingOrb[] = [];
 
-    // 🌊 Optimized particle count: 40 (50% reduction)
-    const particleCount = 100;
-    const orbCount = 20;
+    
+    const particleCount = isMobile ? 50 : 90;
+const orbCount = isMobile ? 12 : 24;
     
     for (let i = 0; i < particleCount; i++) {
       const angle = Math.random() * Math.PI * 2;

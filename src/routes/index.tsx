@@ -18,6 +18,7 @@ import { Beyond } from "@/components/sections/beyond";
 import { Roadmap } from "@/components/sections/roadmap";
 import { ResumeHub } from "@/components/sections/resume";
 import { Contact } from "@/components/sections/contact";
+import { Github } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -42,30 +43,44 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
-  const [introExiting, setIntroExiting] = useState(false);
+  const [introFinished, setIntroFinished] = useState(false);
 
   const timelineRef = useRef<HTMLDivElement>(null);
   const timelineInView = useInView(timelineRef, { margin: "0px 0px -40% 0px" });
 
   return (
     <>
-      <CinematicIntro onExitStart={() => setIntroExiting(true)} />
-      <SmoothScroll />
-      <Nav />
-      <Hero introReady={introExiting} />
-      <About journeyStarted={timelineInView} />
-      <TimelineSection timelineRef={timelineRef} showJourneyBunny={timelineInView} />
-      <Now />
-      <Skills />
-      <Projects />
-      <Certificates />
-      <Achievements />
-      <Github_ />
-      <Learning />
-      <Beyond />
-      {/* <Roadmap /> */}
-      {/* <ResumeHub /> */}
-      <Contact />
+      <CinematicIntro
+  onExitStart={() => {
+    setTimeout(() => {
+      setIntroFinished(true);
+    }, 350);
+  }}
+/>
+
+{introFinished && (
+  <>
+    <SmoothScroll />
+    <Nav />
+    <Hero introReady />
+
+    <About journeyStarted={timelineInView} />
+    <TimelineSection
+      timelineRef={timelineRef}
+      showJourneyBunny={timelineInView}
+    />
+
+    <Now />
+    <Skills />
+    <Projects />
+    <Certificates />
+    <Achievements />
+    <Github />
+    <Learning />
+    <Beyond />
+    <Contact />
+  </>
+)}
     </>
   );
 }
